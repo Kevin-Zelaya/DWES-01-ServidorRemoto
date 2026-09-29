@@ -7,4 +7,27 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+      <!-- Result -->
+    <PackageReference Include="CSharpFunctionalExtensions" Version="3.7.0" />
+      <!-- Scrutor e inyección de dependencias -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
+    <PackageReference Include="Scrutor" Version="4.2.2" />
+  <!-- Logs -->
+    <PackageReference Include="Serilog" Version="4.4.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <!-- Entity framework -->
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.12" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.12" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.12" />
+    <!-- Refit  -->
+    <PackageReference Include="Refit" Version="16.1.0" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="16.1.0" />
+    <PackageReference Include="Refit.Reflection" Version="16.1.0" />
+    <!-- Refit  -->
+  </ItemGroup>
+
 </Project>
