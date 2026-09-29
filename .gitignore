@@ -1,0 +1,29 @@
+
+## Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+## Entorno e IDEs (Visual Studio / VS Code)
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Archivos de compilación y binarios de .NET
+**/bin/
+**/obj/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.exe
+*.pdb
+
+## Paquetes de NuGet y dependencias
+*.nupkg
+**/packages/
+
+## Variables de entorno y credenciales
+.env
+appsettings.Secrets.json
