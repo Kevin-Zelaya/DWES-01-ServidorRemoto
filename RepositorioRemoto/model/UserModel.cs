@@ -20,7 +20,7 @@
         public string lng { get; set; }
     }
 
-    public class User
+    public class UserModel
     {
         public int id { get; set; }
         public string name { get; set; }
