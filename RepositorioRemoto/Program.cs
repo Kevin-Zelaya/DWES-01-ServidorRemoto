@@ -12,7 +12,7 @@ var services = provider.GetRequiredService<IUserApiService>();
 
 
 var users = await services.GetAllAsync();
-
+/*
 if(users is Result<List<UserDto>, DomainError>.Success usersOk)
 {
     
@@ -61,3 +61,4 @@ if(userr is Result<UserDto, DomainError>.Success useryes)
     var valor = useryes.value;
     Console.WriteLine($"Nombre: {valor.name} compañia: {valor.company.name} {valor.address.geo.lat}");
 }
+*/

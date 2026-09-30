@@ -44,14 +44,14 @@ public static class UserMapper
         username = model.username,
         email = model.email,
 
-        address = new Address
+        address = new AddressDto
         {
             street = model.address.street,
             suite = model.address.suite,
             city = model.address.city,
             zipcode = model.address.zipcode,
 
-            geo = new Geo
+            geo = new GeoDto
             {
                 lat = model.address.geo.lat,
                 lng = model.address.geo.lng
@@ -61,7 +61,7 @@ public static class UserMapper
         phone = model.phone,
         website = model.website,
 
-        company = new Company
+        company = new CompanyDto
         {
             name = model.company.name,
             catchPhrase = model.company.catchPhrase,
