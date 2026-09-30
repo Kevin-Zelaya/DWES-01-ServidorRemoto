@@ -1,3 +1,5 @@
+using Cliente_Http_con_refit.Dto;
+
 public interface IUserApiService
 {
     /// <summary>
@@ -14,11 +16,11 @@ public interface IUserApiService
     /// <returns></returns>
     public Task<Result<UserModel, DomainError>> GetByIdAsync(int id, CancellationToken cts = default);
 
-    // public Task<Result<UserModel, DomainError>> CreateAsync(CreateUserRequest request, CancellationToken cts = default);
+    public Task<Result<UserModel, DomainError>> CreateAsync(CreateUserDto request, CancellationToken cts = default);
 
-    // public Task<Result<UserModel, DomainError>> UpdateAsync(int id, UpdateUserRequest request, CancellationToken cts = default);
+    public Task<Result<UserModel, DomainError>> UpdateAsync(int id, UpdateUserRequest request, CancellationToken cts = default);
 
-    // public Task<Result<bool, DomainError>> DeleteAsync(int id, CancellationToken cts = default);
+    public Task<Result<bool, DomainError>> DeleteAsync(int id, CancellationToken cts = default);
 
 
 }

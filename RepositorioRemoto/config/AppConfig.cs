@@ -8,7 +8,7 @@ public class AppConfig
     {
         var enviroment =
             Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
-            ?? "Development";
+            ?? "development";
 
         Config = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -18,17 +18,21 @@ public class AppConfig
                 reloadOnChange: true
             )
             .AddJsonFile(
-                $"appsettings{enviroment}.json",
+                $"appsettings.{enviroment}.json",
                 optional: false,
                 reloadOnChange: true
             )
             .Build();
 
-
+            ApiUrl = Config["ApiSettings:BaseUrl"]
+                ?? throw new InvalidOperationException("No se encontro 'ApiSettins:BaseUrl'");
+            
+            
 
     }
 
     public static IConfiguration Config {get; private set;}
 
     // Por aqui
+    public static string ApiUrl {get; set;}
 }

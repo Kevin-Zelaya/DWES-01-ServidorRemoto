@@ -24,6 +24,8 @@ public class Address
 
     public class UserModel
     {
+        /// <summary>Para el mapper</summary>
+        
         public int id { get; set; }
         public string name { get; set; }
         public string username { get; set; }

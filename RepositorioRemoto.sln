@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositorioRemoto", "RepositorioRemoto\RepositorioRemoto.csproj", "{3B7C08E4-B59B-47CB-8ACB-BC1F3F417B8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositorioRemoto.Tests", "RepositorioRemoto.Tests\RepositorioRemoto.Tests.csproj", "{9253D013-7D9F-4C00-8A07-8620C33E342B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{3B7C08E4-B59B-47CB-8ACB-BC1F3F417B8B}.Release|x64.Build.0 = Release|Any CPU
 		{3B7C08E4-B59B-47CB-8ACB-BC1F3F417B8B}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B7C08E4-B59B-47CB-8ACB-BC1F3F417B8B}.Release|x86.Build.0 = Release|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Debug|x64.Build.0 = Debug|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Debug|x86.Build.0 = Debug|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Release|x64.ActiveCfg = Release|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Release|x64.Build.0 = Release|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Release|x86.ActiveCfg = Release|Any CPU
+		{9253D013-7D9F-4C00-8A07-8620C33E342B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
