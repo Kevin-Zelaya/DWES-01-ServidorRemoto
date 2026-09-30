@@ -1,24 +1,24 @@
-   public class Address
-    {
-        public string street { get; set; }
-        public string suite { get; set; }
-        public string city { get; set; }
-        public string zipcode { get; set; }
-        public Geo geo { get; set; }
-    }
+public class AddressDto
+{
+    public string street { get; set; }
+    public string suite { get; set; }
+    public string city { get; set; }
+    public string zipcode { get; set; }
+    public GeoDto geo { get; set; }
+}
 
-    public class Company
-    {
-        public string name { get; set; }
-        public string catchPhrase { get; set; }
-        public string bs { get; set; }
-    }
+public class CompanyDto
+{
+    public string name { get; set; }
+    public string catchPhrase { get; set; }
+    public string bs { get; set; }
+}
 
-    public class Geo
-    {
-        public string lat { get; set; }
-        public string lng { get; set; }
-    }
+public class GeoDto
+{
+    public string lat { get; set; }
+    public string lng { get; set; }
+}
 
     public class UserDto
     {
