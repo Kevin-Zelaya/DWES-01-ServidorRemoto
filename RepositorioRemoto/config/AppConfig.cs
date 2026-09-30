@@ -4,7 +4,7 @@ public class AppConfig
 {
     
 
-    static ApiConfig()
+    static AppConfig()
     {
         var enviroment =
             Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")

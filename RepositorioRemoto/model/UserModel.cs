@@ -1,4 +1,6 @@
-   public class Address
+  
+ 
+public class Address
     {
         public string street { get; set; }
         public string suite { get; set; }

@@ -1,5 +1,4 @@
 using System.IO.Compression;
-
 public abstract record Result<T, E> where E : DomainError
 {
     

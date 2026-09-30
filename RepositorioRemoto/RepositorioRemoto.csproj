@@ -10,6 +10,7 @@
   <ItemGroup>
       <!-- Result -->
     <PackageReference Include="CSharpFunctionalExtensions" Version="3.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="11.0.0-rc.1.26425.128" />
       <!-- Scrutor e inyección de dependencias -->
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
     <PackageReference Include="Scrutor" Version="4.2.2" />
