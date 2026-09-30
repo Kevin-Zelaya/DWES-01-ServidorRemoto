@@ -20,7 +20,7 @@
         public string lng { get; set; }
     }
 
-    public class UserModel
+    public class UserDto
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -31,3 +31,5 @@
         public string website { get; set; }
         public Company company { get; set; }
     }
+
+    // Creando el createDto 
