@@ -1,3 +1,4 @@
+using Cliente_Http_con_refit.Dto;
 
 public static class UserMapper
 {
@@ -29,6 +30,74 @@ public static class UserMapper
         website = dto.website,
 
         company = new Company
+        {
+            name = dto.company.name,
+            catchPhrase = dto.company.catchPhrase,
+            bs = dto.company.bs
+        }
+    };
+    /// <summary>
+    /// De dto a modelo
+    /// </summary>
+    public static UserModel ToModel(this UpdateUserRequest dto) => new()
+    {
+        id = dto.id,
+        name = dto.name,
+        username = dto.username,
+        email = dto.email,
+
+        address = new Address
+        {
+            street = dto.address.street,
+            suite = dto.address.suite,
+            city = dto.address.city,
+            zipcode = dto.address.zipcode,
+
+            geo = new Geo
+            {
+                lat = dto.address.geo.lat,
+                lng = dto.address.geo.lng
+            }
+        },
+
+        phone = dto.phone,
+        website = dto.website,
+
+        company = new Company
+        {
+            name = dto.company.name,
+            catchPhrase = dto.company.catchPhrase,
+            bs = dto.company.bs
+        }
+    };
+    /// <summary>
+    /// De dto a modelo
+    /// </summary>
+    public static UserDto ToDto(this UpdateUserRequest dto) => new()
+    {
+        id = dto.id,
+        name = dto.name,
+        username = dto.username,
+        email = dto.email,
+
+        address = new AddressDto
+        {
+            street = dto.address.street,
+            suite = dto.address.suite,
+            city = dto.address.city,
+            zipcode = dto.address.zipcode,
+
+            geo = new GeoDto
+            {
+                lat = dto.address.geo.lat,
+                lng = dto.address.geo.lng
+            }
+        },
+
+        phone = dto.phone,
+        website = dto.website,
+
+        company = new CompanyDto
         {
             name = dto.company.name,
             catchPhrase = dto.company.catchPhrase,
