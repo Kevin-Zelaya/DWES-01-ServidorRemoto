@@ -13,7 +13,14 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="" />
+    <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Mapper/MapperTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Mapper/MapperTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Cache/common/IPostService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Cache/common/IPostService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/dto/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/dto/UserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,63 +39,64 @@
     <commands />
     <urls />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0022126638384683" />
-      <entry key="MS500" value="1.2944306973987454" />
-      <entry key="S2" value="1.73662384290824" />
-      <entry key="S5" value="1.884908381864203" />
-      <entry key="S10" value="1.940697527478982" />
-      <entry key="S30" value="2.0436323871700024" />
-      <entry key="S60" value="2.89009494016061" />
-      <entry key="M2" value="5.404772612635055" />
-      <entry key="M5" value="9.710616663645515" />
-      <entry key="M10" value="12.745627164427848" />
-      <entry key="M15" value="14.443033636203868" />
-      <entry key="M30" value="16.9593184766461" />
-      <entry key="H1" value="18.724424260022555" />
-      <entry key="H2" value="19.78777688764147" />
-      <entry key="H4" value="20.373749966234673" />
-      <entry key="D1" value="20.89268751735303" />
-      <entry key="W1" value="20.984595799110824" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000000007" />
+      <entry key="S30" value="1.0000085740051694" />
+      <entry key="S60" value="1.0038852410239372" />
+      <entry key="M2" value="1.1559262924106595" />
+      <entry key="M5" value="3.356007833265026" />
+      <entry key="M10" value="7.563883967609367" />
+      <entry key="M15" value="10.569962200457866" />
+      <entry key="M30" value="15.451133474789753" />
+      <entry key="H1" value="19.089321231539788" />
+      <entry key="H2" value="21.35436338659668" />
+      <entry key="H4" value="22.624931020343524" />
+      <entry key="D1" value="23.76312526500768" />
+      <entry key="W1" value="23.965966219909877" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
+      <entry key="MS500" value="5.654358014987458E-287" />
+      <entry key="S2" value="2.7421791587797923E-72" />
+      <entry key="S5" value="2.3726754153467834E-29" />
+      <entry key="S10" value="4.871011615000301E-15" />
+      <entry key="S30" value="1.695143186564997E-5" />
+      <entry key="S60" value="0.0041172116615070895" />
+      <entry key="M2" value="0.06416550211373" />
+      <entry key="M5" value="0.33336548937841554" />
+      <entry key="M10" value="0.5773781164699746" />
+      <entry key="M15" value="0.693383569390126" />
+      <entry key="M30" value="0.8326965650164087" />
+      <entry key="H1" value="0.9125220901525665" />
+      <entry key="H2" value="0.9552602211714704" />
+      <entry key="H4" value="0.977374145949989" />
+      <entry key="D1" value="0.9961929741083811" />
+      <entry key="W1" value="0.9994552497075377" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8784280513776304" />
-      <entry key="MS500" value="1.2572252398671906" />
-      <entry key="S2" value="1.7229469068374232" />
-      <entry key="S5" value="1.8788496644485089" />
-      <entry key="S10" value="1.9375574391486248" />
-      <entry key="S30" value="2.041871398564104" />
-      <entry key="S60" value="2.883602694242415" />
-      <entry key="M2" value="5.391942692344258" />
-      <entry key="M5" value="9.698389996385666" />
-      <entry key="M10" value="12.737023673528027" />
-      <entry key="M15" value="14.436406933004477" />
-      <entry key="M30" value="16.955365434523838" />
-      <entry key="H1" value="18.722228483106527" />
-      <entry key="H2" value="19.786613672728745" />
-      <entry key="H4" value="20.37315045278723" />
-      <entry key="D1" value="20.89258496368627" />
-      <entry key="W1" value="20.98458108203128" />
+      <entry key="MS100" value="1.6017405450791426E-5" />
+      <entry key="MS500" value="0.10987994511397337" />
+      <entry key="S2" value="0.5757442488420222" />
+      <entry key="S5" value="0.8018476179484814" />
+      <entry key="S10" value="0.8954594451724144" />
+      <entry key="S30" value="0.9638861573494332" />
+      <entry key="S60" value="0.9894455338459109" />
+      <entry key="M2" value="1.2079730473035577" />
+      <entry key="M5" value="3.677016793985061" />
+      <entry key="M10" value="8.129896862819031" />
+      <entry key="M15" value="11.253602905034063" />
+      <entry key="M30" value="16.27734016279351" />
+      <entry key="H1" value="19.99803176921691" />
+      <entry key="H2" value="22.307547003479144" />
+      <entry key="H4" value="23.601219711787365" />
+      <entry key="D1" value="24.75913035852677" />
+      <entry key="W1" value="24.965394452954904" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -118,7 +126,7 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/cache&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -162,7 +170,19 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
