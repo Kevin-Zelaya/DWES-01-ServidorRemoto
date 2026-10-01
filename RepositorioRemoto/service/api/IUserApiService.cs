@@ -1,4 +1,5 @@
 using Cliente_Http_con_refit.Dto;
+using CSharpFunctionalExtensions;
 
 public interface IUserApiService
 {

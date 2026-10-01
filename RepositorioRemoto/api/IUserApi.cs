@@ -32,5 +32,5 @@ public interface IUserApi
     /// Eliminar usuario
     /// </summary>
     [Delete("/users/{id}")]
-    Task DeleteUsuarioAsync(int id, CancellationToken cts = default);
+    Task<bool> DeleteUsuarioAsync(int id, CancellationToken cts = default);
 }
