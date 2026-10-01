@@ -1,4 +1,5 @@
 using Cliente_Http_con_refit.Dto;
+using CSharpFunctionalExtensions;
 using Refit;
 
 public class UserApiService(
@@ -11,23 +12,23 @@ public class UserApiService(
         try
         {
             var result = await _api.GetUsuariosAsync(cts);
-            return Result<List<UserModel>, DomainError>.ok(result.Select(u => u.ToModel()).ToList());
+            return Result.Success<List<UserModel>, DomainError>(result.Select(u => u.ToModel()).ToList());
         }
         catch (OperationCanceledException)
         {
-            return Result<List<UserModel>, DomainError>.Fail(
+            return Result.Failure<List<UserModel>, DomainError>(
                 new ApiError.Timeout()
             );
         }
         catch (ApiException ex)
         {
-            return Result<List<UserModel>, DomainError>.Fail(
+            return Result.Failure<List<UserModel>, DomainError>(
                 new ApiError.HttpFailure(ex.StatusCode, ex.Message)
             );
         }
         catch (HttpRequestException ex)
         {
-            return Result<List<UserModel>, DomainError>.Fail(
+            return Result.Failure<List<UserModel>, DomainError>(
                 new ApiError.NetworkError(ex.Message)
             );
         }
@@ -45,32 +46,32 @@ public class UserApiService(
         {
             var usuario = await _api.GetUsuarioByIdAsync(id);
             return usuario is not null
-                ? Result<UserModel, DomainError>.ok(usuario.ToModel())
-                : Result<UserModel, DomainError>.Fail(
+                ? Result.Success<UserModel, DomainError>(usuario.ToModel())
+                : Result.Failure<UserModel, DomainError>(
                     new ApiError.NotFound("Usuario", id)
                 );
         }
         catch (OperationCanceledException)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.Timeout()
             );
         }
         catch (ApiException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.NotFound("User", id)
             );
         }
         catch (ApiException ex)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.HttpFailure(ex.StatusCode, ex.Message)
             );
         }
         catch (HttpRequestException ex)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.NetworkError(ex.Message)
             );
         }
@@ -87,29 +88,29 @@ public class UserApiService(
         try
         {
             var creado = await _api.CreateUsuarioAsync(request, cts);
-            return Result<UserModel, DomainError>.ok(creado.ToModel());
+            return Result.Success<UserModel, DomainError>(creado.ToModel());
         }
         catch (OperationCanceledException)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.Timeout()
             );
         }
         catch (ApiException ex) when (ex.StatusCode == System.Net.HttpStatusCode.BadRequest)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.BadRequest()
             );
         }
         catch (ApiException ex)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.HttpFailure(ex.StatusCode, ex.Message)
             );
         }
         catch (HttpRequestException ex)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.NetworkError(ex.Message)
             );
         }
@@ -125,29 +126,29 @@ public class UserApiService(
         try
         {
             var actualizado = await _api.UpdateUsuarioAsync(id, request);
-            return Result<UserModel, DomainError>.ok(actualizado.ToModel());
+            return Result.Success<UserModel, DomainError>(actualizado.ToModel());
         }
         catch (OperationCanceledException)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.Timeout()
             );
         }
         catch (ApiException ex) when (ex.StatusCode == System.Net.HttpStatusCode.BadRequest)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.BadRequest()
             );
         }
         catch (ApiException ex)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.HttpFailure(ex.StatusCode, ex.Message)
             );
         }
         catch (HttpRequestException ex)
         {
-            return Result<UserModel, DomainError>.Fail(
+            return Result.Failure<UserModel, DomainError>(
                 new ApiError.NetworkError(ex.Message)
             );
         }
@@ -163,23 +164,23 @@ public class UserApiService(
         try
         {
             await _api.DeleteUsuarioAsync(id, cts);
-            return Result<bool, DomainError>.ok(true);
+            return Result.Success<bool, DomainError>(true);
         }
         catch (OperationCanceledException)
         {
-            return Result<bool, DomainError>.Fail(
+            return Result.Failure<bool, DomainError>(
                 new ApiError.Timeout()
             );
         }
         catch (ApiException ex)
         {
-            return Result<bool, DomainError>.Fail(
+            return Result.Failure<bool, DomainError>(
                 new ApiError.HttpFailure(ex.StatusCode, ex.Message)
             );
         }
         catch (HttpRequestException ex)
         {
-            return Result<bool, DomainError>.Fail(
+            return Result.Failure<bool, DomainError>(
                 new ApiError.NetworkError(ex.Message)
             );
         }
