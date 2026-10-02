@@ -1,4 +1,3 @@
-```csharp
 using System.Net;
 
 public abstract record DatabaseError(

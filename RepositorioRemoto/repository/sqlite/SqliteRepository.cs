@@ -19,10 +19,31 @@ public class SqliteRepository(AppDbContext context)
 
             return Result.Success<List<UserEntity>, DomainError>(users);
         }
+        catch (SqliteException ex) when (ex.SqliteErrorCode is 10 or 14)
+        {
+            return Result.Failure<List<UserEntity>, DomainError>(
+                new DatabaseError.ConnectionFailure(ex.Message)
+            );
+        }
+        catch (SqliteException ex) when (
+        ex.SqliteErrorCode == 1 &&
+        ex.Message.Contains("no such table", StringComparison.OrdinalIgnoreCase))
+        {
+            return Result.Failure<List<UserEntity>, DomainError>(
+                new DatabaseError.SchemaMismatch(ex.Message)
+            );
+        }
+        catch(SqliteException ex)
+        {
+            return Result.Failure<List<UserEntity>, DomainError>(
+                new DatabaseError.ReadFailure(ex.Message)
+            );
+        }
         catch (Exception ex)
         {
             return Result.Failure<List<UserEntity>, DomainError>(
-                MapError(ex, "read"));
+                new DatabaseError.Unknown(ex.Message)
+            );
         }
     }
 
@@ -41,10 +62,65 @@ public class SqliteRepository(AppDbContext context)
 
             return Result.Success<UserEntity, DomainError>(user);
         }
+        catch (DbUpdateException ex)
+            when (ex.InnerException is SqliteException
+                { SqliteErrorCode: 19 } sqlite)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.ConstraintViolation(sqlite.Message));
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.DatabaseLocked(ex.Message));
+        }
+        catch (DbUpdateException ex)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.WriteFailure(ex.Message));
+        }
         catch (Exception ex)
         {
             return Result.Failure<UserEntity, DomainError>(
-                MapError(ex, "write"));
+                new DatabaseError.Unknown(ex.Message));
+        }
+    }
+    /// <summary>
+    /// Crear un nuevo usuario en la base de datos.
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    public async Task<Result<UserEntity, DomainError>> CreateRangeAsync(
+        IEnumerable<UserEntity> users)
+    {
+        try
+        {
+            context.Users.AddRange(users);
+            await context.SaveChangesAsync();
+
+            return Result.Success<UserEntity, DomainError>(users.First());
+        }
+        catch (DbUpdateException ex)
+            when (ex.InnerException is SqliteException
+                { SqliteErrorCode: 19 } sqlite)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.ConstraintViolation(sqlite.Message));
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.DatabaseLocked(ex.Message));
+        }
+        catch (DbUpdateException ex)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.WriteFailure(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.Unknown(ex.Message));
         }
     }
     /// <summary>
@@ -53,19 +129,40 @@ public class SqliteRepository(AppDbContext context)
     /// <param name="user"></param>
     /// <returns></returns>
     public async Task<Result<UserEntity, DomainError>> UpdateAsync(
-        UserEntity user)
+    UserEntity user)
     {
         try
         {
-            context.Users.Update(user);
+            var existingUser = await context.Users.FindAsync(user.id);
+
+            if (existingUser is null)
+            {
+                return Result.Failure<UserEntity, DomainError>(
+                    new DatabaseError.NotFound("Usuario", user.id));
+            }
+
+            context.Entry(existingUser).CurrentValues.SetValues(user);
+
             await context.SaveChangesAsync();
 
-            return Result.Success<UserEntity, DomainError>(user);
+            return Result.Success<UserEntity, DomainError>(existingUser);
+        }
+        catch (DbUpdateException ex)
+            when (ex.InnerException is SqliteException
+                { SqliteErrorCode: 19 } sqlite)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.ConstraintViolation(sqlite.Message));
+        }
+        catch (DbUpdateException ex)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.WriteFailure(ex.Message));
         }
         catch (Exception ex)
         {
             return Result.Failure<UserEntity, DomainError>(
-                MapError(ex, "write"));
+                new DatabaseError.Unknown(ex.Message));
         }
     }
 
@@ -91,55 +188,23 @@ public class SqliteRepository(AppDbContext context)
 
             return Result.Success<bool, DomainError>(true);
         }
+        catch (DbUpdateException ex)
+            when (ex.InnerException is SqliteException
+                { SqliteErrorCode: 19 } sqlite)
+        {
+            return Result.Failure<bool, DomainError>(
+                new DatabaseError.ConstraintViolation(sqlite.Message));
+        }
+        catch (DbUpdateException ex)
+        {
+            return Result.Failure<bool, DomainError>(
+                new DatabaseError.WriteFailure(ex.Message));
+        }
         catch (Exception ex)
         {
             return Result.Failure<bool, DomainError>(
-                MapError(ex, "write"));
+                new DatabaseError.Unknown(ex.Message));
         }
     }
-    /// <summary>
-    /// Mapear excepciones de SQLite a errores de dominio.
-    /// </summary>
-    private static DatabaseError MapError(Exception ex, string operation)
-    {
-        // EF Core puede envolver el error de SQLite.
-        var sqliteEx = ex switch
-        {
-            SqliteException sqlite => sqlite,
-            DbUpdateException { InnerException: SqliteException sqlite } => sqlite,
-            _ => null
-        };
-
-        if (sqliteEx is not null)
-        {
-            return sqliteEx.SqliteErrorCode switch
-            {
-                5 or 6 => new DatabaseError.DatabaseLocked(ex.Message),
-
-                10 or 14 => new DatabaseError.ConnectionFailure(ex.Message),
-
-                11 or 26 => new DatabaseError.DatabaseCorrupted(ex.Message),
-
-                19 => new DatabaseError.ConstraintViolation(ex.Message),
-
-                1 when ex.Message.Contains(
-                    "no such table",
-                    StringComparison.OrdinalIgnoreCase)
-                    => new DatabaseError.SchemaMismatch(ex.Message),
-
-                _ => operation == "read"
-                    ? new DatabaseError.ReadFailure(ex.Message)
-                    : new DatabaseError.WriteFailure(ex.Message)
-            };
-        }
-
-        if (ex is DbUpdateException)
-        {
-            return new DatabaseError.WriteFailure(ex.Message);
-        }
-
-        return operation == "read"
-            ? new DatabaseError.ReadFailure(ex.Message)
-            : new DatabaseError.Unknown(ex.Message);
-    }
+    
 }
