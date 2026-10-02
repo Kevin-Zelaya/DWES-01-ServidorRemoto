@@ -8,4 +8,10 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<UserEntity> Users { get; set; }
+
+
+    public void EnsureCreated()
+    {
+        Database.EnsureCreated();
+    }
 }

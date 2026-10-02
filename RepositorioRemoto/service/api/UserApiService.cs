@@ -5,7 +5,12 @@ public class UserApiService(
     IUserApi _api
 ) : IUserApiService
 {
-    
+
+    public void Typeof()
+    {
+        string miNamespace = this.GetType().Namespace;
+        Console.WriteLine($"Namespace: {miNamespace}");
+    }    
     public async Task<Result<List<UserModel>, DomainError>> GetAllAsync(CancellationToken cts = default)
     {
         try
@@ -185,5 +190,6 @@ public class UserApiService(
             );
         }
     }    
+ 
 
 }

@@ -1,9 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Caching.Memory;
 using Refit;
-using RepositorioRemoto.Cache;
-using RepositorioRemoto.Cache.Common;
 
 public class DependencyProvider
 {
@@ -11,21 +9,24 @@ public class DependencyProvider
     {
         var services = new ServiceCollection();
 
-        // Registro nativo de IMemoryCache de Microsoft
-        services.AddMemoryCache();
-
-        // Registro de tu InMemoryCache implementando IPostService como Singleton
-        services.AddSingleton<IPostService, InMemoryCache>();
-
-        // Refit
+        // Refir
         services.AddHttpClient("jasonplaceholder", client =>
-            {
-                client.BaseAddress = new Uri(AppConfig.ApiUrl);
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-            })
-            .AddRefitClient<IUserApi>();
+        {
+            client.BaseAddress = new Uri(AppConfig.ApiUrl);
+            client.DefaultRequestHeaders.Add("Acept", "application/jon");
+        })
+        .AddRefitClient<IUserApi>();
 
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseSqlite(AppConfig.ConnectionString);
+        });
         services.AddScoped<IUserApiService, UserApiService>();
+        services.AddScoped<UserService>();
+        services.AddScoped<IRepository, SqliteRepository>();
+        services.AddScoped<UnitOfWork>();
+        services.AddHostedService<UserSyncBackgroundService>();
+        
 
         return services.BuildServiceProvider();
     }
