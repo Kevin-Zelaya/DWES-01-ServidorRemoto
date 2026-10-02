@@ -11,7 +11,6 @@ using Microsoft.Extensions.Caching.Memory;
 public class InMemoryCache<T> : ICache<T>
 {
     private readonly IMemoryCache _memoryCache;
-    private readonly SemaphoreSlim _cacheLock = new(1, 1);
 
     public InMemoryCache(IMemoryCache memoryCache)
     {
@@ -21,61 +20,50 @@ public class InMemoryCache<T> : ICache<T>
     // ==========================================
     // OBTENER UN ELEMENTO
     // ==========================================
-    public async Task<T?> GetAsync(string key)
+    public Task<Result<T, DomainError>> GetAsync(string key)
     {
-        await _cacheLock.WaitAsync();
+        if (_memoryCache.TryGetValue(key, out T? value)
+            && value is not null)
+        {
+            return Task.FromResult(
+                Result.Success<T, DomainError>(value));
+        }
 
-        try
-        {
-            _memoryCache.TryGetValue(key, out T? value);
-            return value;
-        }
-        finally
-        {
-            _cacheLock.Release();
-        }
+        return Task.FromResult(
+            Result.Failure<T, DomainError>(
+                new CacheError.NotFound(key)));
     }
 
     // ==========================================
     // GUARDAR UN ELEMENTO
     // ==========================================
-    public async Task SetAsync(
+    public Task<Result<bool, DomainError>> SetAsync(
         string key,
         T value,
         TimeSpan? expiration = null)
     {
-        await _cacheLock.WaitAsync();
-
-        try
+        var options = new MemoryCacheEntryOptions
         {
-            var options = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow =
-                    expiration ?? TimeSpan.FromMinutes(30)
-            };
+            AbsoluteExpirationRelativeToNow =
+                expiration ?? TimeSpan.FromMinutes(30)
+        };
 
-            _memoryCache.Set(key, value, options);
-        }
-        finally
-        {
-            _cacheLock.Release();
-        }
+        _memoryCache.Set(key, value, options);
+
+        return Task.FromResult(
+            Result.Success<bool, DomainError>(true));
     }
 
     // ==========================================
     // ELIMINAR UN ELEMENTO
     // ==========================================
-    public async Task RemoveAsync(string key)
+    public Task<Result<bool, DomainError>> RemoveAsync(string key)
     {
-        await _cacheLock.WaitAsync();
+        bool exists = _memoryCache.TryGetValue(key, out _);
 
-        try
-        {
-            _memoryCache.Remove(key);
-        }
-        finally
-        {
-            _cacheLock.Release();
-        }
+        _memoryCache.Remove(key);
+
+        return Task.FromResult(
+            Result.Success<bool, DomainError>(exists));
     }
 }

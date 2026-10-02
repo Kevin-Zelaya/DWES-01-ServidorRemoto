@@ -1,9 +1,11 @@
 using CSharpFunctionalExtensions;
+using RepositorioRemoto.Cache.Common;
 
 public class UserService(
     IRepository _repository,
     IUserApiService _api,
-    UnitOfWork _unitOfWork
+    UnitOfWork _unitOfWork,
+    ICache<UserModel> _cache
 )
 {
     /// <summary>
@@ -87,43 +89,127 @@ public class UserService(
     /// <returns></returns>
     public async Task<Result<UserModel, DomainError>> GetUserByIdAsync(int id)
     {
-        // 1. Buscar en la caché
+        var key = $"user:{id}";
 
-        // 2. Buscar en la base de datos
-        var response = await _repository.GetUserByIdAsync(id);
-        if (response.IsFailure)
+        // 1. Buscar en caché
+        var cacheResult = await _cache.GetAsync(key);
+
+        if (cacheResult.IsSuccess)
+            return cacheResult;
+
+        // Si falla la caché, continuamos con el repositorio.
+
+        // 2. Buscar en base de datos
+        var repositoryResult = await _repository.GetUserByIdAsync(id);
+
+        if (repositoryResult.IsSuccess)
         {
-            // 3. Buscamos en la api
-            var responseApi = await _api.GetByIdAsync(id);
-            if (responseApi.IsFailure)
-            {
-                // 4. Por último si no se encuentra en la api retornamos error
-                return Result.Failure<UserModel, DomainError>(responseApi.Error);
-            }
-            return Result.Success<UserModel, DomainError>(response.Value.ToModel());
-        }
-        return Result.Success<UserModel, DomainError>(response.Value.ToModel());
-    }
+            var user = repositoryResult.Value.ToModel();
 
+            await _cache.SetAsync(key, user);
+
+            return Result.Success<UserModel, DomainError>(user);
+        }
+
+        // Solo continuamos si el usuario no existe en la base de datos.
+        if (repositoryResult.Error is not DatabaseError.NotFound)
+            return Result.Failure<UserModel, DomainError>(
+                repositoryResult.Error);
+
+        // 3. Buscar en la API
+        var apiResult = await _api.GetByIdAsync(id);
+
+        if (apiResult.IsFailure)
+            return Result.Failure<UserModel, DomainError>(apiResult.Error);
+
+        var apiUser = apiResult.Value;
+
+        await _cache.SetAsync(key, apiUser);
+
+        return Result.Success<UserModel, DomainError>(apiUser);
+    }
+    /// <summary>
+    /// Actualizar usuario
+    /// 1. Actualizar en la api
+    /// 2. Actualizar en la base de datos
+    /// 3. Actualizar en la caché
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public async Task<Result<UserModel, DomainError>> UpdateUserAsync(
         int id,
-        UpdateUserRequest request
-    )
+        UpdateUserRequest request)
     {
-        // 1. Actualizar en la api
+        // 1. Actualizar en la API (fuente oficial)
         var response = await _api.UpdateAsync(id, request);
-        if (response.IsSuccess)
+
+        if (response.IsFailure)
+            return Result.Failure<UserModel, DomainError>(
+                response.Error);
+
+        var user = response.Value;
+
+        // 2. Actualizar la base de datos local
+        var responseDatabase = await _repository.UpdateAsync(
+            user.ToEntity(),
+            id);
+
+        if (responseDatabase.IsFailure)
         {
-            // 2. Actualizamos en la bd
-            var bdResponse = await _repository.UpdateAsync(response.Value.ToEntity(), id);
-            
-            return Result.Success<UserModel, DomainError>(
-                bdResponse.Value.ToModel()
-            );
-        } 
-        return Result.Failure<UserModel, DomainError>(
-            response.Error 
-        );
+            // La API ya se ha actualizado.
+            // Registrar el error para sincronizar la BD posteriormente.
+            return Result.Failure<UserModel, DomainError>(
+                responseDatabase.Error);
+        }
+
+        // 3. Actualizar la caché
+        var responseCache = await _cache.SetAsync(
+            $"user:{id}",
+            user);
+
+        // La caché es auxiliar: si falla, el usuario ya está actualizado
+        // en la API y en la BD.
+        return Result.Success<UserModel, DomainError>(user);
     }
+
+    /// <summary>
+    /// Eliminar usuario
+    /// 1. Eliminar en la api
+    /// 2. Eliminar en la base de datos
+    /// 3. Eliminar en la caché
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<Result<bool, DomainError>> DeleteUserAsync(int id)
+    {
+        var key = $"user:{id}";
+
+        // 1. Eliminar usuario de la API
+        var response = await _api.DeleteAsync(id);
+
+        if (response.IsFailure)
+            return Result.Failure<bool, DomainError>(
+                response.Error);
+
+        // 2. Eliminar de la base de datos
+        var responseDatabase = await _repository.DeleteAsync(id);
+
+        if (responseDatabase.IsFailure)
+        {
+            // La API ya ha eliminado el usuario.
+            // Registrar el error para sincronizar la BD posteriormente.
+            return Result.Failure<bool, DomainError>(
+                responseDatabase.Error);
+        }
+
+        // 3. Eliminar de la caché
+        var responseCache = await _cache.RemoveAsync(key);
+
+        // La caché es auxiliar: si falla, la eliminación
+        // en la API y en la BD ya se ha realizado.
+        return Result.Success<bool, DomainError>(true);
+    }
+
 
 }

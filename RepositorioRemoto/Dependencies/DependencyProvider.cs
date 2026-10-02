@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
+using RepositorioRemoto.Cache;
+using RepositorioRemoto.Cache.Common;
 
 public class DependencyProvider
 {
@@ -26,6 +28,8 @@ public class DependencyProvider
         services.AddScoped<IRepository, SqliteRepository>();
         services.AddScoped<UnitOfWork>();
         services.AddHostedService<UserSyncBackgroundService>();
+        services.AddMemoryCache();
+        services.AddSingleton(typeof(ICache<>), typeof(InMemoryCache<>));
         
 
         return services.BuildServiceProvider();

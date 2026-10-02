@@ -6,9 +6,12 @@ namespace RepositorioRemoto.Cache.Common;
 
 public interface ICache<T>
 {
-    Task<T?> GetAsync(string key);
+    Task<Result<T, DomainError>> GetAsync(string key);
 
-    Task SetAsync(string key, T value, TimeSpan? expiration = null);
+    Task<Result<bool, DomainError>> SetAsync(
+        string key,
+        T value,
+        TimeSpan? expiration = null);
 
-    Task RemoveAsync(string key);
+    Task<Result<bool, DomainError>> RemoveAsync(string key);
 }
