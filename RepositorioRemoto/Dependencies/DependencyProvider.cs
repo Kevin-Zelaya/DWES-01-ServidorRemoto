@@ -22,6 +22,12 @@ public class DependencyProvider
             options.UseSqlite(AppConfig.ConnectionString);
         });
         services.AddScoped<IUserApiService, UserApiService>();
+        services.AddScoped<UserService>();
+        services.AddScoped<IRepository, SqliteRepository>();
+        services.AddScoped<UnitOfWork>();
+        services.AddHostedService<UserSyncBackgroundService>();
+        
+
         return services.BuildServiceProvider();
     }
 }

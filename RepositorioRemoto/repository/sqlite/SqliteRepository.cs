@@ -3,7 +3,7 @@ using CSharpFunctionalExtensions;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-public class SqliteRepository(AppDbContext context)
+public class SqliteRepository(AppDbContext context) : IRepository
 {
     /// <summary>
     /// Obtener todos los usuarios de la base de datos.
@@ -44,6 +44,41 @@ public class SqliteRepository(AppDbContext context)
             return Result.Failure<List<UserEntity>, DomainError>(
                 new DatabaseError.Unknown(ex.Message)
             );
+        }
+    }
+
+    public async Task<Result<UserEntity, DomainError>> GetUserByIdAsync(
+        int id,
+        CancellationToken ct = default)
+    {
+        try
+        {
+            var user = await context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.id == id, ct);
+
+            if (user is null)
+            {
+                return Result.Failure<UserEntity, DomainError>(
+                    new DatabaseError.NotFound("Usuario", id));
+            }
+
+            return Result.Success<UserEntity, DomainError>(user);
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode is 10 or 14)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.ConnectionFailure(ex.Message));
+        }
+        catch (SqliteException ex) when (ex.SqliteErrorCode is 11 or 26)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.DatabaseCorrupted(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.ReadFailure(ex.Message));
         }
     }
 
@@ -129,7 +164,7 @@ public class SqliteRepository(AppDbContext context)
     /// <param name="user"></param>
     /// <returns></returns>
     public async Task<Result<UserEntity, DomainError>> UpdateAsync(
-    UserEntity user)
+    UserEntity user, int id)
     {
         try
         {
@@ -199,6 +234,25 @@ public class SqliteRepository(AppDbContext context)
         {
             return Result.Failure<bool, DomainError>(
                 new DatabaseError.WriteFailure(ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return Result.Failure<bool, DomainError>(
+                new DatabaseError.Unknown(ex.Message));
+        }
+    }
+    public async Task<Result<bool, DomainError>> DeleteAllAsync()
+    {
+        try
+        {
+            await context.Users.ExecuteDeleteAsync();
+
+            return Result.Success<bool, DomainError>(true);
+        }
+        catch (OperationCanceledException)
+        {
+            return Result.Failure<bool, DomainError>(
+                new ApiError.Timeout());
         }
         catch (Exception ex)
         {

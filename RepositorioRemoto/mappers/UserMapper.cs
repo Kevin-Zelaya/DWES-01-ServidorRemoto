@@ -1,4 +1,6 @@
 
+using System.Text.Json;
+
 public static class UserMapper
 {
     /// <summary>
@@ -137,4 +139,41 @@ public static class UserMapper
             bs = model.company.bs
         }
     };
+    /// <summary>
+    /// De modelo a entidad
+    /// </summary>
+    public static UserEntity ToEntity(this UserModel model) => new()
+    {
+        id = model.id,
+        name = model.name,
+        username = model.username,
+        email = model.email,
+
+        address = JsonSerializer.Serialize(model.address),
+        
+
+        phone = model.phone,
+        website = model.website,
+
+        company = JsonSerializer.Serialize(model.company),
+    };
+    /// <summary>
+    /// De modelo a entidad
+    /// </summary>
+    public static UserModel ToModel(this UserEntity model) => new()
+    {
+        id = model.id,
+        name = model.name,
+        username = model.username,
+        email = model.email ?? "",
+
+        address = JsonSerializer.Deserialize<Address>(model.address ?? string.Empty) ?? new Address(),
+
+        phone = model.phone ?? "",
+        website = model.website ?? "",
+
+        company = JsonSerializer.Deserialize<Company>(model.company ?? string.Empty) ?? new Company(),
+    };
+
+
 }
