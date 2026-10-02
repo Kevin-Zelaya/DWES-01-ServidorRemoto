@@ -1,12 +1,21 @@
-﻿
-
-
-// Prueba
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-var provider = DependencyProvider.Configure();
+// Configuración de la aplicación
+var builder = Host.CreateApplicationBuilder(args);
+
+// Reducir los logs de HttpClient y Entity Framework
+builder.Logging.AddFilter("System.Net.Http.HttpClient", LogLevel.Warning);
+builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+
+DependencyProvider.Configure(
+    builder.Services,
+    builder.Environment
+);
+
+using var host = builder.Build();
+
 
 UserSyncBackgroundService.DatabaseRefreshed += (sender, e) =>
 {
@@ -15,22 +24,32 @@ UserSyncBackgroundService.DatabaseRefreshed += (sender, e) =>
     Console.ResetColor();
 };
 
-// 💡 3. Arrancar el BackgroundService usando el mismo ServiceProvider que ya configuraste
-var backgroundService = provider.GetRequiredService<IHostedService>();
-using var cts = new CancellationTokenSource();
-_ = backgroundService.StartAsync(cts.Token);
+await host.StartAsync();
 
 
-var services = provider.GetRequiredService<IUserApiService>();
 
-
-var users = await services.GetAllAsync();
-
-
-foreach(var user in users.Value)
+try
 {
-    Console.WriteLine($"{user.name}");
-}
-Console.ReadLine();
-await backgroundService.StopAsync(cts.Token);
+    // IUserApiService está registrado como Scoped
+    using var scope = host.Services.CreateScope();
 
+    var userService = scope.ServiceProvider
+        .GetRequiredService<IUserApiService>();
+
+    var users = await userService.GetAllAsync();
+
+    foreach (var user in users.Value)
+    {
+        Console.WriteLine(user.name);
+    }
+
+    Console.ReadLine();
+}
+finally
+{
+    await host.StopAsync();
+}
+
+
+// Entender toda está parte y la inyección de dependencias y la configuración
+// de entorno o  perfil

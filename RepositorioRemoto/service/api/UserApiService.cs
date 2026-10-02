@@ -3,7 +3,7 @@ using Refit;
 
 public class UserApiService(
     IUserApi _api
-) : IUserApiService
+) : IUserApiService, Scoped
 {
 
     public void Typeof()
