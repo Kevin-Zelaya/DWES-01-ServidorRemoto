@@ -15,11 +15,17 @@
   <component name="ChangeListManager">
     <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Mapper/MapperTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Mapper/MapperTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Service/api/ApiServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Service/api/ApiServiceTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Cache/common/IPostService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Cache/common/IPostService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/dto/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/dto/UserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Dependencies/DependencyProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Dependencies/DependencyProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/api/IUserApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/api/IUserApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/dto/CreateUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/dto/CreateUserRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/dto/UpdateUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/dto/UpdateUserRequest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +39,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ffb7373a7bc47e19c23f13c1e761201127200/91/4d39e6f4/Result`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3cca26e6dd627c1a7919bec86cb05b6d975a30287456f7daa8773a92451a/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/config/AppConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/dto/CreateUserRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/dto/UpdateUserRequest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/dto/UserDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/errors/ApiError.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/errors/CacheError.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/errors/DomainError.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/model/UserModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -44,59 +64,59 @@
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000000000007" />
-      <entry key="S30" value="1.0000085740051694" />
-      <entry key="S60" value="1.0038852410239372" />
-      <entry key="M2" value="1.1559262924106595" />
-      <entry key="M5" value="3.356007833265026" />
-      <entry key="M10" value="7.563883967609367" />
-      <entry key="M15" value="10.569962200457866" />
-      <entry key="M30" value="15.451133474789753" />
-      <entry key="H1" value="19.089321231539788" />
-      <entry key="H2" value="21.35436338659668" />
-      <entry key="H4" value="22.624931020343524" />
-      <entry key="D1" value="23.76312526500768" />
-      <entry key="W1" value="23.965966219909877" />
+      <entry key="S2" value="1.0000000000000873" />
+      <entry key="S5" value="1.0000059734944489" />
+      <entry key="S10" value="1.002449285297879" />
+      <entry key="S30" value="1.152045462749329" />
+      <entry key="S60" value="1.5006375742748657" />
+      <entry key="M2" value="2.1964957505865383" />
+      <entry key="M5" value="6.840934970131821" />
+      <entry key="M10" value="15.836476032897437" />
+      <entry key="M15" value="23.784766273770416" />
+      <entry key="M30" value="41.946451756015634" />
+      <entry key="H1" value="61.25186799862541" />
+      <entry key="H2" value="76.25588003062235" />
+      <entry key="H4" value="85.7690300284159" />
+      <entry key="D1" value="94.99434772273679" />
+      <entry key="W1" value="96.7099912952317" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="5.654358014987458E-287" />
-      <entry key="S2" value="2.7421791587797923E-72" />
-      <entry key="S5" value="2.3726754153467834E-29" />
-      <entry key="S10" value="4.871011615000301E-15" />
-      <entry key="S30" value="1.695143186564997E-5" />
-      <entry key="S60" value="0.0041172116615070895" />
-      <entry key="M2" value="0.06416550211373" />
-      <entry key="M5" value="0.33336548937841554" />
-      <entry key="M10" value="0.5773781164699746" />
-      <entry key="M15" value="0.693383569390126" />
-      <entry key="M30" value="0.8326965650164087" />
-      <entry key="H1" value="0.9125220901525665" />
-      <entry key="H2" value="0.9552602211714704" />
-      <entry key="H4" value="0.977374145949989" />
-      <entry key="D1" value="0.9961929741083811" />
-      <entry key="W1" value="0.9994552497075377" />
+      <entry key="MS100" value="1.9605695140972823E-177" />
+      <entry key="MS500" value="4.5548748529804405E-36" />
+      <entry key="S2" value="1.4608953686116208E-9" />
+      <entry key="S5" value="2.923126988758495E-4" />
+      <entry key="S10" value="0.017102199356434766" />
+      <entry key="S30" value="0.2747684113561927" />
+      <entry key="S60" value="0.6385271756514999" />
+      <entry key="M2" value="1.0778749273521382" />
+      <entry key="M5" value="1.7770811353199263" />
+      <entry key="M10" value="3.135976816941964" />
+      <entry key="M15" value="4.75738542398121" />
+      <entry key="M30" value="8.810222189766245" />
+      <entry key="H1" value="12.968121017964481" />
+      <entry key="H2" value="16.017906981126" />
+      <entry key="H4" value="17.87543179239839" />
+      <entry key="D1" value="19.62570919894398" />
+      <entry key="W1" value="19.94601216922669" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.6017405450791426E-5" />
-      <entry key="MS500" value="0.10987994511397337" />
-      <entry key="S2" value="0.5757442488420222" />
-      <entry key="S5" value="0.8018476179484814" />
-      <entry key="S10" value="0.8954594451724144" />
-      <entry key="S30" value="0.9638861573494332" />
-      <entry key="S60" value="0.9894455338459109" />
-      <entry key="M2" value="1.2079730473035577" />
-      <entry key="M5" value="3.677016793985061" />
-      <entry key="M10" value="8.129896862819031" />
-      <entry key="M15" value="11.253602905034063" />
-      <entry key="M30" value="16.27734016279351" />
-      <entry key="H1" value="19.99803176921691" />
-      <entry key="H2" value="22.307547003479144" />
-      <entry key="H4" value="23.601219711787365" />
-      <entry key="D1" value="24.75913035852677" />
-      <entry key="W1" value="24.965394452954904" />
+      <entry key="MS100" value="9.711138717711407E-5" />
+      <entry key="MS500" value="0.1575629239478732" />
+      <entry key="S2" value="0.6300333057083393" />
+      <entry key="S5" value="0.8314947266669712" />
+      <entry key="S10" value="0.9286466992174195" />
+      <entry key="S30" value="1.3794405096959257" />
+      <entry key="S60" value="2.1029187659472774" />
+      <entry key="M2" value="3.2485952988884073" />
+      <entry key="M5" value="8.600653689162444" />
+      <entry key="M10" value="18.954891394051792" />
+      <entry key="M15" value="28.523569163954626" />
+      <entry key="M30" value="50.738753353159105" />
+      <entry key="H1" value="74.20643842475077" />
+      <entry key="H2" value="92.26526773089972" />
+      <entry key="H4" value="103.63965857933734" />
+      <entry key="D1" value="114.61916959258966" />
+      <entry key="W1" value="116.6558744131769" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -131,7 +151,8 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;file.status.colors&quot;
   }
 }</component>
   <component name="RunManager">
@@ -203,5 +224,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

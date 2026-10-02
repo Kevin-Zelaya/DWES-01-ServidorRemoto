@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Caching.Memory;
-using Cliente_Http_con_refit.Dto;
+using Microsoft.Extensions.Options;
 using RepositorioRemoto.Cache.Common;
+using RepositorioRemoto.Errors;
 
 namespace RepositorioRemoto.Cache;
 
@@ -11,8 +10,10 @@ public class InMemoryCache : IPostService
 {
     private readonly IMemoryCache _cache;
     private const string CacheKey = "UserListCacheKey";
+    
+    // Semáforo asíncrono para proteger el acceso concurrente al ser un Singleton compartido
+    private static readonly SemaphoreSlim _semaphore = new(1, 1);
 
-    // Inyectamos el servicio IMemoryCache de .NET
     public InMemoryCache(IMemoryCache cache)
     {
         _cache = cache;
@@ -21,59 +22,92 @@ public class InMemoryCache : IPostService
     // ==========================================
     // OBTENER TODOS LOS USUARIOS
     // ==========================================
-    public async Task<List<UserModel>> GetAllUsersAsync() // falta result
+    public async Task<List<UserModel>> GetAllUsersAsync()
     {
-        // Comprobamos si la lista ya existe en memoria; si no, la inicializamos vacía
         if (!_cache.TryGetValue(CacheKey, out List<UserModel> users))
         {
-            users = new List<UserModel>();
-            _cache.Set(CacheKey, users);
+            await _semaphore.WaitAsync();
+            try
+            {
+                // Doble comprobación segura tras adquirir el bloqueo
+                if (!_cache.TryGetValue(CacheKey, out users))
+                {
+                    users = new List<UserModel>();
+                    SetUsersInCache(users);
+                }
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
-        return users;
+        return users ?? new List<UserModel>();
+    }
+
+    // Método auxiliar privado para aplicar el tiempo de vida (TTL) predeterminado
+    private void SetUsersInCache(List<UserModel> users)
+    {
+        var cacheEntryOptions = new MemoryCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30),
+            SlidingExpiration = TimeSpan.FromMinutes(10)
+        };
+        _cache.Set(CacheKey, users, cacheEntryOptions);
     }
 
     // ==========================================
-    //  CREAR USUARIO
+    // CREAR USUARIO
     // ==========================================
     public async Task<Result<UserModel, DomainError>> CreateUser(CreateUserDto request)
     {
-        var users = await GetAllUsersAsync();
-
-        // Generamos un ID autoincremental provisional para la memoria
-        int newId = users.Count > 0 ? users.Max(u => u.id) + 1 : 1;
-
-        // Mapeo manual desde CreateUserDto hacia UserModel
-        var newUser = new UserModel
+        await _semaphore.WaitAsync();
+        try
         {
-            id = newId,
-            name = request.name,
-            username = request.username,
-            email = request.email,
-            phone = request.phone,
-            website = request.website,
-            address = request.address != null ? new Address
-            {
-                street = request.address.street,
-                suite = request.address.suite,
-                city = request.address.city,
-                zipcode = request.address.zipcode,
-                geo = request.address.geo != null ? new Geo { lat = request.address.geo.lat, lng = request.address.geo.lng } : null
-            } : null,
-            company = request.company != null ? new Company
-            {
-                name = request.company.name,
-                catchPhrase = request.company.catchPhrase,
-                bs = request.company.bs
-            } : null
-        };
+            var users = await GetAllUsersAsync();
 
-        // Añadimos el usuario a la lista en caché y actualizamos el almacenamiento
-        users.Add(newUser);
-        _cache.Set(CacheKey, users);
+            if (users.Any(u => u.email.Equals(request.email, StringComparison.OrdinalIgnoreCase)))
+            {
+                return Result.Failure<UserModel, DomainError>(
+                    new CacheError.AlreadyExists("Usuario con email", request.email)
+                );
+            }
 
-        // Devolvemos el resultado exitoso utilizando .ok()
-        return Result<UserModel, DomainError>.ok(newUser);
+            int newId = users.Count > 0 ? users.Max(u => u.id) + 1 : 1;
+
+            var newUser = new UserModel
+            {
+                id = newId,
+                name = request.name,
+                username = request.username,
+                email = request.email,
+                phone = request.phone,
+                website = request.website,
+                address = request.address != null ? new Address
+                {
+                    street = request.address.street,
+                    suite = request.address.suite,
+                    city = request.address.city,
+                    zipcode = request.address.zipcode,
+                    geo = request.address.geo != null ? new Geo { lat = request.address.geo.lat, lng = request.address.geo.lng } : null
+                } : null,
+                company = request.company != null ? new Company
+                {
+                    name = request.company.name,
+                    catchPhrase = request.company.catchPhrase,
+                    bs = request.company.bs
+                } : null
+            };
+
+            users.Add(newUser);
+            SetUsersInCache(users);
+
+            return Result.Success<UserModel, DomainError>(newUser);
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
     }
 
     // ==========================================
@@ -81,50 +115,62 @@ public class InMemoryCache : IPostService
     // ==========================================
     public async Task<Result<UserModel, DomainError>> UpdateUser(UpdateUserRequest request)
     {
-        var users = await GetAllUsersAsync();
-        var existingUser = users.FirstOrDefault(u => u.id == request.id);
-
-        // Si el usuario no existe en la caché, devolvemos un error de dominio controlado
-        if (existingUser == null)
+        if (request.id <= 0)
         {
-            return Result<UserModel, DomainError>.Fail(
-                new DomainError("El usuario no existe en la caché.", System.Net.HttpStatusCode.NotFound)
+            return Result.Failure<UserModel, DomainError>(
+                new CacheError.InvalidOperation("El ID proporcionado para actualizar en la caché no es válido.")
             );
         }
 
-        // Actualizamos las propiedades del usuario encontrado con los datos del request
-        existingUser.name = request.name;
-        existingUser.username = request.username;
-        existingUser.email = request.email;
-        existingUser.phone = request.phone;
-        existingUser.website = request.website;
-        
-        if (request.address != null)
+        await _semaphore.WaitAsync();
+        try
         {
-            existingUser.address = new Address
-            {
-                street = request.address.street,
-                suite = request.address.suite,
-                city = request.address.city,
-                zipcode = request.address.zipcode,
-                geo = request.address.geo != null ? new Geo { lat = request.address.geo.lat, lng = request.address.geo.lng } : null
-            };
-        }
+            var users = await GetAllUsersAsync();
+            var existingUser = users.FirstOrDefault(u => u.id == request.id);
 
-        if (request.company != null)
+            if (existingUser == null)
+            {
+                return Result.Failure<UserModel, DomainError>(
+                    new CacheError.NotFound("Usuario", request.id)
+                );
+            }
+
+            existingUser.name = request.name;
+            existingUser.username = request.username;
+            existingUser.email = request.email;
+            existingUser.phone = request.phone;
+            existingUser.website = request.website;
+            
+            if (request.address != null)
+            {
+                existingUser.address = new Address
+                {
+                    street = request.address.street,
+                    suite = request.address.suite,
+                    city = request.address.city,
+                    zipcode = request.address.zipcode,
+                    geo = request.address.geo != null ? new Geo { lat = request.address.geo.lat, lng = request.address.geo.lng } : null
+                };
+            }
+
+            if (request.company != null)
+            {
+                existingUser.company = new Company
+                {
+                    name = request.company.name,
+                    catchPhrase = request.company.catchPhrase,
+                    bs = request.company.bs
+                };
+            }
+
+            SetUsersInCache(users);
+
+            return Result.Success<UserModel, DomainError>(existingUser);
+        }
+        finally
         {
-            existingUser.company = new Company
-            {
-                name = request.company.name,
-                catchPhrase = request.company.catchPhrase,
-                bs = request.company.bs
-            };
+            _semaphore.Release();
         }
-
-        // Guardamos los cambios en la caché
-        _cache.Set(CacheKey, users);
-
-        return Result<UserModel, DomainError>.ok(existingUser);
     }
 
     // ==========================================
@@ -132,21 +178,27 @@ public class InMemoryCache : IPostService
     // ==========================================
     public async Task<Result<bool, DomainError>> DeleteUser(int id)
     {
-        var users = await GetAllUsersAsync();
-        var user = users.FirstOrDefault(u => u.id == id);
-
-        // Si no se encuentra el usuario, devolvemos error
-        if (user == null)
+        await _semaphore.WaitAsync();
+        try
         {
-            return Result<bool, DomainError>.Fail(
-                new DomainError("El usuario a eliminar no existe.", System.Net.HttpStatusCode.NotFound)
-            );
+            var users = await GetAllUsersAsync();
+            var user = users.FirstOrDefault(u => u.id == id);
+
+            if (user == null)
+            {
+                return Result.Failure<bool, DomainError>(
+                    new CacheError.NotFound("Usuario", id)
+                );
+            }
+
+            users.Remove(user);
+            SetUsersInCache(users);
+
+            return Result.Success<bool, DomainError>(true);
         }
-
-        // Removemos de la lista y actualizamos la caché
-        users.Remove(user);
-        _cache.Set(CacheKey, users);
-
-        return Result<bool, DomainError>.ok(true);
+        finally
+        {
+            _semaphore.Release();
+        }
     }
 }

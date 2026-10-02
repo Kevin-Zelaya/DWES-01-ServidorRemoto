@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Cliente_Http_con_refit.Dto;
+using CSharpFunctionalExtensions;
+
 namespace RepositorioRemoto.Cache.Common;
 
 public interface IPostService

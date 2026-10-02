@@ -1,4 +1,3 @@
-namespace Cliente_Http_con_refit.Dto;
 
 public class UpdateUserRequest
 {
