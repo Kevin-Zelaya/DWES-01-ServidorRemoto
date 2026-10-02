@@ -3,10 +3,16 @@
 
 // Prueba
 
-using Cliente_Http_con_refit.Dto;
+
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+
+
 var provider = DependencyProvider.Configure();
+
+var scoped = provider.CreateScope();
 
 var services = provider.GetRequiredService<IUserApiService>();
 
@@ -62,3 +68,6 @@ if(userr is Result<UserDto, DomainError>.Success useryes)
     Console.WriteLine($"Nombre: {valor.name} compañia: {valor.company.name} {valor.address.geo.lat}");
 }
 */
+
+
+var contex = scoped.ServiceProvider.GetRequiredService<AppDbContext>();

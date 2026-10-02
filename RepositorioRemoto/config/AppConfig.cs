@@ -26,8 +26,8 @@ public class AppConfig
 
             ApiUrl = Config["ApiSettings:BaseUrl"]
                 ?? throw new InvalidOperationException("No se encontro 'ApiSettins:BaseUrl'");
-            
-            
+            ConnectionString = Config["ConnectionStrings:DefaultConnection"]
+                ?? throw new InvalidOperationException("No se encontro 'ConnectionStrings:DefaultConnection'");
 
     }
 
@@ -35,4 +35,6 @@ public class AppConfig
 
     // Por aqui
     public static string ApiUrl {get; set;}
+
+    public static string ConnectionString {get; private set;} 
 }

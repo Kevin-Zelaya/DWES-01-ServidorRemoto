@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
@@ -16,7 +17,10 @@ public class DependencyProvider
         })
         .AddRefitClient<IUserApi>();
 
-
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseSqlite(AppConfig.ConnectionString);
+        });
         services.AddScoped<IUserApiService, UserApiService>();
         return services.BuildServiceProvider();
     }
