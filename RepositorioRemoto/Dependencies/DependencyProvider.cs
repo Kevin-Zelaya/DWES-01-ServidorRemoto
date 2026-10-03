@@ -5,6 +5,8 @@ using Microsoft.Extensions.Hosting;
 using Refit;
 using RepositorioRemoto.Cache;
 using RepositorioRemoto.Cache.Common;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 public class DependencyProvider
 {
@@ -26,7 +28,15 @@ public class DependencyProvider
         services.AddScoped<IUserApiService, UserApiService>();
         // Orquestador del negocio
         services.AddScoped<UserService>();
-        
+        // Logs
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(AppConfig.Config)
+            .WriteTo.Console(
+            theme: AnsiConsoleTheme.Code,
+            outputTemplate:
+            "{Timestamp:HH:mm:ss} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
+        )
+            .CreateLogger(); 
         if (enviroment.IsDevelopment())
         {
             // Uso de sqlite
