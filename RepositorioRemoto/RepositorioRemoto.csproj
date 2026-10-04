@@ -36,6 +36,7 @@
     <PackageReference Include="Refit" Version="16.1.0" />
     <PackageReference Include="Refit.HttpClientFactory" Version="16.1.0" />
     <PackageReference Include="Refit.Reflection" Version="16.1.0" />
+    <PackageReference Include="StackExchange.Redis" Version="3.3.1" />
     <!-- Refit  -->
   </ItemGroup>
 
