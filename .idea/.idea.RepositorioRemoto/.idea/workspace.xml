@@ -14,18 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Service/api/ApiServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Service/api/ApiServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Cache/InMemoryCache.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Cache/common/IPostService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Cache/common/IPostService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Dependencies/DependencyProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Dependencies/DependencyProvider.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepositorioRemoto/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/api/IUserApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/api/IUserApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/dto/CreateUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/dto/CreateUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/dto/UpdateUserRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/dto/UpdateUserRequest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/mappers/UserMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +43,8 @@
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/model/UserModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/sergi/Desktop/Asignaturas-Daw/Entorno-Servicio/Repositorio/DWES-01-ServidorRemoto/RepositorioRemoto/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/sergi/Desktop/Asignaturas-Daw/Entorno-Servicio/Repositorio/DWES-01-ServidorRemoto/RepositorioRemoto/mappers/UserMapper.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />

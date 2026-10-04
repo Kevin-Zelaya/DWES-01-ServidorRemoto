@@ -3,7 +3,6 @@
 
 // Prueba
 
-using Cliente_Http_con_refit.Dto;
 using Microsoft.Extensions.DependencyInjection;
 
 var provider = DependencyProvider.Configure();
