@@ -8,7 +8,7 @@ public class UserService(
     UnitOfWork _unitOfWork,
     ICache<UserModel> _cache,
     ILogger<UserService> _logger
-)
+) : IUserService
 {
     /// <summary>
     /// Sincronizar los usuarios de la API con la base de datos local.

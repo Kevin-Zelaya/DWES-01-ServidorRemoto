@@ -65,7 +65,8 @@ Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
             services.AddMemoryCache();
             services.AddSingleton(typeof(ICache<>), typeof(InMemoryCache<>));
         }
-        
+        // Controler
+        services.AddScoped<UserControllers>();
 
         
         // Gestiona las transacciones,
