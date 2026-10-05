@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("Users")]
+[Table("users")]
 public class UserEntity
 {
     /// <summary>Para el mapper</summary>

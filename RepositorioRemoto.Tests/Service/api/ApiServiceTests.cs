@@ -1,16 +1,20 @@
 using System.Net;
 using Moq;
+using Microsoft.Extensions.Logging;
 using Refit;
 
 public class ApiServiceTests
 {
     private UserApiService _service;  
     private Mock<IUserApi> _apiMock;
+    private Mock<ILogger<UserApiService>> _logger;
     [SetUp]
     public void Setup()
     {
         _apiMock = new Mock<IUserApi>();
-        _service = new UserApiService(_apiMock.Object);
+        _logger = new Mock<ILogger<UserApiService>>();
+
+        _service = new UserApiService(_apiMock.Object, logger: _logger.Object);
     }
 
     [Test]

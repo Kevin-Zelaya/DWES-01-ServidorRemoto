@@ -7,6 +7,7 @@ using RepositorioRemoto.Cache;
 using RepositorioRemoto.Cache.Common;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
+using StackExchange.Redis;
 
 public class DependencyProvider
 {
@@ -15,8 +16,8 @@ public class DependencyProvider
         IHostEnvironment enviroment
     )
     {
-
-
+        Console.WriteLine($"Environment: {enviroment.EnvironmentName}");
+Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         // Refit
         services.AddHttpClient("jasonplaceholder", client =>
         {
@@ -37,7 +38,21 @@ public class DependencyProvider
             "{Timestamp:HH:mm:ss} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
         )
             .CreateLogger(); 
-        if (enviroment.IsDevelopment())
+        //if (enviroment.IsDevelopment())
+        if (enviroment.IsProduction())
+        {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(AppConfig.ConnectionString));
+            services.AddScoped<IRepository, PostgreSqlRepository>();
+            var redis = ConnectionMultiplexer.Connect(
+                AppConfig.Config["Redis:ConnectionString"]!
+            );
+            services.AddSingleton<IConnectionMultiplexer>(redis);
+
+            services.AddSingleton(typeof(ICache<>), typeof(RedisCache<>));
+            Console.WriteLine("aqui mira");
+        }
+        else// if(enviroment.IsProduction())
         {
             // Uso de sqlite
             services.AddDbContext<AppDbContext>(options =>
@@ -52,7 +67,6 @@ public class DependencyProvider
         }
         
 
-        
         
         // Gestiona las transacciones,
         services.AddScoped<UnitOfWork>();

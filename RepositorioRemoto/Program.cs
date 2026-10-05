@@ -20,7 +20,7 @@ using var host = builder.Build();
 UserSyncBackgroundService.DatabaseRefreshed += (sender, e) =>
 {
     Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine($"\n[OYENTE CONSOLA] 🔔 Base de datos sincronizada. Total registros: {e.RegistrosCargados}");
+    Console.WriteLine($"\n[CONSOLA] Base de datos sincronizada. Total registros: {e.RegistrosCargados}");
     Console.ResetColor();
 };
 
@@ -34,14 +34,17 @@ try
     using var scope = host.Services.CreateScope();
 
     var userService = scope.ServiceProvider
-        .GetRequiredService<IUserApiService>();
+        .GetRequiredService<UserService>();
 
-    var users = await userService.GetAllAsync();
+    var users = await userService.GetAllUsersAsync();
 
     foreach (var user in users.Value)
     {
         Console.WriteLine(user.name);
     }
+    await userService.GetUserByIdAsync(1);
+    Task.Delay(1000);
+    await userService.GetUserByIdAsync(1);
 
     Console.ReadLine();
 }

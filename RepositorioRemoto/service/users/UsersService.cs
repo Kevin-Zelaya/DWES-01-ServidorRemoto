@@ -13,7 +13,7 @@ public class UserService(
     /// <summary>
     /// Sincronizar los usuarios de la API con la base de datos local.
     /// </summary>
-    public async Task<Result<bool, DomainError>> SyncUsersAsync(
+    public async Task<Result<int, DomainError>> SyncUsersAsync(
         CancellationToken cts = default)
     {
         _logger.LogInformation(
@@ -27,7 +27,9 @@ public class UserService(
             _logger.LogError(
                 "No se pudo obtener los usuarios de la API. Se cancela la sincronización.");
 
-            return apiResult.ConvertFailure<bool>();
+            return Result.Failure<int, DomainError>(
+                apiResult.Error
+            );
         }
 
         _logger.LogInformation(
@@ -52,7 +54,9 @@ public class UserService(
 
                 await _unitOfWork.RollbackTransactionAsync(cts);
 
-                return deleteResult.ConvertFailure<bool>();
+                return Result.Failure<int, DomainError>(
+                    deleteResult.Error
+                );
             }
 
             _logger.LogDebug(
@@ -81,7 +85,9 @@ public class UserService(
 
                     await _unitOfWork.RollbackTransactionAsync(cts);
 
-                    return createResult.ConvertFailure<bool>();
+                    return Result.Failure<int, DomainError>(
+                        createResult.Error
+                    );
                 }
 
                 totalInserted += entities.Count;
@@ -98,7 +104,9 @@ public class UserService(
                 "Sincronización completada. Total de usuarios sincronizados: {TotalUsers}.",
                 totalInserted);
 
-            return Result.Success<bool, DomainError>(true);
+            return Result.Success<int, DomainError>(
+                apiResult.Value.Count
+            );
         }
         catch (OperationCanceledException ex)
         {
@@ -118,7 +126,7 @@ public class UserService(
 
             await _unitOfWork.RollbackTransactionAsync(CancellationToken.None);
 
-            return Result.Failure<bool, DomainError>(
+            return Result.Failure<int, DomainError>(
                 new DatabaseError.Unknown(ex.Message));
         }
     }
@@ -182,10 +190,12 @@ public class UserService(
         {
             _logger.LogDebug(
                 "Usuario {UserId} encontrado en caché.", id);
+                
 
             return cacheResult;
         }
-
+        Console.WriteLine("en cache no está padron");
+        Console.ReadLine();
         _logger.LogDebug(
             "Caché miss para el usuario {UserId}.", id);
 
