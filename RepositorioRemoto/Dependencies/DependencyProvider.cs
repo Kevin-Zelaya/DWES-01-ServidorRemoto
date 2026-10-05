@@ -37,7 +37,17 @@ public class DependencyProvider
             "{Timestamp:HH:mm:ss} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
         )
             .CreateLogger(); 
-        if (enviroment.IsDevelopment())
+        //if (enviroment.IsDevelopment())
+        if (enviroment.IsProduction())
+        {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(AppConfig.ConnectionString));
+            services.AddScoped<IRepository, PostgreSqlRepository>();
+
+            services.AddMemoryCache();
+            services.AddSingleton(typeof(ICache<>), typeof(InMemoryCache<>));
+        }
+        else// if(enviroment.IsProduction())
         {
             // Uso de sqlite
             services.AddDbContext<AppDbContext>(options =>

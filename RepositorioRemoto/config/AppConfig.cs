@@ -8,7 +8,7 @@ public class AppConfig
     {
         var enviroment =
             Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
-            ?? "development";
+            ?? "Development";
 
         Config = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)

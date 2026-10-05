@@ -20,7 +20,7 @@ using var host = builder.Build();
 UserSyncBackgroundService.DatabaseRefreshed += (sender, e) =>
 {
     Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine($"\n[OYENTE CONSOLA] 🔔 Base de datos sincronizada. Total registros: {e.RegistrosCargados}");
+    Console.WriteLine($"\n[CONSOLA] Base de datos sincronizada. Total registros: {e.RegistrosCargados}");
     Console.ResetColor();
 };
 
