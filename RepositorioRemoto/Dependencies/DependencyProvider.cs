@@ -15,8 +15,6 @@ public class DependencyProvider
         IHostEnvironment enviroment
     )
     {
-
-
         // Refit
         services.AddHttpClient("jasonplaceholder", client =>
         {
