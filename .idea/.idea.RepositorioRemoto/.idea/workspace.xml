@@ -57,23 +57,23 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0000000003895342" />
-      <entry key="M10" value="1.0000843289788393" />
-      <entry key="M15" value="1.0055709105770183" />
-      <entry key="M30" value="1.5119104918946304" />
-      <entry key="H1" value="7.713467259829407" />
-      <entry key="H2" value="28.076129152415028" />
-      <entry key="H4" value="56.82648421645609" />
-      <entry key="D1" value="104.31347945764752" />
-      <entry key="W1" value="115.93603345803756" />
+      <entry key="MS100" value="1.5092265003526002" />
+      <entry key="MS500" value="3.5700661945538408" />
+      <entry key="S2" value="7.092552434957943" />
+      <entry key="S5" value="8.651379263626893" />
+      <entry key="S10" value="9.289779180523807" />
+      <entry key="S30" value="9.754751147301585" />
+      <entry key="S60" value="9.876277083345608" />
+      <entry key="M2" value="9.937861225973544" />
+      <entry key="M5" value="9.97507758710086" />
+      <entry key="M10" value="9.987611736511738" />
+      <entry key="M15" value="9.997244419876171" />
+      <entry key="M30" value="10.507333197068405" />
+      <entry key="H1" value="16.708649769690325" />
+      <entry key="H2" value="37.069568650344195" />
+      <entry key="H4" value="65.8202728445492" />
+      <entry key="D1" value="113.31163730651419" />
+      <entry key="W1" value="124.93574207925555" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -81,37 +81,37 @@
       <entry key="S2" value="0.0" />
       <entry key="S5" value="0.0" />
       <entry key="S10" value="0.0" />
-      <entry key="S30" value="1.3818033627733434E-110" />
-      <entry key="S60" value="1.5588162562351527E-55" />
-      <entry key="M2" value="6.268642929551512E-28" />
-      <entry key="M5" value="2.491687130646597E-11" />
-      <entry key="M10" value="9.06285998743333E-6" />
-      <entry key="M15" value="7.370234561675829E-4" />
-      <entry key="M30" value="0.08948611028249351" />
-      <entry key="H1" value="1.3230237955904958" />
-      <entry key="H2" value="5.509782087420493" />
-      <entry key="H4" value="11.44091441853859" />
-      <entry key="D1" value="21.198201127684065" />
-      <entry key="W1" value="23.577769835569228" />
+      <entry key="S30" value="1.315811044964053E-110" />
+      <entry key="S60" value="1.5211378306903567E-55" />
+      <entry key="M2" value="6.192419265388429E-28" />
+      <entry key="M5" value="2.4795235491671545E-11" />
+      <entry key="M10" value="9.040712002090307E-6" />
+      <entry key="M15" value="7.358221988304581E-4" />
+      <entry key="M30" value="0.08941315488153402" />
+      <entry key="H1" value="1.3224843743773098" />
+      <entry key="H2" value="5.508658752997488" />
+      <entry key="H4" value="11.439748072218086" />
+      <entry key="D1" value="21.19784093657125" />
+      <entry key="W1" value="23.577712603185972" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.6952729999444363E-11" />
-      <entry key="MS500" value="0.008596707885672945" />
-      <entry key="S2" value="0.3044970170052083" />
-      <entry key="S5" value="0.6214886718556424" />
-      <entry key="S10" value="0.7883455282144006" />
-      <entry key="S30" value="0.9237877582859119" />
-      <entry key="S60" value="0.9611387820111682" />
-      <entry key="M2" value="0.9803768571376867" />
-      <entry key="M5" value="0.9921040452847427" />
-      <entry key="M10" value="0.9961375248908969" />
-      <entry key="M15" value="1.0036655498035203" />
-      <entry key="M30" value="1.5998787965088095" />
-      <entry key="H1" value="9.034398498826391" />
-      <entry key="H2" value="33.582594980379234" />
-      <entry key="H4" value="68.26412076490777" />
-      <entry key="D1" value="125.51068685636396" />
-      <entry key="W1" value="139.51364567699213" />
+      <entry key="MS100" value="1.395000789261998" />
+      <entry key="MS500" value="3.3968963600742184" />
+      <entry key="S2" value="6.649997189825971" />
+      <entry key="S5" value="8.308990406408904" />
+      <entry key="S10" value="9.073366597108297" />
+      <entry key="S30" value="9.6700788333573" />
+      <entry key="S60" value="9.832189212859076" />
+      <entry key="M2" value="9.91536422184061" />
+      <entry key="M5" value="9.965968053446323" />
+      <entry key="M10" value="9.983047321260186" />
+      <entry key="M15" value="9.994923727835376" />
+      <entry key="M30" value="10.59502043231812" />
+      <entry key="H1" value="18.02893773168718" />
+      <entry key="H2" value="42.57485945720477" />
+      <entry key="H4" value="77.25671719736361" />
+      <entry key="D1" value="134.50848016680064" />
+      <entry key="W1" value="148.51329644274495" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -141,7 +141,7 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/testcache&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/cache&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -150,7 +150,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;file.status.colors&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.RepositorioRemoto">
     <configuration name="RepositorioRemoto" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -190,7 +190,7 @@
     <option name="coveragePercentColumnWidth" value="150" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="218" />
+    <option name="symbolColumnWidth" value="258" />
     <coverage-tree-state>
       <expand>
         <path>
