@@ -24,12 +24,23 @@ public class RedisCache<T> : ICache<T>
 
         if (!value.HasValue)
         {
-            return default;
+            return Result.Failure<T, DomainError>(
+                new CacheError.NotFound(key)
+            );
         }
 
-        // Convertimos explícitamente a string para evitar la ambigüedad en el Deserialize
-        string jsonString = value.ToString();
-        return JsonSerializer.Deserialize<T>(jsonString);
+        var jsonString = value.ToString();
+
+        var result = JsonSerializer.Deserialize<T>(jsonString);
+
+        if (result is null)
+        {
+            return Result.Failure<T, DomainError>(
+                new CacheError.NotFound(key)
+            );
+        }
+
+        return Result.Success<T, DomainError>(result);
     }
     
     // ==========================================

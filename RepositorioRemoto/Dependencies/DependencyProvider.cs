@@ -16,6 +16,8 @@ public class DependencyProvider
         IHostEnvironment enviroment
     )
     {
+        Console.WriteLine($"Environment: {enviroment.EnvironmentName}");
+Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         // Refit
         services.AddHttpClient("jasonplaceholder", client =>
         {
@@ -65,7 +67,6 @@ public class DependencyProvider
         }
         
 
-        
         
         // Gestiona las transacciones,
         services.AddScoped<UnitOfWork>();

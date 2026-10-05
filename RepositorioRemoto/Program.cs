@@ -34,15 +34,17 @@ try
     using var scope = host.Services.CreateScope();
 
     var userService = scope.ServiceProvider
-        .GetRequiredService<IUserApiService>();
+        .GetRequiredService<UserService>();
 
-    var users = await userService.GetAllAsync();
+    var users = await userService.GetAllUsersAsync();
 
     foreach (var user in users.Value)
     {
         Console.WriteLine(user.name);
     }
-    await userService.GetByIdAsync(1);
+    await userService.GetUserByIdAsync(1);
+    Task.Delay(1000);
+    await userService.GetUserByIdAsync(1);
 
     Console.ReadLine();
 }

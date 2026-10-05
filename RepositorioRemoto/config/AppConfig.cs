@@ -9,7 +9,6 @@ public class AppConfig
         var enviroment =
             Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
             ?? "Development";
-
         Config = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile(

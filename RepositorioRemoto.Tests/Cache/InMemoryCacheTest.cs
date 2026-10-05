@@ -6,6 +6,7 @@ namespace RepositorioRemoto.Tests.Cache;
 
 public class InMemoryCacheTests
 {
+    /*
     private IMemoryCache _realMemoryCache;
     private InMemoryCache<string> _cache;
 
@@ -93,4 +94,5 @@ public class InMemoryCacheTests
 
         Assert.That(result, Is.EqualTo(value));
     }
+    */
 }

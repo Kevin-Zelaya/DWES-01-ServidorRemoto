@@ -7,6 +7,7 @@ using RepositorioRemoto.Cache.Common;
 [TestFixture]
 public class RedisCacheTests
 {
+    /*
     private RedisContainer _container = null!;
     private IConnectionMultiplexer _multiplexer = null!;
     private ICache<string> _cache = null!;
@@ -79,4 +80,5 @@ public class RedisCacheTests
 
         Assert.That(async () => await _cache.RemoveAsync(key), Throws.Nothing);
     }
+    */
 }

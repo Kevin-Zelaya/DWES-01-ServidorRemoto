@@ -190,10 +190,12 @@ public class UserService(
         {
             _logger.LogDebug(
                 "Usuario {UserId} encontrado en caché.", id);
+                
 
             return cacheResult;
         }
-
+        Console.WriteLine("en cache no está padron");
+        Console.ReadLine();
         _logger.LogDebug(
             "Caché miss para el usuario {UserId}.", id);
 
