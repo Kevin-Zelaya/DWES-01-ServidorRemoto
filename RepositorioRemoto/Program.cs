@@ -42,6 +42,7 @@ try
     {
         Console.WriteLine(user.name);
     }
+    await userService.GetByIdAsync(1);
 
     Console.ReadLine();
 }

@@ -16,8 +16,8 @@ public class UserSyncBackgroundService(
             TimeSpan.FromSeconds(
                 AppConfig.BatchSettings.IntervalInSeconds));
 
-        while (await timer.WaitForNextTickAsync(stoppingToken))
-        {
+        
+        do{
             try
             {
                 using var scope = scopeFactory.CreateScope();
@@ -53,6 +53,6 @@ public class UserSyncBackgroundService(
                     ex,
                     "Error inesperado durante la sincronización de usuarios.");
             }
-        }
+        } while (await timer.WaitForNextTickAsync(stoppingToken));
     }
 }

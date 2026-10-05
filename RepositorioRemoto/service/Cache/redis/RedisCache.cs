@@ -47,6 +47,7 @@ public class RedisCache<T> : ICache<T>
         var response = await _database.StringSetAsync(key, jsonValue, expiry);
         if(response)
             return Result.Success<bool, DomainError>(response);
+        
         return Result.Failure<bool, DomainError>(
             new CacheError.NotFound(key)
         );

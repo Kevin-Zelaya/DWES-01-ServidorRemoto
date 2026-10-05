@@ -7,6 +7,7 @@ using RepositorioRemoto.Cache;
 using RepositorioRemoto.Cache.Common;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
+using StackExchange.Redis;
 
 public class DependencyProvider
 {
@@ -41,8 +42,13 @@ public class DependencyProvider
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(AppConfig.ConnectionString));
             services.AddScoped<IRepository, PostgreSqlRepository>();
+            var redis = ConnectionMultiplexer.Connect(
+                AppConfig.Config["Redis:ConnectionString"]!
+            );
+            services.AddSingleton<IConnectionMultiplexer>(redis);
 
-            services.AddScoped(typeof(ICache<>), typeof(RedisCache<>));
+            services.AddSingleton(typeof(ICache<>), typeof(RedisCache<>));
+            Console.WriteLine("aqui mira");
         }
         else// if(enviroment.IsProduction())
         {
