@@ -42,8 +42,7 @@ public class DependencyProvider
                 options.UseNpgsql(AppConfig.ConnectionString));
             services.AddScoped<IRepository, PostgreSqlRepository>();
 
-            services.AddMemoryCache();
-            services.AddSingleton(typeof(ICache<>), typeof(InMemoryCache<>));
+            services.AddScoped(typeof(ICache<>), typeof(RedisCache<>));
         }
         else// if(enviroment.IsProduction())
         {
