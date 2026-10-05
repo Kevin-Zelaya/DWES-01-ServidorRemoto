@@ -1,129 +1,382 @@
 using CSharpFunctionalExtensions;
+using Microsoft.Extensions.Logging;
+using RepositorioRemoto.Cache.Common;
 
 public class UserService(
     IRepository _repository,
     IUserApiService _api,
-    UnitOfWork _unitOfWork
+    UnitOfWork _unitOfWork,
+    ICache<UserModel> _cache,
+    ILogger<UserService> _logger
 )
 {
     /// <summary>
-    /// Saga, sincronizar bases de datos
+    /// Sincronizar los usuarios de la API con la base de datos local.
     /// </summary>
-    /// <param name="cts"></param>
-    /// <returns></returns>
-    public async Task<Result<bool, DomainError>>SyncUsersAsync(
-        CancellationToken cts = default
-    )
+    public async Task<Result<bool, DomainError>> SyncUsersAsync(
+        CancellationToken cts = default)
     {
-        // 1. Obtener datos de la api 
+        _logger.LogInformation(
+            "Iniciando la sincronización de usuarios.");
+
+        // 1. Obtener datos de la API
         var apiResult = await _api.GetAllAsync(cts);
 
         if (apiResult.IsFailure)
         {
+            _logger.LogError(
+                "No se pudo obtener los usuarios de la API. Se cancela la sincronización.");
+
             return apiResult.ConvertFailure<bool>();
         }
-        // 2. Iniciamos la transacción
-        await _unitOfWork.BeginTransactionAsync(cts);
+
+        _logger.LogInformation(
+            "Se obtuvieron {TotalUsers} usuarios de la API.",
+            apiResult.Value.Count);
 
         try
         {
-            // 3. Limpiamos la base de datos
+            // 2. Iniciar transacción
+            await _unitOfWork.BeginTransactionAsync(cts);
+
+            _logger.LogDebug(
+                "Transacción de sincronización iniciada.");
+
+            // 3. Limpiar la base de datos
             var deleteResult = await _repository.DeleteAllAsync();
 
             if (deleteResult.IsFailure)
             {
+                _logger.LogError(
+                    "No se pudo limpiar la base de datos. Se revierte la transacción.");
+
                 await _unitOfWork.RollbackTransactionAsync(cts);
+
                 return deleteResult.ConvertFailure<bool>();
             }
 
-            // 4. Insertamos los datos de la api en la base de datos por lotes (batch)
-            foreach (var batch in apiResult.Value.Chunk(AppConfig.BatchSettings.BatchSize))
+            _logger.LogDebug(
+                "Base de datos limpiada correctamente.");
+
+            // 4. Insertar usuarios por lotes
+            var batchSize = AppConfig.BatchSettings.BatchSize;
+            var totalInserted = 0;
+
+            foreach (var batch in apiResult.Value.Chunk(batchSize))
             {
-                var entities = batch.Select(u => u.ToEntity()).ToList();
-                var createResult = await _repository.CreateRangeAsync(entities);
+                cts.ThrowIfCancellationRequested();
+
+                var entities = batch
+                    .Select(u => u.ToEntity())
+                    .ToList();
+
+                var createResult =
+                    await _repository.CreateRangeAsync(entities);
 
                 if (createResult.IsFailure)
                 {
+                    _logger.LogError(
+                        "Error al insertar el lote de usuarios. Tamaño: {BatchSize}. Se revierte la transacción.",
+                        entities.Count);
+
                     await _unitOfWork.RollbackTransactionAsync(cts);
+
                     return createResult.ConvertFailure<bool>();
                 }
-            }
-            // En el futuro se trabaja con cach
 
-            // 5. Confirmamos la transacción
+                totalInserted += entities.Count;
+
+                _logger.LogDebug(
+                    "Lote insertado correctamente. Usuarios procesados: {TotalInserted}.",
+                    totalInserted);
+            }
+
+            // 5. Confirmar transacción
             await _unitOfWork.CommitTransactionAsync(cts);
 
+            _logger.LogInformation(
+                "Sincronización completada. Total de usuarios sincronizados: {TotalUsers}.",
+                totalInserted);
+
             return Result.Success<bool, DomainError>(true);
-        } catch (Exception ex)
+        }
+        catch (OperationCanceledException ex)
         {
-            await _unitOfWork.RollbackTransactionAsync(cts);
+            _logger.LogWarning(
+                ex,
+                "La sincronización de usuarios fue cancelada.");
+
+            await _unitOfWork.RollbackTransactionAsync(CancellationToken.None);
+
+            throw;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Error inesperado durante la sincronización de usuarios.");
+
+            await _unitOfWork.RollbackTransactionAsync(CancellationToken.None);
+
             return Result.Failure<bool, DomainError>(
-                new DatabaseError.Unknown(ex.Message)
-            );
+                new DatabaseError.Unknown(ex.Message));
         }
     }
+
     /// <summary>
-    /// Obtener todos los datos de la base de datos
+    /// Obtener todos los usuarios de la base de datos local.
     /// </summary>
-    /// <returns></returns>
     public async Task<Result<List<UserModel>, DomainError>> GetAllUsersAsync()
     {
-        // 1. Obtener datos de la base de datos
+        _logger.LogInformation(
+            "Obteniendo todos los usuarios de la base de datos local.");
 
-        var response = await _repository.GetAllAsync();
-        var models = response.Value
-            .Select(u => u.ToModel())
-            .ToList();
-        return Result.Success<List<UserModel>, DomainError>(models);
+        try
+        {
+            var response = await _repository.GetAllAsync();
+
+            if (response.IsFailure)
+            {
+                _logger.LogError(
+                    "No se pudieron obtener los usuarios de la base de datos.");
+
+                return Result.Failure<List<UserModel>, DomainError>(
+                    response.Error);
+            }
+
+            var models = response.Value
+                .Select(u => u.ToModel())
+                .ToList();
+
+            _logger.LogInformation(
+                "Se obtuvieron {TotalUsers} usuarios de la base de datos.",
+                models.Count);
+
+            return Result.Success<List<UserModel>, DomainError>(models);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Error inesperado al obtener todos los usuarios.");
+
+            return Result.Failure<List<UserModel>, DomainError>(
+                new DatabaseError.Unknown(ex.Message));
+        }
     }
-    
+
     /// <summary>
-    /// SAGA, Obtener usuario por id
-    /// 1. Consulta en la cache
-    /// 2. Consulta en la db local
-    /// 3. Consulta en la api externa
+    /// Obtener un usuario por ID: caché, base de datos y API.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     public async Task<Result<UserModel, DomainError>> GetUserByIdAsync(int id)
     {
-        // 1. Buscar en la caché
+        var key = $"user:{id}";
 
-        // 2. Buscar en la base de datos
-        var response = await _repository.GetUserByIdAsync(id);
-        if (response.IsFailure)
+        _logger.LogInformation(
+            "Buscando usuario con ID {UserId}.", id);
+
+        // 1. Buscar en caché
+        var cacheResult = await _cache.GetAsync(key);
+
+        if (cacheResult.IsSuccess)
         {
-            // 3. Buscamos en la api
-            var responseApi = await _api.GetByIdAsync(id);
-            if (responseApi.IsFailure)
-            {
-                // 4. Por último si no se encuentra en la api retornamos error
-                return Result.Failure<UserModel, DomainError>(responseApi.Error);
-            }
-            return Result.Success<UserModel, DomainError>(response.Value.ToModel());
+            _logger.LogDebug(
+                "Usuario {UserId} encontrado en caché.", id);
+
+            return cacheResult;
         }
-        return Result.Success<UserModel, DomainError>(response.Value.ToModel());
+
+        _logger.LogDebug(
+            "Caché miss para el usuario {UserId}.", id);
+
+        // 2. Buscar en base de datos
+        var repositoryResult = await _repository.GetUserByIdAsync(id);
+
+        if (repositoryResult.IsSuccess)
+        {
+            var user = repositoryResult.Value.ToModel();
+
+            await _cache.SetAsync(key, user);
+
+            _logger.LogInformation(
+                "Usuario {UserId} obtenido de la base de datos y guardado en caché.",
+                id);
+
+            return Result.Success<UserModel, DomainError>(user);
+        }
+
+        // Solo consultar la API si el usuario no existe localmente.
+        if (repositoryResult.Error is not DatabaseError.NotFound)
+        {
+            _logger.LogError(
+                "Error al consultar el usuario {UserId} en la base de datos.",
+                id);
+
+            return Result.Failure<UserModel, DomainError>(
+                repositoryResult.Error);
+        }
+
+        _logger.LogDebug(
+            "Usuario {UserId} no encontrado localmente. Consultando la API.",
+            id);
+
+        // 3. Buscar en API
+        var apiResult = await _api.GetByIdAsync(id);
+
+        if (apiResult.IsFailure)
+        {
+            _logger.LogWarning(
+                "No se pudo obtener el usuario {UserId} de la API.",
+                id);
+
+            return Result.Failure<UserModel, DomainError>(
+                apiResult.Error);
+        }
+
+        var apiUser = apiResult.Value;
+
+        await _cache.SetAsync(key, apiUser);
+
+        _logger.LogInformation(
+            "Usuario {UserId} obtenido de la API y guardado en caché.",
+            id);
+
+        return Result.Success<UserModel, DomainError>(apiUser);
     }
 
+    /// <summary>
+    /// Actualizar un usuario en la API, base de datos y caché.
+    /// </summary>
     public async Task<Result<UserModel, DomainError>> UpdateUserAsync(
         int id,
-        UpdateUserRequest request
-    )
+        UpdateUserRequest request)
     {
-        // 1. Actualizar en la api
+        _logger.LogInformation(
+            "Iniciando actualización del usuario {UserId}.", id);
+
+        // 1. Actualizar en API
         var response = await _api.UpdateAsync(id, request);
-        if (response.IsSuccess)
+
+        if (response.IsFailure)
         {
-            // 2. Actualizamos en la bd
-            var bdResponse = await _repository.UpdateAsync(response.Value.ToEntity(), id);
-            
-            return Result.Success<UserModel, DomainError>(
-                bdResponse.Value.ToModel()
-            );
-        } 
-        return Result.Failure<UserModel, DomainError>(
-            response.Error 
-        );
+            _logger.LogWarning(
+                "La API rechazó o no pudo completar la actualización del usuario {UserId}.",
+                id);
+
+            return Result.Failure<UserModel, DomainError>(
+                response.Error);
+        }
+
+        var user = response.Value;
+
+        _logger.LogInformation(
+            "Usuario {UserId} actualizado en la API.",
+            id);
+
+        // 2. Actualizar base de datos
+        var responseDatabase = await _repository.UpdateAsync(
+            user.ToEntity(),
+            id);
+
+        if (responseDatabase.IsFailure)
+        {
+            _logger.LogError(
+                "El usuario {UserId} se actualizó en la API, pero falló la actualización local.",
+                id);
+
+            return Result.Failure<UserModel, DomainError>(
+                responseDatabase.Error);
+        }
+
+        _logger.LogInformation(
+            "Usuario {UserId} actualizado en la base de datos.",
+            id);
+
+        // 3. Actualizar caché
+        var responseCache = await _cache.SetAsync(
+            $"user:{id}",
+            user);
+
+        if (responseCache.IsFailure)
+        {
+            _logger.LogWarning(
+                "El usuario {UserId} se actualizó en API y base de datos, pero falló la caché.",
+                id);
+        }
+        else
+        {
+            _logger.LogDebug(
+                "Caché actualizada para el usuario {UserId}.", id);
+        }
+
+        _logger.LogInformation(
+            "Proceso de actualización del usuario {UserId} finalizado.",
+            id);
+
+        return Result.Success<UserModel, DomainError>(user);
     }
 
+    /// <summary>
+    /// Eliminar un usuario de la API, base de datos y caché.
+    /// </summary>
+    public async Task<Result<bool, DomainError>> DeleteUserAsync(int id)
+    {
+        var key = $"user:{id}";
+
+        _logger.LogInformation(
+            "Iniciando eliminación del usuario {UserId}.", id);
+
+        // 1. Eliminar de la API
+        var response = await _api.DeleteAsync(id);
+
+        if (response.IsFailure)
+        {
+            _logger.LogWarning(
+                "No se pudo eliminar el usuario {UserId} de la API.",
+                id);
+
+            return Result.Failure<bool, DomainError>(
+                response.Error);
+        }
+
+        _logger.LogInformation(
+            "Usuario {UserId} eliminado de la API.", id);
+
+        // 2. Eliminar de base de datos
+        var responseDatabase = await _repository.DeleteAsync(id);
+
+        if (responseDatabase.IsFailure)
+        {
+            _logger.LogError(
+                "El usuario {UserId} se eliminó de la API, pero falló la eliminación local.",
+                id);
+
+            return Result.Failure<bool, DomainError>(
+                responseDatabase.Error);
+        }
+
+        _logger.LogInformation(
+            "Usuario {UserId} eliminado de la base de datos.", id);
+
+        // 3. Eliminar de caché
+        var responseCache = await _cache.RemoveAsync(key);
+
+        if (responseCache.IsFailure)
+        {
+            _logger.LogWarning(
+                "El usuario {UserId} se eliminó de API y base de datos, pero falló la eliminación de caché.",
+                id);
+        }
+        else
+        {
+            _logger.LogDebug(
+                "Caché eliminada para el usuario {UserId}.", id);
+        }
+
+        _logger.LogInformation(
+            "Proceso de eliminación del usuario {UserId} finalizado.",
+            id);
+
+        return Result.Success<bool, DomainError>(true);
+    }
 }

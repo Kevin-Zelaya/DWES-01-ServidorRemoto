@@ -1,33 +1,62 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Refit;
+using RepositorioRemoto.Cache;
+using RepositorioRemoto.Cache.Common;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 public class DependencyProvider
 {
-    public static ServiceProvider Configure()
+    public static void Configure(
+        IServiceCollection services,
+        IHostEnvironment enviroment
+    )
     {
-        var services = new ServiceCollection();
 
-        // Refir
+
+        // Refit
         services.AddHttpClient("jasonplaceholder", client =>
         {
             client.BaseAddress = new Uri(AppConfig.ApiUrl);
             client.DefaultRequestHeaders.Add("Acept", "application/jon");
         })
         .AddRefitClient<IUserApi>();
-
-        services.AddDbContext<AppDbContext>(options =>
-        {
-            options.UseSqlite(AppConfig.ConnectionString);
-        });
+        // Servicio se manejo de api
         services.AddScoped<IUserApiService, UserApiService>();
+        // Orquestador del negocio
         services.AddScoped<UserService>();
-        services.AddScoped<IRepository, SqliteRepository>();
-        services.AddScoped<UnitOfWork>();
-        services.AddHostedService<UserSyncBackgroundService>();
+        // Logs
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(AppConfig.Config)
+            .WriteTo.Console(
+            theme: AnsiConsoleTheme.Code,
+            outputTemplate:
+            "{Timestamp:HH:mm:ss} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
+        )
+            .CreateLogger(); 
+        if (enviroment.IsDevelopment())
+        {
+            // Uso de sqlite
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlite(AppConfig.ConnectionString);
+            });
+            // Inyección de repositorio sqlite para la interfaz de repositorios
+            services.AddScoped<IRepository, SqliteRepository>();
+            // Imemory cache
+            services.AddMemoryCache();
+            services.AddSingleton(typeof(ICache<>), typeof(InMemoryCache<>));
+        }
         
 
-        return services.BuildServiceProvider();
+        
+        
+        // Gestiona las transacciones,
+        services.AddScoped<UnitOfWork>();
+        // Background service
+        services.AddHostedService<UserSyncBackgroundService>();
     }
 }
