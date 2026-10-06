@@ -23,7 +23,7 @@ public class UserSyncBackgroundService(
                 using var scope = scopeFactory.CreateScope();
 
                 var userService = scope.ServiceProvider
-                    .GetRequiredService<UserService>();
+                    .GetRequiredService<IUserService>();
 
                 var result = await userService.SyncUsersAsync(stoppingToken);
 

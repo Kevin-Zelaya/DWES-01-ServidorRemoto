@@ -9,9 +9,14 @@ namespace RepositorioRemoto.Cache;
 public class RedisCache<T> : ICache<T>
 {
     private readonly IDatabase _database;
-
-    public RedisCache(IConnectionMultiplexer connectionMultiplexer)
+    private readonly ILogger<RedisCache<T>> _logger;
+    private readonly IConnectionMultiplexer _connectionMultiplexer;
+    public RedisCache(IConnectionMultiplexer connectionMultiplexer,
+        ILogger<RedisCache<T>> logger
+    )
     {
+        _logger = logger;
+        _connectionMultiplexer = connectionMultiplexer;
         _database = connectionMultiplexer.GetDatabase();
     }
 
@@ -20,6 +25,9 @@ public class RedisCache<T> : ICache<T>
     // ==========================================
     public async Task<Result<T, DomainError>> GetAsync(string key)
     {
+        _logger.LogDebug(
+            "Buscando la clave {CacheKey} en la caché.",
+            key);
         var value = await _database.StringGetAsync(key);
 
         if (!value.HasValue)
@@ -28,7 +36,8 @@ public class RedisCache<T> : ICache<T>
                 new CacheError.NotFound(key)
             );
         }
-
+        _logger.LogDebug(
+                "Usuario {key} encontrado en caché.", key);
         var jsonString = value.ToString();
 
         var result = JsonSerializer.Deserialize<T>(jsonString);
@@ -75,5 +84,30 @@ public class RedisCache<T> : ICache<T>
         return Result.Failure<bool, DomainError>(
             new CacheError.NotFound(key)
         );
+    }
+
+    public async Task<Result<bool, DomainError>> ClearAsync()
+    {
+        try
+        {
+            var endpoints = _connectionMultiplexer.GetEndPoints();
+            var server = _connectionMultiplexer.GetServer(endpoints[0]);
+
+            foreach (var key in server.Keys())
+            {
+                await _database.KeyDeleteAsync(key);
+            }
+
+            _logger.LogInformation("Caché de Redis vaciada correctamente.");
+
+            return Result.Success<bool, DomainError>(true);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al vaciar la caché de Redis.");
+
+            return Result.Failure<bool, DomainError>(
+                new CacheError.ConnectionFailure(ex.Message));
+        }
     }
 }

@@ -14,4 +14,6 @@ public interface ICache<T>
         TimeSpan? expiration = null);
 
     Task<Result<bool, DomainError>> RemoveAsync(string key);
+
+    Task<Result<bool, DomainError>> ClearAsync();
 }

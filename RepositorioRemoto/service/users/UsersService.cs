@@ -8,7 +8,7 @@ public class UserService(
     UnitOfWork _unitOfWork,
     ICache<UserModel> _cache,
     ILogger<UserService> _logger
-)
+) : IUserService
 {
     /// <summary>
     /// Sincronizar los usuarios de la API con la base de datos local.
@@ -28,8 +28,7 @@ public class UserService(
                 "No se pudo obtener los usuarios de la API. Se cancela la sincronización.");
 
             return Result.Failure<int, DomainError>(
-                apiResult.Error
-            );
+                apiResult.Error);
         }
 
         _logger.LogInformation(
@@ -55,14 +54,30 @@ public class UserService(
                 await _unitOfWork.RollbackTransactionAsync(cts);
 
                 return Result.Failure<int, DomainError>(
-                    deleteResult.Error
-                );
+                    deleteResult.Error);
             }
 
             _logger.LogDebug(
                 "Base de datos limpiada correctamente.");
 
-            // 4. Insertar usuarios por lotes
+            // 4. Limpiar la caché
+            var clearCacheResult = await _cache.ClearAsync();
+
+            if (clearCacheResult.IsFailure)
+            {
+                _logger.LogError(
+                    "No se pudo limpiar la caché. Se revierte la sincronización.");
+
+                await _unitOfWork.RollbackTransactionAsync(cts);
+
+                return Result.Failure<int, DomainError>(
+                    clearCacheResult.Error);
+            }
+
+            _logger.LogDebug(
+                "Caché limpiada correctamente.");
+
+            // 5. Insertar usuarios por lotes
             var batchSize = AppConfig.BatchSettings.BatchSize;
             var totalInserted = 0;
 
@@ -86,8 +101,7 @@ public class UserService(
                     await _unitOfWork.RollbackTransactionAsync(cts);
 
                     return Result.Failure<int, DomainError>(
-                        createResult.Error
-                    );
+                        createResult.Error);
                 }
 
                 totalInserted += entities.Count;
@@ -97,7 +111,7 @@ public class UserService(
                     totalInserted);
             }
 
-            // 5. Confirmar transacción
+            // 6. Confirmar transacción
             await _unitOfWork.CommitTransactionAsync(cts);
 
             _logger.LogInformation(
@@ -105,8 +119,7 @@ public class UserService(
                 totalInserted);
 
             return Result.Success<int, DomainError>(
-                apiResult.Value.Count
-            );
+                apiResult.Value.Count);
         }
         catch (OperationCanceledException ex)
         {
@@ -114,7 +127,8 @@ public class UserService(
                 ex,
                 "La sincronización de usuarios fue cancelada.");
 
-            await _unitOfWork.RollbackTransactionAsync(CancellationToken.None);
+            await _unitOfWork.RollbackTransactionAsync(
+                CancellationToken.None);
 
             throw;
         }
@@ -124,13 +138,13 @@ public class UserService(
                 ex,
                 "Error inesperado durante la sincronización de usuarios.");
 
-            await _unitOfWork.RollbackTransactionAsync(CancellationToken.None);
+            await _unitOfWork.RollbackTransactionAsync(
+                CancellationToken.None);
 
             return Result.Failure<int, DomainError>(
                 new DatabaseError.Unknown(ex.Message));
         }
     }
-
     /// <summary>
     /// Obtener todos los usuarios de la base de datos local.
     /// </summary>
@@ -180,22 +194,13 @@ public class UserService(
     {
         var key = $"user:{id}";
 
-        _logger.LogInformation(
-            "Buscando usuario con ID {UserId}.", id);
-
         // 1. Buscar en caché
         var cacheResult = await _cache.GetAsync(key);
 
         if (cacheResult.IsSuccess)
         {
-            _logger.LogDebug(
-                "Usuario {UserId} encontrado en caché.", id);
-                
-
             return cacheResult;
         }
-        Console.WriteLine("en cache no está padron");
-        Console.ReadLine();
         _logger.LogDebug(
             "Caché miss para el usuario {UserId}.", id);
 
@@ -388,5 +393,76 @@ public class UserService(
             id);
 
         return Result.Success<bool, DomainError>(true);
+    }
+
+    /// <summary>
+/// Crear un usuario en la API, base de datos y caché.
+/// </summary>
+    public async Task<Result<UserModel, DomainError>> CreateUserAsync(
+        CreateUserDto request,
+        CancellationToken cts = default)
+    {
+        _logger.LogInformation(
+            "Iniciando creación del usuario.");
+
+        // 1. Crear en API
+        var response = await _api.CreateAsync(request);
+
+        if (response.IsFailure)
+        {
+            _logger.LogWarning(
+                "La API rechazó o no pudo completar la creación del usuario.");
+
+            return Result.Failure<UserModel, DomainError>(
+                response.Error);
+        }
+
+        var user = response.Value;
+
+        _logger.LogInformation(
+            "Usuario {UserId} creado en la API.",
+            user.id);
+
+        // 2. Crear en base de datos
+        var responseDatabase = await _repository.CreateAsync(
+            user.ToEntity());
+
+        if (responseDatabase.IsFailure)
+        {
+            _logger.LogError(
+                "El usuario {UserId} se creó en la API, pero falló la creación local.",
+                user.id);
+
+            return Result.Failure<UserModel, DomainError>(
+                responseDatabase.Error);
+        }
+
+        _logger.LogInformation(
+            "Usuario {UserId} creado en la base de datos.",
+            user.id);
+
+        // 3. Actualizar caché
+        var responseCache = await _cache.SetAsync(
+            $"user:{user.id}",
+            user);
+
+        if (responseCache.IsFailure)
+        {
+            _logger.LogWarning(
+                "El usuario {UserId} se creó en API y base de datos, pero falló la caché.",
+                user.id);
+        }
+        else
+        {
+            _logger.LogDebug(
+                "Caché creada para el usuario {UserId}.",
+                user.id);
+        }
+
+        _logger.LogInformation(
+            "Proceso de creación del usuario {UserId} finalizado.",
+            user.id);
+
+        return Result.Success<UserModel, DomainError>(user);
     }
 }
