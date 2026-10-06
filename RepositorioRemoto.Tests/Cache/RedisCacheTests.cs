@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Logging.Abstractions;
+using NUnit.Framework;
 using StackExchange.Redis;
 using Testcontainers.Redis;
 using RepositorioRemoto.Cache;
@@ -7,7 +8,6 @@ using RepositorioRemoto.Cache.Common;
 [TestFixture]
 public class RedisCacheTests
 {
-    /*
     private RedisContainer _container = null!;
     private IConnectionMultiplexer _multiplexer = null!;
     private ICache<string> _cache = null!;
@@ -16,7 +16,6 @@ public class RedisCacheTests
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
     {
-        // Levanta el contenedor de Redis automáticamente una sola vez para toda la clase
         _container = new RedisBuilder().WithImage("redis:7-alpine").Build();
         await _container.StartAsync();
     }
@@ -24,7 +23,6 @@ public class RedisCacheTests
     [OneTimeTearDown]
     public async Task OneTimeTearDown()
     {
-        // Destruye y apaga el contenedor al terminar todos los tests
         if (_container != null)
         {
             await _container.DisposeAsync();
@@ -34,9 +32,9 @@ public class RedisCacheTests
     [SetUp]
     public async Task SetUp()
     {
-        // Conecta a la cadena dinámica del contenedor y asigna prefijo único por test
         _multiplexer = await ConnectionMultiplexer.ConnectAsync(_container.GetConnectionString());
-        _cache = new RedisCache<string>(_multiplexer);
+        var logger = NullLogger<RedisCache<string>>.Instance;
+        _cache = new RedisCache<string>(_multiplexer, logger);
         _testPrefix = $"test_{Guid.NewGuid():N}_";
     }
 
@@ -55,10 +53,23 @@ public class RedisCacheTests
         var key = _testPrefix + "key";
         var expectedValue = "Hola Redis";
 
-        await _cache.SetAsync(key, expectedValue, TimeSpan.FromMinutes(5));
-        var result = await _cache.GetAsync(key);
+        var setResult = await _cache.SetAsync(key, expectedValue, TimeSpan.FromMinutes(5));
+        Assert.That(setResult.IsSuccess, Is.True);
 
-        Assert.That(result, Is.EqualTo(expectedValue));
+        var getResult = await _cache.GetAsync(key);
+        
+        Assert.That(getResult.IsSuccess, Is.True);
+        Assert.That(getResult.Value, Is.EqualTo(expectedValue));
+    }
+
+    [Test]
+    public async Task GetAsync_ShouldReturnFailure_WhenKeyDoesNotExist()
+    {
+        var key = _testPrefix + "non_existent_key";
+
+        var getResult = await _cache.GetAsync(key);
+
+        Assert.That(getResult.IsFailure, Is.True);
     }
 
     [Test]
@@ -67,18 +78,20 @@ public class RedisCacheTests
         var key = _testPrefix + "key_to_delete";
         await _cache.SetAsync(key, "Some value");
 
-        await _cache.RemoveAsync(key);
-        var result = await _cache.GetAsync(key);
+        var removeResult = await _cache.RemoveAsync(key);
+        Assert.That(removeResult.IsSuccess, Is.True);
 
-        Assert.That(result, Is.Null);
+        var getResult = await _cache.GetAsync(key);
+        Assert.That(getResult.IsFailure, Is.True);
     }
 
     [Test]
-    public async Task RemoveAsync_ShouldNotThrow_WhenKeyDoesNotExist()
+    public async Task RemoveAsync_ShouldReturnFailure_WhenKeyDoesNotExist()
     {
         var key = _testPrefix + "non_existent_key";
 
-        Assert.That(async () => await _cache.RemoveAsync(key), Throws.Nothing);
+        var removeResult = await _cache.RemoveAsync(key);
+
+        Assert.That(removeResult.IsFailure, Is.True);
     }
-    */
 }

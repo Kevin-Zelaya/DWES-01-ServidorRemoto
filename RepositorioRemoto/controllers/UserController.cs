@@ -7,7 +7,7 @@ public class UserControllers(
     IUserService _service
 ) : ControllerBase
 {
-    [HttpGet("/{id:int}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<UserDto>> GetUserByiD([FromRoute] int id)
     {
         var response = await _service.GetUserByIdAsync(id);
@@ -38,7 +38,7 @@ public class UserControllers(
             response.Value
         );
     }
-    [HttpPut("/{id:int}")]
+    [HttpPut("{id:int}")]
     public async Task<ActionResult<UserDto>> UpdateUser(
         [FromBody] UpdateUserRequest dto,
         [FromRoute] int id)
@@ -49,7 +49,7 @@ public class UserControllers(
         return Ok(
             response.Value);
     }
-    [HttpDelete("/{id:int}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
         var response = await _service.DeleteUserAsync(id);

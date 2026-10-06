@@ -6,16 +6,15 @@ namespace RepositorioRemoto.Tests.Cache;
 
 public class InMemoryCacheTests
 {
-    /*
     private IMemoryCache _realMemoryCache;
     private InMemoryCache<string> _cache;
 
     [SetUp]
     public void Setup()
     {
-        // Inicializamos una instancia real de MemoryCache para tests en memoria
         _realMemoryCache = new MemoryCache(new MemoryCacheOptions());
-        _cache = new InMemoryCache<string>(_realMemoryCache);
+        var logger = Microsoft.Extensions.Logging.Abstractions.NullLogger<InMemoryCache<string>>.Instance;
+        _cache = new InMemoryCache<string>(_realMemoryCache, logger);
     }
 
     [TearDown]
@@ -25,14 +24,13 @@ public class InMemoryCacheTests
     }
 
     [Test]
-    public async Task GetAsync_ShouldReturnDefault_WhenKeyDoesNotExist()
+    public async Task GetAsync_ShouldReturnFailure_WhenKeyDoesNotExist()
     {
         var key = "non_existent_key";
 
-        // Act
         var result = await _cache.GetAsync(key);
 
-        Assert.That(result, Is.Null);
+        Assert.That(result.IsFailure, Is.True);
     }
 
     [Test]
@@ -44,8 +42,8 @@ public class InMemoryCacheTests
         await _cache.SetAsync(key, expectedValue);
         var result = await _cache.GetAsync(key);
 
-        Assert.That(result, Is.Not.Null);
-        Assert.That(result, Is.EqualTo(expectedValue));
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.EqualTo(expectedValue));
     }
 
     [Test]
@@ -57,7 +55,8 @@ public class InMemoryCacheTests
         await _cache.SetAsync(key, "Valor Actualizado");
         var result = await _cache.GetAsync(key);
 
-        Assert.That(result, Is.EqualTo("Valor Actualizado"));
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.EqualTo("Valor Actualizado"));
     }
 
     [Test]
@@ -69,22 +68,23 @@ public class InMemoryCacheTests
         await _cache.RemoveAsync(key);
         var result = await _cache.GetAsync(key);
 
-        Assert.That(result, Is.Null);
+        Assert.That(result.IsFailure, Is.True);
     }
 
     [Test]
-    public async Task RemoveAsync_ShouldNotThrow_WhenKeyDoesNotExist()
+    public async Task RemoveAsync_ShouldReturnFailure_WhenKeyDoesNotExist()
     {
         var key = "non_existent_key";
         
-        // Verificamos que intentar borrar una clave que no existe no lanza ninguna excepción
-        Assert.DoesNotThrowAsync(async () => await _cache.RemoveAsync(key));
+        var result = await _cache.RemoveAsync(key);
+
+        Assert.That(result.IsSuccess, Is.True);
+        
     }
 
     [Test]
     public async Task SetAsync_ShouldRespectCustomExpiration_WhenProvided()
     {
-        
         var key = "expiring_key";
         var value = "Temporal";
         var customExpiration = TimeSpan.FromMinutes(5);
@@ -92,7 +92,7 @@ public class InMemoryCacheTests
         await _cache.SetAsync(key, value, customExpiration);
         var result = await _cache.GetAsync(key);
 
-        Assert.That(result, Is.EqualTo(value));
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.EqualTo(value));
     }
-    */
 }
