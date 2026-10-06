@@ -1,0 +1,34 @@
+info:
+  name: Get User By ID
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: http://localhost:5000/api/users/1
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Should return status code 200", function() {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Should return a valid user object", function() {
+          const data = res.getBody();
+          expect(data).to.be.an('object');
+          expect(data).to.have.property('id');
+          expect(data.id).to.be.a('number');
+          expect(data).to.have.property('name');
+          expect(data).to.have.property('email');
+          expect(data).to.have.property('address');
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
