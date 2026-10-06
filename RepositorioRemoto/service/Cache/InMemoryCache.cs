@@ -101,4 +101,18 @@ public class InMemoryCache<T>(
         return Task.FromResult(
             Result.Success<bool, DomainError>(exists));
     }
+
+    public Task<Result<bool, DomainError>> ClearAsync()
+    {
+        if (_memoryCache is MemoryCache cache)
+        {
+            cache.Compact(1.0);
+        }
+
+        _logger.LogInformation(
+            "Caché en memoria vaciada correctamente.");
+
+        return Task.FromResult(
+            Result.Success<bool, DomainError>(true));
+    }
 }

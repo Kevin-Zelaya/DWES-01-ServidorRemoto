@@ -1,0 +1,155 @@
+2026-10-05 23:29:32.670 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-05 23:29:33.023 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:29:33.026 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:29:33.047 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:29:33.051 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:29:33.146 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 91.0468ms - 200
+2026-10-05 23:29:33.150 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 109.9074ms - 200
+2026-10-05 23:29:33.179 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:29:33.182 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:29:33.652 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:29:33.846 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:29:33.848 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:29:34.021 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:29:34.026 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:29:34.041 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:30:22.915 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:30:22.915 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:30:22.917 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:30:22.918 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:30:22.929 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 9.9788ms - 200
+2026-10-05 23:30:22.932 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.2192ms - 200
+2026-10-05 23:30:22.934 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:30:22.935 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:30:22.951 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:30:22.954 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:30:22.955 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:30:22.959 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:30:22.962 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:30:22.965 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:31:12.918 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:31:12.933 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:31:12.934 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:31:12.935 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:31:12.944 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 7.8815ms - 200
+2026-10-05 23:31:12.946 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 11.9003ms - 200
+2026-10-05 23:31:12.948 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:31:12.949 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:31:13.014 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:31:13.017 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:31:13.018 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:31:13.022 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:31:13.025 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:31:13.028 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:32:02.915 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:32:02.915 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:32:02.916 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:32:02.917 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:32:02.940 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 23.0327ms - 200
+2026-10-05 23:32:02.941 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 25.305ms - 200
+2026-10-05 23:32:02.942 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:32:02.944 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:32:02.946 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:32:02.957 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:32:02.958 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:32:02.965 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:32:02.971 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:32:02.975 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:32:52.903 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:32:52.922 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:32:52.923 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:32:52.925 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:32:52.938 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 10.2432ms - 200
+2026-10-05 23:32:52.940 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 16.8743ms - 200
+2026-10-05 23:32:52.942 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:32:52.946 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:32:52.948 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:32:52.951 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:32:52.952 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:32:52.955 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:32:52.957 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:32:52.960 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:33:42.907 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:33:42.908 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:33:42.909 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:33:42.912 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:33:42.920 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 7.8322ms - 200
+2026-10-05 23:33:42.921 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 12.0655ms - 200
+2026-10-05 23:33:42.923 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:33:42.923 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:33:42.924 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:33:42.926 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:33:42.927 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:33:42.930 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:33:42.932 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:33:42.934 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:34:32.910 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:34:32.930 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:34:32.931 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:34:32.932 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:34:32.962 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 29.0582ms - 200
+2026-10-05 23:34:32.963 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 31.9109ms - 200
+2026-10-05 23:34:32.964 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:34:32.965 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:34:32.966 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:34:32.968 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:34:32.969 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:34:32.972 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:34:32.975 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:34:32.981 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:35:22.907 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:35:22.907 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:35:22.910 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:35:22.913 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:35:22.924 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 9.7837ms - 200
+2026-10-05 23:35:22.925 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.5475ms - 200
+2026-10-05 23:35:22.927 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:35:22.928 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:35:22.940 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:35:22.943 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:35:22.944 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:35:22.947 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:35:22.956 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:35:22.959 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:36:12.909 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:36:12.910 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:36:12.911 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:36:12.912 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:36:12.921 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 8.5601ms - 200
+2026-10-05 23:36:12.922 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 11.1773ms - 200
+2026-10-05 23:36:12.924 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:36:12.925 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:36:12.928 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:36:12.930 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:36:12.931 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:36:12.934 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:36:12.937 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:36:12.939 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:37:02.913 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:37:02.933 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:37:02.934 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:37:02.935 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:37:02.971 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 33.691ms - 200
+2026-10-05 23:37:02.971 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 37.2765ms - 200
+2026-10-05 23:37:02.972 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:37:02.973 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:37:02.975 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:37:02.977 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:37:02.978 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:37:02.980 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:37:02.984 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:37:02.986 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-05 23:37:52.914 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-05 23:37:52.915 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-05 23:37:52.917 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:37:52.919 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-05 23:37:52.930 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 10.7363ms - 200
+2026-10-05 23:37:52.933 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.9698ms - 200
+2026-10-05 23:37:52.935 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-05 23:37:52.937 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-05 23:37:52.939 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-05 23:37:52.942 [INF] [PostgreSqlRepository] Se han eliminado 10 usuarios
+2026-10-05 23:37:52.943 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-05 23:37:52.947 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-05 23:37:52.950 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-05 23:37:52.952 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.

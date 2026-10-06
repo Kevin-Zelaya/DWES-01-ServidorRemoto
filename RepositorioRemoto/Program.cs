@@ -1,6 +1,5 @@
 ﻿
 // Configuración de la aplicación
-using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,13 +20,12 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 // documentación swagger
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwaggerUI(options => {
-        options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
-    });
-}
+
+app.MapOpenApi();
+app.UseSwaggerUI(options => {
+    options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
+});
+
 // Background service
 UserSyncBackgroundService.DatabaseRefreshed += (sender, e) =>
 {

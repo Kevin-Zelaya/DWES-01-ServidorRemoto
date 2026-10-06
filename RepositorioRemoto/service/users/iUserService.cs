@@ -8,4 +8,5 @@ public interface IUserService
     public Task<Result<UserModel, DomainError>> UpdateUserAsync(int id,
         UpdateUserRequest request);
     public Task<Result<bool, DomainError>> DeleteUserAsync(int id);
+    public Task<Result<UserModel, DomainError>> CreateUserAsync(CreateUserDto dto, CancellationToken cts = default);
 }

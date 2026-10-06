@@ -28,7 +28,7 @@ Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         // Servicio se manejo de api
         services.AddScoped<IUserApiService, UserApiService>();
         // Orquestador del negocio
-        services.AddScoped<UserService>();
+        services.AddScoped<IUserService, UserService>();
         // Logs
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(AppConfig.Config)
@@ -37,7 +37,12 @@ Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
             outputTemplate:
             "{Timestamp:HH:mm:ss} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
         )
-            .CreateLogger(); 
+        .CreateLogger(); 
+        Log.Logger.Debug("PRUEBA DIRECTA DE SERILOG");
+        services.AddLogging(logging =>
+        {
+            logging.AddSerilog(Log.Logger);
+        });
         //if (enviroment.IsDevelopment())
         if (enviroment.IsProduction())
         {
