@@ -15,11 +15,19 @@
   <component name="ChangeListManager">
     <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/InMemoryCacheTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/InMemoryCacheTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/RedisCacheTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/RedisCacheTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepositorioRemoto/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261006.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261006.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Funko/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Funko/opencollection.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Create User.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Delete User.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Get All Users.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Get User By ID.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Update User.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/opencollection.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Sample API Collection/Get Users.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Sample API Collection/Untitled 1.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Sample API Collection/opencollection.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +66,6 @@
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/model/UserModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -67,61 +74,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3497575182890307" />
-      <entry key="MS500" value="2.753328034539698" />
-      <entry key="S2" value="5.7519070785486015" />
-      <entry key="S5" value="7.422651606911899" />
-      <entry key="S10" value="8.155191514934762" />
-      <entry key="S30" value="8.704844360809673" />
-      <entry key="S60" value="8.850655754737542" />
-      <entry key="M2" value="8.92488065085847" />
-      <entry key="M5" value="8.969847121312615" />
-      <entry key="M10" value="8.987321710945565" />
-      <entry key="M15" value="9.012688857174645" />
-      <entry key="M30" value="9.262234775459353" />
-      <entry key="H1" value="11.835279601218529" />
-      <entry key="H2" value="25.588306169586385" />
-      <entry key="H4" value="52.67766860720599" />
-      <entry key="D1" value="109.50150072385009" />
-      <entry key="W1" value="125.15735728080202" />
+      <entry key="MS100" value="1.4476895866196244" />
+      <entry key="MS500" value="3.0279203157726315" />
+      <entry key="S2" value="4.836074619521808" />
+      <entry key="S5" value="5.6729127336913345" />
+      <entry key="S10" value="6.76821770576012" />
+      <entry key="S30" value="13.98161128034268" />
+      <entry key="S60" value="24.11076679257267" />
+      <entry key="M2" value="37.64056995263166" />
+      <entry key="M5" value="55.181673996778585" />
+      <entry key="M10" value="64.82271746403288" />
+      <entry key="M15" value="68.75893518700008" />
+      <entry key="M30" value="73.3327928738813" />
+      <entry key="H1" value="78.06206264022049" />
+      <entry key="H2" value="92.52934719181725" />
+      <entry key="H4" value="119.98978527424352" />
+      <entry key="D1" value="177.9885632624999" />
+      <entry key="W1" value="194.07492699343277" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="4.248473894959215E-176" />
-      <entry key="S30" value="3.4893482676027324E-59" />
-      <entry key="S60" value="5.907070566365982E-30" />
-      <entry key="M2" value="2.4304465775585316E-15" />
-      <entry key="M5" value="1.4265087234301062E-6" />
-      <entry key="M10" value="0.0011943761794745915" />
-      <entry key="M15" value="0.011265326200676237" />
-      <entry key="M30" value="0.11557873807049894" />
-      <entry key="H1" value="0.7563365120679804" />
-      <entry key="H2" value="3.7140674618852825" />
-      <entry key="H4" value="9.396967099283119" />
-      <entry key="D1" value="21.183929004938733" />
-      <entry key="W1" value="24.414107583485393" />
+      <entry key="MS100" value="6.95919977707771E-15" />
+      <entry key="MS500" value="0.0014807913276729356" />
+      <entry key="S2" value="0.25635467848617527" />
+      <entry key="S5" value="0.984022607867979" />
+      <entry key="S10" value="1.7299136086393476" />
+      <entry key="S30" value="2.8560328101196384" />
+      <entry key="S60" value="3.5127251708460805" />
+      <entry key="M2" value="4.58384163185647" />
+      <entry key="M5" value="6.650720584678239" />
+      <entry key="M10" value="8.009656447586734" />
+      <entry key="M15" value="8.596691747352653" />
+      <entry key="M30" value="9.34396794681161" />
+      <entry key="H1" value="10.298553562432165" />
+      <entry key="H2" value="13.341125544788776" />
+      <entry key="H4" value="19.0724645074392" />
+      <entry key="D1" value="31.081806711702026" />
+      <entry key="W1" value="34.397630144333405" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.2869748466796442" />
-      <entry key="MS500" value="2.7067134060284537" />
-      <entry key="S2" value="5.729302868825084" />
-      <entry key="S5" value="7.411344778055111" />
-      <entry key="S10" value="8.149041725239721" />
-      <entry key="S30" value="8.702670066211711" />
-      <entry key="S60" value="8.849552091920664" />
-      <entry key="M2" value="8.924324614120472" />
-      <entry key="M5" value="8.969625080773783" />
-      <entry key="M10" value="8.988390382535355" />
-      <entry key="M15" value="9.023792800308465" />
-      <entry key="M30" value="9.37734708665851" />
-      <entry key="H1" value="12.590505112016762" />
-      <entry key="H2" value="29.300112327979697" />
-      <entry key="H4" value="62.07191701032973" />
-      <entry key="D1" value="130.68443049223964" />
-      <entry key="W1" value="149.57130073145962" />
+      <entry key="MS100" value="1.3923048344314124" />
+      <entry key="MS500" value="3.00560849044224" />
+      <entry key="S2" value="5.002845800015879" />
+      <entry key="S5" value="6.4806549800842905" />
+      <entry key="S10" value="8.299448907739686" />
+      <entry key="S30" value="16.667957138013293" />
+      <entry key="S60" value="27.49537939624599" />
+      <entry key="M2" value="42.12169321599624" />
+      <entry key="M5" value="61.75679660903424" />
+      <entry key="M10" value="72.78190168225305" />
+      <entry key="M15" value="77.31814812316891" />
+      <entry key="M30" value="82.65549429392564" />
+      <entry key="H1" value="88.34854979213735" />
+      <entry key="H2" value="105.86262590249898" />
+      <entry key="H4" value="139.05670782504484" />
+      <entry key="D1" value="209.06888741440818" />
+      <entry key="W1" value="228.47232333048183" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -157,10 +164,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;file.status.colors&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.RepositorioRemoto">
     <configuration name="RepositorioRemoto" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -200,22 +207,17 @@
     <option name="coveragePercentColumnWidth" value="150" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="240" />
+    <option name="symbolColumnWidth" value="251" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 0% 1436/1436" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 58% 602/1423" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 0% 1436/1436" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="RepositorioRemoto 0% 906/906" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-        </path>
-        <path>
-          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 0% 1436/1436" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="RepositorioRemoto.Tests 0% 530/530" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 58% 602/1423" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="RepositorioRemoto 33% 598/893" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />

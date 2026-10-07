@@ -266,9 +266,10 @@ public class UserService(
         int id,
         UpdateUserRequest request)
     {
+        
         _logger.LogInformation(
             "Iniciando actualización del usuario {UserId}.", id);
-
+        /*
         // 1. Actualizar en API
         var response = await _api.UpdateAsync(id, request);
 
@@ -287,10 +288,10 @@ public class UserService(
         _logger.LogInformation(
             "Usuario {UserId} actualizado en la API.",
             id);
-
+        */
         // 2. Actualizar base de datos
         var responseDatabase = await _repository.UpdateAsync(
-            user.ToEntity(),
+            request.ToModel().ToEntity(),
             id);
 
         if (responseDatabase.IsFailure)
@@ -310,7 +311,7 @@ public class UserService(
         // 3. Actualizar caché
         var responseCache = await _cache.SetAsync(
             $"user:{id}",
-            user);
+            request.ToModel());
 
         if (responseCache.IsFailure)
         {
@@ -328,7 +329,7 @@ public class UserService(
             "Proceso de actualización del usuario {UserId} finalizado.",
             id);
 
-        return Result.Success<UserModel, DomainError>(user);
+        return Result.Success<UserModel, DomainError>(request.ToModel());
     }
 
     /// <summary>
@@ -340,7 +341,7 @@ public class UserService(
 
         _logger.LogInformation(
             "Iniciando eliminación del usuario {UserId}.", id);
-
+        /*
         // 1. Eliminar de la API
         var response = await _api.DeleteAsync(id);
 
@@ -356,6 +357,7 @@ public class UserService(
 
         _logger.LogInformation(
             "Usuario {UserId} eliminado de la API.", id);
+            */
 
         // 2. Eliminar de base de datos
         var responseDatabase = await _repository.DeleteAsync(id);

@@ -1,0 +1,58 @@
+info:
+  name: Create User
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:5000/api/users
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Patri",
+        "username": "patrichu",
+        "email": "patri@example.com",
+        "address": {
+          "street": "Calle Mayor",
+          "suite": "Planta 1",
+          "city": "Madrid",
+          "zipcode": "28001",
+          "geo": {
+            "lat": "40.4168",
+            "lng": "-3.7038"
+          }
+        },
+        "phone": "600123456",
+        "website": "https://example.com",
+        "company": {
+          "name": "DevCompany",
+          "catchPhrase": "Code that works",
+          "bs": "synergize scalable solutions"
+        }
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Should return status code 201 Created", function() {
+          expect(res.getStatus()).to.equal(201);
+        });
+
+        test("Should return the created user with an assigned ID", function() {
+          const data = res.getBody();
+          expect(data).to.be.an('object');
+          expect(data).to.have.property('id');
+          expect(data).to.have.property('name');
+          expect(data).to.have.property('email');
+          expect(data.email).to.be.a('string');
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

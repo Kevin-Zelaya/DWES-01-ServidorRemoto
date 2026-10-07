@@ -1,0 +1,62 @@
+info:
+  name: Update User
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://localhost:5000/api/users/2
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "id": 2,
+        "name": "Sergio Búrdalo Actualizado",
+        "username": "sburdalo_updated",
+        "email": "sergio.updated@example.com",
+        "address": {
+          "street": "Calle Nueva",
+          "suite": "Bajo",
+          "city": "Madrid",
+          "zipcode": "28002",
+          "geo": {
+            "lat": "40.4168",
+            "lng": "-3.7038"
+          }
+        },
+        "phone": "600987654",
+        "website": "https://example.com",
+        "company": {
+          "name": "NewDevCompany",
+          "catchPhrase": "Always updating",
+          "bs": "transform paradigms"
+        }
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Should return status code 200", function() {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Should return the updated user object with valid structure", function() {
+          const data = res.getBody();
+          expect(data).to.be.an('object');
+          expect(data).to.have.property('id');
+          expect(data).to.have.property('name');
+          expect(data).to.have.property('email');
+          expect(data.email).to.be.a('string');
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
