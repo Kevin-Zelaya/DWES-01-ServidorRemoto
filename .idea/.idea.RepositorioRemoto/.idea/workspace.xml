@@ -16,8 +16,18 @@
     <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RepositorioRemoto/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261006.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261006.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/service/users/UsersService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/service/users/UsersService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Funko/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Funko/opencollection.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Create User.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Delete User.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Get All Users.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Get User By ID.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/Update User.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/RepositorioRemoto-API/opencollection.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Sample API Collection/Get Users.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Sample API Collection/Untitled 1.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bruno/Sample API Collection/opencollection.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +66,6 @@
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/model/UserModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/IUserApiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/service/api/UserApiService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Immediate Window" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -65,61 +74,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.151633261627659E-8" />
-      <entry key="MS500" value="0.044896084109995765" />
-      <entry key="S2" value="0.7829751776469243" />
-      <entry key="S5" value="1.519402631622614" />
-      <entry key="S10" value="2.0438296605637793" />
-      <entry key="S30" value="2.7497976864775446" />
-      <entry key="S60" value="3.742168924513071" />
-      <entry key="M2" value="6.039358028835061" />
-      <entry key="M5" value="9.885517725815127" />
-      <entry key="M10" value="12.080271769478744" />
-      <entry key="M15" value="12.979023844705898" />
-      <entry key="M30" value="14.172628031120167" />
-      <entry key="H1" value="17.149804287267642" />
-      <entry key="H2" value="30.89606304038953" />
-      <entry key="H4" value="57.98712078659906" />
-      <entry key="D1" value="115.26550889547784" />
-      <entry key="W1" value="131.11887459454402" />
+      <entry key="MS100" value="1.4476895866196244" />
+      <entry key="MS500" value="3.0279203157726315" />
+      <entry key="S2" value="4.836074619521808" />
+      <entry key="S5" value="5.6729127336913345" />
+      <entry key="S10" value="6.76821770576012" />
+      <entry key="S30" value="13.98161128034268" />
+      <entry key="S60" value="24.11076679257267" />
+      <entry key="M2" value="37.64056995263166" />
+      <entry key="M5" value="55.181673996778585" />
+      <entry key="M10" value="64.82271746403288" />
+      <entry key="M15" value="68.75893518700008" />
+      <entry key="M30" value="73.3327928738813" />
+      <entry key="H1" value="78.06206264022049" />
+      <entry key="H2" value="92.52934719181725" />
+      <entry key="H4" value="119.98978527424352" />
+      <entry key="D1" value="177.9885632624999" />
+      <entry key="W1" value="194.07492699343277" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.000000000000007" />
-      <entry key="MS500" value="1.001480191959483" />
-      <entry key="S2" value="1.1961460244741877" />
-      <entry key="S5" value="1.5212331862448676" />
-      <entry key="S10" value="1.7227566622622832" />
-      <entry key="S30" value="2.080179074146546" />
-      <entry key="S60" value="2.7597995312421135" />
-      <entry key="M2" value="3.75071283173906" />
-      <entry key="M5" value="4.8708306452116155" />
-      <entry key="M10" value="5.388544277429031" />
-      <entry key="M15" value="5.58950575911672" />
-      <entry key="M30" value="5.888596787693785" />
-      <entry key="H1" value="6.609393337814912" />
-      <entry key="H2" value="9.56569809148601" />
-      <entry key="H4" value="15.250584188929858" />
-      <entry key="D1" value="27.134460023298036" />
-      <entry key="W1" value="30.406056637883484" />
+      <entry key="MS100" value="6.95919977707771E-15" />
+      <entry key="MS500" value="0.0014807913276729356" />
+      <entry key="S2" value="0.25635467848617527" />
+      <entry key="S5" value="0.984022607867979" />
+      <entry key="S10" value="1.7299136086393476" />
+      <entry key="S30" value="2.8560328101196384" />
+      <entry key="S60" value="3.5127251708460805" />
+      <entry key="M2" value="4.58384163185647" />
+      <entry key="M5" value="6.650720584678239" />
+      <entry key="M10" value="8.009656447586734" />
+      <entry key="M15" value="8.596691747352653" />
+      <entry key="M30" value="9.34396794681161" />
+      <entry key="H1" value="10.298553562432165" />
+      <entry key="H2" value="13.341125544788776" />
+      <entry key="H4" value="19.0724645074392" />
+      <entry key="D1" value="31.081806711702026" />
+      <entry key="W1" value="34.397630144333405" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="9.464333858265912E-6" />
-      <entry key="MS500" value="0.12895190817265356" />
-      <entry key="S2" value="1.2745615398663501" />
-      <entry key="S5" value="2.466285931888629" />
-      <entry key="S10" value="3.364771068013395" />
-      <entry key="S30" value="4.636160888962949" />
-      <entry key="S60" value="6.355476698969947" />
-      <entry key="M2" value="9.671616338840552" />
-      <entry key="M5" value="14.683470481657334" />
-      <entry key="M10" value="17.42566425936519" />
-      <entry key="M15" value="18.5379490597661" />
-      <entry key="M30" value="20.04463313132294" />
-      <entry key="H1" value="23.749805004971297" />
-      <entry key="H2" value="40.45532339283065" />
-      <entry key="H4" value="73.23288755214591" />
-      <entry key="D1" value="142.39861397537848" />
-      <entry key="W1" value="161.5247159749802" />
+      <entry key="MS100" value="1.3923048344314124" />
+      <entry key="MS500" value="3.00560849044224" />
+      <entry key="S2" value="5.002845800015879" />
+      <entry key="S5" value="6.4806549800842905" />
+      <entry key="S10" value="8.299448907739686" />
+      <entry key="S30" value="16.667957138013293" />
+      <entry key="S60" value="27.49537939624599" />
+      <entry key="M2" value="42.12169321599624" />
+      <entry key="M5" value="61.75679660903424" />
+      <entry key="M10" value="72.78190168225305" />
+      <entry key="M15" value="77.31814812316891" />
+      <entry key="M30" value="82.65549429392564" />
+      <entry key="H1" value="88.34854979213735" />
+      <entry key="H2" value="105.86262590249898" />
+      <entry key="H4" value="139.05670782504484" />
+      <entry key="D1" value="209.06888741440818" />
+      <entry key="W1" value="228.47232333048183" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -137,28 +146,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.RepositorioRemoto.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "file.status.colors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.RepositorioRemoto.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/testcache&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected=".NET Project.RepositorioRemoto">
     <configuration name="RepositorioRemoto" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -198,22 +207,17 @@
     <option name="coveragePercentColumnWidth" value="150" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="240" />
+    <option name="symbolColumnWidth" value="251" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 0% 1436/1436" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 58% 602/1423" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 0% 1436/1436" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="RepositorioRemoto 0% 906/906" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-        </path>
-        <path>
-          <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 0% 1436/1436" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="RepositorioRemoto.Tests 0% 530/530" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 58% 602/1423" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="RepositorioRemoto 33% 598/893" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />

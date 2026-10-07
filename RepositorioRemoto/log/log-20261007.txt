@@ -1,0 +1,713 @@
+2026-10-07 10:59:25.442 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-07 10:59:25.792 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 10:59:25.797 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 10:59:25.823 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 10:59:25.829 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 10:59:25.950 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 116.9293ms - 200
+2026-10-07 10:59:25.956 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 141.3464ms - 200
+2026-10-07 10:59:25.999 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 10:59:26.004 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 10:59:26.386 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 10:59:26.389 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 10:59:26.609 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 10:59:26.611 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 10:59:26.614 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 10:59:26.615 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 10:59:26.623 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 10:59:26.770 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 10:59:26.772 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 10:59:26.773 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 10:59:26.777 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 10:59:26.779 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 10:59:26.793 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 10:59:43.366 [INF] [UserService] Obteniendo todos los usuarios de la base de datos local.
+2026-10-07 10:59:43.855 [INF] [SqliteRepository] Obteniendo todos los usuarios de SQLite.
+2026-10-07 10:59:46.084 [INF] [SqliteRepository] Se obtuvieron 10 usuarios de SQLite.
+2026-10-07 10:59:46.499 [INF] [UserService] Se obtuvieron 10 usuarios de la base de datos.
+2026-10-07 10:59:47.893 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Buscando la clave user:11 en la caché.
+2026-10-07 10:59:48.434 [DBG] [RepositorioRemoto.Cache.InMemoryCache] No se encontró la clave user:11 en la caché.
+2026-10-07 10:59:49.229 [DBG] [UserService] Caché miss para el usuario 11.
+2026-10-07 10:59:50.760 [INF] [SqliteRepository] Buscando usuario con ID 11 en SQLite.
+2026-10-07 10:59:53.190 [WRN] [SqliteRepository] No se encontró el usuario con ID 11.
+2026-10-07 10:59:54.078 [DBG] [UserService] Usuario 11 no encontrado localmente. Consultando la API.
+2026-10-07 10:59:55.017 [INF] [UserApiService] Obteniendo usuario con ID 11.
+2026-10-07 10:59:55.885 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users/11
+2026-10-07 10:59:56.720 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users/11
+2026-10-07 10:59:57.668 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 188.4043ms - 404
+2026-10-07 10:59:58.263 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 2387.923ms - 404
+2026-10-07 10:59:59.247 [WRN] [UserApiService] La API no encontró el usuario con ID 11.
+Refit.ApiException: Response status code does not indicate success: 404 (Not Found).
+   at Refit.RequestExecutionHelpers.DispatchResponseAsync[T,TBody](HttpRequestMessage request, HttpResponseMessage response, HttpContent content, RefitSettings settings, RequestExecutionOptions options, Exception exception, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\RequestExecutionHelpers.cs:line 411
+   at Refit.RequestExecutionHelpers.SendAndProcessResponseAsync[T,TBody](HttpClient client, HttpRequestMessage request, RefitSettings settings, RequestExecutionOptions options, Int32 timeoutMilliseconds, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\RequestExecutionHelpers.cs:line 159
+   at Refit.GeneratedRequestRunner.SendAsync[T,TBody](HttpClient client, HttpRequestMessage request, RefitSettings settings, Boolean isApiResponse, Boolean shouldDisposeResponse, Boolean bufferBody, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\GeneratedRequestRunner.Sending.cs:line 73
+   at UserApiService.GetByIdAsync(Int32 id, CancellationToken cts) in C:\Users\sergi\Desktop\Asignaturas-Daw\Entorno-Servicio\Repositorio\DWES-01-ServidorRemoto\RepositorioRemoto\service\api\UserApiService.cs:line 79
+2026-10-07 11:00:02.290 [WRN] [UserService] No se pudo obtener el usuario 11 de la API.
+2026-10-07 11:00:02.957 [INF] [UserService] Iniciando creación del usuario.
+2026-10-07 11:00:03.237 [INF] [UserApiService] Creando un usuario.
+2026-10-07 11:00:03.434 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:03.644 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:04.104 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 203.8448ms - 201
+2026-10-07 11:00:04.556 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 1121.3728ms - 201
+2026-10-07 11:00:04.966 [INF] [UserApiService] Usuario creado correctamente.
+2026-10-07 11:00:05.142 [INF] [UserService] Usuario 11 creado en la API.
+2026-10-07 11:00:05.763 [INF] [SqliteRepository] Creando un usuario en SQLite.
+2026-10-07 11:00:06.438 [INF] [SqliteRepository] Usuario creado correctamente con ID 11.
+2026-10-07 11:00:07.125 [INF] [UserService] Usuario 11 creado en la base de datos.
+2026-10-07 11:00:07.718 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:07.950 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:00:07.957 [DBG] [UserService] Caché creada para el usuario 11.
+2026-10-07 11:00:07.960 [INF] [UserService] Proceso de creación del usuario 11 finalizado.
+2026-10-07 11:00:08.311 [INF] [UserService] Iniciando actualización del usuario 11.
+2026-10-07 11:00:08.376 [INF] [SqliteRepository] Actualizando usuario con ID 11.
+2026-10-07 11:00:10.860 [INF] [SqliteRepository] Usuario con ID 11 actualizado correctamente.
+2026-10-07 11:00:10.875 [INF] [UserService] Usuario 11 actualizado en la base de datos.
+2026-10-07 11:00:10.893 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:10.968 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:00:11.402 [DBG] [UserService] Caché actualizada para el usuario 11.
+2026-10-07 11:00:11.412 [INF] [UserService] Proceso de actualización del usuario 11 finalizado.
+2026-10-07 11:00:12.145 [INF] [UserService] Iniciando eliminación del usuario 11.
+2026-10-07 11:00:13.459 [INF] [SqliteRepository] Eliminando usuario con ID 11.
+2026-10-07 11:00:14.536 [INF] [SqliteRepository] Usuario con ID 11 eliminado correctamente.
+2026-10-07 11:00:15.090 [INF] [UserService] Usuario 11 eliminado de la base de datos.
+2026-10-07 11:00:15.507 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 eliminada de la caché.
+2026-10-07 11:00:15.657 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:00:16.049 [DBG] [UserService] Caché eliminada para el usuario 11.
+2026-10-07 11:00:16.310 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:00:16.335 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:16.552 [INF] [UserService] Proceso de eliminación del usuario 11 finalizado.
+2026-10-07 11:00:16.596 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:16.616 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 9.6802ms - 200
+2026-10-07 11:00:16.643 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 307.4965ms - 200
+2026-10-07 11:00:16.657 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:00:16.674 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:00:16.748 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:00:16.760 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:00:16.769 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:00:16.779 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:00:16.784 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:00:16.790 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:00:17.063 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:00:17.488 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:00:18.023 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:00:18.239 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:00:18.256 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:00:18.293 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:00:18.409 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:00:41.300 [INF] [UserService] Obteniendo todos los usuarios de la base de datos local.
+2026-10-07 11:00:41.302 [INF] [SqliteRepository] Obteniendo todos los usuarios de SQLite.
+2026-10-07 11:00:41.306 [INF] [SqliteRepository] Se obtuvieron 10 usuarios de SQLite.
+2026-10-07 11:00:41.308 [INF] [UserService] Se obtuvieron 10 usuarios de la base de datos.
+2026-10-07 11:00:41.445 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Buscando la clave user:1 en la caché.
+2026-10-07 11:00:41.447 [DBG] [RepositorioRemoto.Cache.InMemoryCache] No se encontró la clave user:1 en la caché.
+2026-10-07 11:00:41.450 [DBG] [UserService] Caché miss para el usuario 1.
+2026-10-07 11:00:41.452 [INF] [SqliteRepository] Buscando usuario con ID 1 en SQLite.
+2026-10-07 11:00:41.455 [INF] [SqliteRepository] Usuario con ID 1 obtenido correctamente.
+2026-10-07 11:00:41.458 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:1 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:41.460 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:1 guardada correctamente en caché.
+2026-10-07 11:00:41.462 [INF] [UserService] Usuario 1 obtenido de la base de datos y guardado en caché.
+2026-10-07 11:00:41.578 [INF] [UserService] Iniciando creación del usuario.
+2026-10-07 11:00:41.579 [INF] [UserApiService] Creando un usuario.
+2026-10-07 11:00:41.581 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:41.583 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:41.709 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 123.8566ms - 201
+2026-10-07 11:00:41.713 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 132.416ms - 201
+2026-10-07 11:00:41.716 [INF] [UserApiService] Usuario creado correctamente.
+2026-10-07 11:00:41.718 [INF] [UserService] Usuario 11 creado en la API.
+2026-10-07 11:00:41.721 [INF] [SqliteRepository] Creando un usuario en SQLite.
+2026-10-07 11:00:41.778 [INF] [SqliteRepository] Usuario creado correctamente con ID 11.
+2026-10-07 11:00:41.780 [INF] [UserService] Usuario 11 creado en la base de datos.
+2026-10-07 11:00:41.783 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:41.787 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:00:41.789 [DBG] [UserService] Caché creada para el usuario 11.
+2026-10-07 11:00:41.792 [INF] [UserService] Proceso de creación del usuario 11 finalizado.
+2026-10-07 11:00:41.909 [INF] [UserService] Iniciando actualización del usuario 11.
+2026-10-07 11:00:41.911 [INF] [SqliteRepository] Actualizando usuario con ID 11.
+2026-10-07 11:00:41.925 [INF] [SqliteRepository] Usuario con ID 11 actualizado correctamente.
+2026-10-07 11:00:41.928 [INF] [UserService] Usuario 11 actualizado en la base de datos.
+2026-10-07 11:00:41.930 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:41.933 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:00:41.935 [DBG] [UserService] Caché actualizada para el usuario 11.
+2026-10-07 11:00:41.937 [INF] [UserService] Proceso de actualización del usuario 11 finalizado.
+2026-10-07 11:00:42.051 [INF] [UserService] Iniciando eliminación del usuario 11.
+2026-10-07 11:00:42.053 [INF] [SqliteRepository] Eliminando usuario con ID 11.
+2026-10-07 11:00:42.060 [INF] [SqliteRepository] Usuario con ID 11 eliminado correctamente.
+2026-10-07 11:00:42.071 [INF] [UserService] Usuario 11 eliminado de la base de datos.
+2026-10-07 11:00:42.079 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 eliminada de la caché.
+2026-10-07 11:00:42.082 [DBG] [UserService] Caché eliminada para el usuario 11.
+2026-10-07 11:00:42.083 [INF] [UserService] Proceso de eliminación del usuario 11 finalizado.
+2026-10-07 11:00:46.154 [INF] [UserService] Obteniendo todos los usuarios de la base de datos local.
+2026-10-07 11:00:46.156 [INF] [SqliteRepository] Obteniendo todos los usuarios de SQLite.
+2026-10-07 11:00:46.160 [INF] [SqliteRepository] Se obtuvieron 10 usuarios de SQLite.
+2026-10-07 11:00:46.161 [INF] [UserService] Se obtuvieron 10 usuarios de la base de datos.
+2026-10-07 11:00:46.278 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Buscando la clave user:1 en la caché.
+2026-10-07 11:00:46.281 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Elemento encontrado en caché para la clave user:1.
+2026-10-07 11:00:46.390 [INF] [UserService] Iniciando creación del usuario.
+2026-10-07 11:00:46.392 [INF] [UserApiService] Creando un usuario.
+2026-10-07 11:00:46.394 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:46.396 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:00:46.521 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 122.7868ms - 201
+2026-10-07 11:00:46.524 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 129.8082ms - 201
+2026-10-07 11:00:46.527 [INF] [UserApiService] Usuario creado correctamente.
+2026-10-07 11:00:46.528 [INF] [UserService] Usuario 11 creado en la API.
+2026-10-07 11:00:46.530 [INF] [SqliteRepository] Creando un usuario en SQLite.
+2026-10-07 11:00:46.582 [INF] [SqliteRepository] Usuario creado correctamente con ID 11.
+2026-10-07 11:00:46.584 [INF] [UserService] Usuario 11 creado en la base de datos.
+2026-10-07 11:00:46.586 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:46.590 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:00:46.592 [DBG] [UserService] Caché creada para el usuario 11.
+2026-10-07 11:00:46.594 [INF] [UserService] Proceso de creación del usuario 11 finalizado.
+2026-10-07 11:00:46.702 [INF] [UserService] Iniciando actualización del usuario 11.
+2026-10-07 11:00:46.704 [INF] [SqliteRepository] Actualizando usuario con ID 11.
+2026-10-07 11:00:46.710 [INF] [SqliteRepository] Usuario con ID 11 actualizado correctamente.
+2026-10-07 11:00:46.712 [INF] [UserService] Usuario 11 actualizado en la base de datos.
+2026-10-07 11:00:46.714 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:00:46.716 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:00:46.718 [DBG] [UserService] Caché actualizada para el usuario 11.
+2026-10-07 11:00:46.720 [INF] [UserService] Proceso de actualización del usuario 11 finalizado.
+2026-10-07 11:00:46.829 [INF] [UserService] Iniciando eliminación del usuario 11.
+2026-10-07 11:00:46.830 [INF] [SqliteRepository] Eliminando usuario con ID 11.
+2026-10-07 11:00:46.835 [INF] [SqliteRepository] Usuario con ID 11 eliminado correctamente.
+2026-10-07 11:00:46.836 [INF] [UserService] Usuario 11 eliminado de la base de datos.
+2026-10-07 11:00:46.837 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 eliminada de la caché.
+2026-10-07 11:00:46.838 [DBG] [UserService] Caché eliminada para el usuario 11.
+2026-10-07 11:00:46.839 [INF] [UserService] Proceso de eliminación del usuario 11 finalizado.
+2026-10-07 11:01:05.650 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:01:05.652 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:01:05.654 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:01:05.655 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:01:05.670 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 11.7297ms - 200
+2026-10-07 11:01:05.671 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 17.9086ms - 200
+2026-10-07 11:01:05.674 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:01:05.678 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:01:05.706 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:01:05.708 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:01:05.710 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:01:05.712 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:01:05.717 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:01:05.719 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:01:05.720 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:01:05.723 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:01:05.726 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:01:05.727 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:01:05.730 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:01:05.732 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:01:05.784 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:06:32.618 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-07 11:06:32.926 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:06:32.931 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:06:32.956 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:06:32.960 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:06:33.076 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 112.3021ms - 200
+2026-10-07 11:06:33.081 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 134.0086ms - 200
+2026-10-07 11:06:33.138 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:06:33.142 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:06:33.480 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:06:33.482 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:06:33.662 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:06:33.664 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:06:33.665 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:06:33.666 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:06:33.673 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:06:33.809 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:06:33.811 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:06:33.812 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:06:33.814 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:06:33.815 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:06:33.876 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:07:08.148 [INF] [UserService] Obteniendo todos los usuarios de la base de datos local.
+2026-10-07 11:07:08.150 [INF] [SqliteRepository] Obteniendo todos los usuarios de SQLite.
+2026-10-07 11:07:08.288 [INF] [SqliteRepository] Se obtuvieron 10 usuarios de SQLite.
+2026-10-07 11:07:08.291 [INF] [UserService] Se obtuvieron 10 usuarios de la base de datos.
+2026-10-07 11:07:08.837 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Buscando la clave user:1 en la caché.
+2026-10-07 11:07:08.839 [DBG] [RepositorioRemoto.Cache.InMemoryCache] No se encontró la clave user:1 en la caché.
+2026-10-07 11:07:08.840 [DBG] [UserService] Caché miss para el usuario 1.
+2026-10-07 11:07:08.842 [INF] [SqliteRepository] Buscando usuario con ID 1 en SQLite.
+2026-10-07 11:07:08.960 [INF] [SqliteRepository] Usuario con ID 1 obtenido correctamente.
+2026-10-07 11:07:08.962 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:1 en caché. Expiración: "00:30:00".
+2026-10-07 11:07:08.964 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:1 guardada correctamente en caché.
+2026-10-07 11:07:08.965 [INF] [UserService] Usuario 1 obtenido de la base de datos y guardado en caché.
+2026-10-07 11:07:09.169 [INF] [UserService] Iniciando creación del usuario.
+2026-10-07 11:07:09.171 [INF] [UserApiService] Creando un usuario.
+2026-10-07 11:07:09.175 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:07:09.176 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request POST https://jsonplaceholder.typicode.com/users
+2026-10-07 11:07:09.321 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 143.5029ms - 201
+2026-10-07 11:07:09.324 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 150.0142ms - 201
+2026-10-07 11:07:09.329 [INF] [UserApiService] Usuario creado correctamente.
+2026-10-07 11:07:09.330 [INF] [UserService] Usuario 11 creado en la API.
+2026-10-07 11:07:09.333 [INF] [SqliteRepository] Creando un usuario en SQLite.
+2026-10-07 11:07:09.341 [INF] [SqliteRepository] Usuario creado correctamente con ID 11.
+2026-10-07 11:07:09.343 [INF] [UserService] Usuario 11 creado en la base de datos.
+2026-10-07 11:07:09.345 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:11 en caché. Expiración: "00:30:00".
+2026-10-07 11:07:09.347 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:11 guardada correctamente en caché.
+2026-10-07 11:07:09.349 [DBG] [UserService] Caché creada para el usuario 11.
+2026-10-07 11:07:09.350 [INF] [UserService] Proceso de creación del usuario 11 finalizado.
+2026-10-07 11:07:09.497 [INF] [UserService] Iniciando actualización del usuario 2.
+2026-10-07 11:07:09.500 [INF] [SqliteRepository] Actualizando usuario con ID 2.
+2026-10-07 11:07:09.605 [INF] [SqliteRepository] Usuario con ID 2 actualizado correctamente.
+2026-10-07 11:07:09.606 [INF] [UserService] Usuario 2 actualizado en la base de datos.
+2026-10-07 11:07:09.608 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Guardando la clave user:2 en caché. Expiración: "00:30:00".
+2026-10-07 11:07:09.609 [DBG] [RepositorioRemoto.Cache.InMemoryCache] Clave user:2 guardada correctamente en caché.
+2026-10-07 11:07:09.610 [DBG] [UserService] Caché actualizada para el usuario 2.
+2026-10-07 11:07:09.611 [INF] [UserService] Proceso de actualización del usuario 2 finalizado.
+2026-10-07 11:07:22.799 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:07:22.801 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:07:22.803 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:07:22.804 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:07:22.820 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 14.2957ms - 200
+2026-10-07 11:07:22.822 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 19.9768ms - 200
+2026-10-07 11:07:22.825 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:07:22.827 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:07:22.833 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:07:22.834 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:07:22.836 [INF] [SqliteRepository] Se eliminaron 11 usuarios de SQLite.
+2026-10-07 11:07:22.839 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:07:22.844 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:07:22.845 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:07:22.846 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:07:22.848 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:07:22.849 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:07:22.850 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:07:22.852 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:07:22.853 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:07:22.902 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:08:12.790 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:08:12.799 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:08:12.801 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:08:12.802 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:08:12.817 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 13.458ms - 200
+2026-10-07 11:08:12.819 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 18.1212ms - 200
+2026-10-07 11:08:12.820 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:08:12.822 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:08:12.835 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:08:12.836 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:08:12.837 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:08:12.838 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:08:12.839 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:08:12.839 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:08:12.840 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:08:12.842 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:08:12.843 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:08:12.844 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:08:12.846 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:08:12.847 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:08:12.896 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:09:02.796 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:09:02.798 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:09:02.800 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:09:02.802 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:09:02.858 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 53.8325ms - 200
+2026-10-07 11:09:02.861 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 61.5052ms - 200
+2026-10-07 11:09:02.865 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:09:02.867 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:09:02.870 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:09:02.872 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:09:02.875 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:09:02.877 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:09:02.878 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:09:02.880 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:09:02.882 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:09:02.886 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:09:02.889 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:09:02.891 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:09:02.895 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:09:02.896 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:09:02.947 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:09:52.793 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:09:52.795 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:09:52.797 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:09:52.799 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:09:52.819 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 16.1311ms - 200
+2026-10-07 11:09:52.821 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 24.1643ms - 200
+2026-10-07 11:09:52.824 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:09:52.826 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:09:52.827 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:09:52.831 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:09:52.838 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:09:52.839 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:09:52.840 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:09:52.841 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:09:52.842 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:09:52.845 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:09:52.846 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:09:52.847 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:09:52.848 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:09:52.849 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:09:52.898 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:10:42.804 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:10:42.805 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:10:42.806 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:10:42.807 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:10:42.836 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 27.9062ms - 200
+2026-10-07 11:10:42.839 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 32.9603ms - 200
+2026-10-07 11:10:42.841 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:10:42.842 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:10:42.844 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:10:42.845 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:10:42.846 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:10:42.847 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:10:42.848 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:10:42.848 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:10:42.849 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:10:42.855 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:10:42.858 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:10:42.859 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:10:42.860 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:10:42.861 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:10:42.867 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:11:32.795 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:11:32.796 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:11:32.796 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:11:32.797 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:11:32.828 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 30.3384ms - 200
+2026-10-07 11:11:32.829 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 32.0989ms - 200
+2026-10-07 11:11:32.829 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:11:32.830 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:11:32.831 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:11:32.832 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:11:32.833 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:11:32.833 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:11:32.834 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:11:32.834 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:11:32.835 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:11:32.836 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:11:32.836 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:11:32.837 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:11:32.838 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:11:32.839 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:11:32.887 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:12:22.798 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:12:22.800 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:12:22.802 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:12:22.805 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:12:22.817 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 10.3846ms - 200
+2026-10-07 11:12:22.819 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 17.2907ms - 200
+2026-10-07 11:12:22.822 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:12:22.824 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:12:22.825 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:12:22.826 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:12:22.827 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:12:22.827 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:12:22.828 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:12:22.829 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:12:22.830 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:12:22.831 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:12:22.832 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:12:22.833 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:12:22.834 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:12:22.835 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:12:22.845 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:13:12.794 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:13:12.796 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:13:12.798 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:13:12.801 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:13:12.814 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 10.9462ms - 200
+2026-10-07 11:13:12.816 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 17.7868ms - 200
+2026-10-07 11:13:12.817 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:13:12.817 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:13:12.819 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:13:12.819 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:13:12.819 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:13:12.820 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:13:12.823 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:13:12.823 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:13:12.823 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:13:12.824 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:13:12.825 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:13:12.826 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:13:12.827 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:13:12.827 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:13:12.878 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:14:02.804 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:14:02.807 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:14:02.809 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:14:02.811 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:14:02.868 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 54.4718ms - 200
+2026-10-07 11:14:02.869 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 60.2113ms - 200
+2026-10-07 11:14:02.870 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:14:02.871 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:14:02.872 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:14:02.872 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:14:02.873 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:14:02.874 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:14:02.874 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:14:02.875 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:14:02.875 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:14:02.876 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:14:02.877 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:14:02.878 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:14:02.878 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:14:02.879 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:14:02.906 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:14:52.803 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:14:52.804 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:14:52.805 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:14:52.806 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:14:52.815 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 8.877ms - 200
+2026-10-07 11:14:52.817 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 12.1884ms - 200
+2026-10-07 11:14:52.818 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:14:52.820 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:14:52.821 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:14:52.822 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:14:52.823 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:14:52.824 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:14:52.825 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:14:52.825 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:14:52.826 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:14:52.827 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:14:52.828 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:14:52.829 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:14:52.831 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:14:52.832 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:14:52.835 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:15:42.795 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:15:42.797 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:15:42.799 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:15:42.801 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:15:42.835 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 33.1452ms - 200
+2026-10-07 11:15:42.837 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 38.3587ms - 200
+2026-10-07 11:15:42.840 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:15:42.841 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:15:42.843 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:15:42.844 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:15:42.845 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:15:42.846 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:15:42.847 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:15:42.848 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:15:42.849 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:15:42.850 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:15:42.851 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:15:42.851 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:15:42.852 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:15:42.853 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:15:42.903 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:16:32.800 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:16:32.801 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:16:32.802 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:16:32.803 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:16:32.851 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 47.2633ms - 200
+2026-10-07 11:16:32.853 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 50.5177ms - 200
+2026-10-07 11:16:32.854 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:16:32.855 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:16:32.857 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:16:32.858 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:16:32.859 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:16:32.860 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:16:32.860 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:16:32.861 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:16:32.862 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:16:32.863 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:16:32.864 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:16:32.865 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:16:32.866 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:16:32.867 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:16:32.869 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:17:22.793 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:17:22.795 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:17:22.797 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:17:22.799 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:17:22.814 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 12.6959ms - 200
+2026-10-07 11:17:22.816 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 18.8815ms - 200
+2026-10-07 11:17:22.818 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:17:22.820 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:17:22.821 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:17:22.823 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:17:22.824 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:17:22.824 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:17:22.825 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:17:22.826 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:17:22.827 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:17:22.829 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:17:22.832 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:17:22.833 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:17:22.835 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:17:22.839 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:17:22.841 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:18:12.792 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:18:12.793 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:18:12.794 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:18:12.796 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:18:12.818 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 20.282ms - 200
+2026-10-07 11:18:12.819 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 25.4067ms - 200
+2026-10-07 11:18:12.820 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:18:12.821 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:18:12.822 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:18:12.823 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:18:12.824 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:18:12.825 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:18:12.826 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:18:12.826 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:18:12.827 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:18:12.828 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:18:12.829 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:18:12.830 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:18:12.831 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:18:12.832 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:18:12.834 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:19:02.789 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:19:02.791 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:19:02.793 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:19:02.796 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:19:02.850 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 53.0574ms - 200
+2026-10-07 11:19:02.853 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 59.9869ms - 200
+2026-10-07 11:19:02.856 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:19:02.857 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:19:02.859 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:19:02.860 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:19:02.861 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:19:02.862 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:19:02.863 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:19:02.864 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:19:02.865 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:19:02.866 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:19:02.867 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:19:02.868 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:19:02.869 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:19:02.870 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:19:02.884 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:19:52.798 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:19:52.799 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:19:52.800 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:19:52.803 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:19:52.816 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 11.1183ms - 200
+2026-10-07 11:19:52.817 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 16.779ms - 200
+2026-10-07 11:19:52.819 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:19:52.820 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:19:52.821 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:19:52.822 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:19:52.822 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:19:52.823 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:19:52.824 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:19:52.824 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:19:52.825 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:19:52.826 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:19:52.827 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:19:52.828 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:19:52.830 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:19:52.831 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:19:52.881 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:20:42.796 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:20:42.798 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:20:42.801 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:20:42.802 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:20:42.815 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 10.5906ms - 200
+2026-10-07 11:20:42.816 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.6546ms - 200
+2026-10-07 11:20:42.818 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:20:42.819 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:20:42.820 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:20:42.821 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:20:42.822 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:20:42.822 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:20:42.823 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:20:42.824 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:20:42.824 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:20:42.826 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:20:42.827 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:20:42.828 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:20:42.829 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:20:42.830 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:20:42.879 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:21:32.790 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:21:32.793 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:21:32.795 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:21:32.797 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:21:32.841 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 42.0116ms - 200
+2026-10-07 11:21:32.842 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 47.4607ms - 200
+2026-10-07 11:21:32.843 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:21:32.844 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:21:32.845 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:21:32.846 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:21:32.847 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:21:32.847 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:21:32.848 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:21:32.849 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:21:32.849 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:21:32.850 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:21:32.851 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:21:32.852 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:21:32.852 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:21:32.853 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:21:32.885 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:22:22.801 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:22:22.802 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:22:22.804 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:22:22.806 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:22:22.819 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 11.7447ms - 200
+2026-10-07 11:22:22.820 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.984ms - 200
+2026-10-07 11:22:22.822 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:22:22.823 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:22:22.825 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:22:22.826 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:22:22.828 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:22:22.828 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:22:22.829 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:22:22.830 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:22:22.830 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:22:22.831 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:22:22.833 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:22:22.834 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:22:22.835 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:22:22.835 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:22:22.885 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:23:12.794 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:23:12.795 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:23:12.796 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:23:12.798 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:23:12.809 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 9.6299ms - 200
+2026-10-07 11:23:12.811 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.5576ms - 200
+2026-10-07 11:23:12.813 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:23:12.815 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:23:12.816 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:23:12.817 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:23:12.818 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:23:12.819 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:23:12.821 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:23:12.822 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:23:12.823 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:23:12.825 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:23:12.826 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:23:12.827 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:23:12.829 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:23:12.830 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:23:12.879 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:24:02.803 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:24:02.805 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:24:02.807 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:24:02.808 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:24:02.857 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 46.9408ms - 200
+2026-10-07 11:24:02.859 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 52.2067ms - 200
+2026-10-07 11:24:02.860 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:24:02.862 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:24:02.863 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:24:02.864 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:24:02.866 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:24:02.867 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:24:02.868 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:24:02.869 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:24:02.870 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:24:02.871 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:24:02.872 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:24:02.873 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:24:02.874 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:24:02.874 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:24:02.924 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 11:24:52.802 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 11:24:52.804 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 11:24:52.805 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:24:52.806 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 11:24:52.820 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 12.4943ms - 200
+2026-10-07 11:24:52.821 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 16.7184ms - 200
+2026-10-07 11:24:52.823 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 11:24:52.824 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 11:24:52.825 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 11:24:52.826 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-07 11:24:52.827 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-07 11:24:52.828 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 11:24:52.828 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 11:24:52.829 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 11:24:52.843 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:24:52.844 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:24:52.846 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 11:24:52.846 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-07 11:24:52.847 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-07 11:24:52.848 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 11:24:52.898 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
