@@ -6116,3 +6116,529 @@ DELETE FROM users AS u
 2026-10-07 17:23:47.384 [ERR] [Microsoft.EntityFrameworkCore.Database.Connection] An error occurred using the connection to database 'users_db' on server 'tcp://localhost:5432'.
 2026-10-07 17:23:47.388 [ERR] [UserService] La sincronización falló después de 3 intentos.
 2026-10-07 17:23:47.389 [ERR] [UserSyncBackgroundService] Falló la sincronización de usuarios: Unknown { message = Se ha producido un error inesperado en la base de datos., StatusCode = InternalServerError, detail = Se perdió la conexión con PostgreSQL., Message = Se ha producido un error inesperado en la base de datos., Details = Se perdió la conexión con PostgreSQL. }
+2026-10-07 20:56:02.480 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 20:56:02.518 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 20:56:02.537 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 20:56:02.541 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 20:56:02.682 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 137.0067ms - 200
+2026-10-07 20:56:02.687 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 156.1508ms - 200
+2026-10-07 20:56:02.726 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 20:56:02.738 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 20:56:03.630 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 20:56:03.934 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 20:56:03.936 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 20:56:03.938 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 20:56:04.100 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 20:56:04.104 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 20:56:04.116 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 20:56:51.955 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 20:56:51.966 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 20:56:51.968 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 20:56:51.970 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 20:56:51.992 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 19.1415ms - 200
+2026-10-07 20:56:51.993 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 25.5308ms - 200
+2026-10-07 20:56:51.996 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 20:56:51.998 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 20:56:52.018 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 20:56:52.020 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 20:56:52.022 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 20:56:52.022 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 20:56:52.025 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 20:56:52.029 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 20:56:52.101 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:39:53.245 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:39:53.247 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:39:53.250 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:39:53.253 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:39:53.284 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] HTTP request failed after 20.7022ms
+System.Net.Http.HttpRequestException: Host desconocido. (jsonplaceholder.typicode.com:443)
+ ---> System.Net.Sockets.SocketException (11001): Host desconocido.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+2026-10-07 21:39:53.302 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] HTTP request failed after 51.5977ms
+System.Net.Http.HttpRequestException: Host desconocido. (jsonplaceholder.typicode.com:443)
+ ---> System.Net.Sockets.SocketException (11001): Host desconocido.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+2026-10-07 21:39:53.315 [ERR] [UserSyncBackgroundService] Error inesperado durante la sincronización de usuarios.
+Refit.ApiRequestException: Host desconocido. (jsonplaceholder.typicode.com:443)
+ ---> System.Net.Http.HttpRequestException: Host desconocido. (jsonplaceholder.typicode.com:443)
+ ---> System.Net.Sockets.SocketException (11001): Host desconocido.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendCoreAsync>g__Core|4_0(HttpRequestMessage request, Boolean useAsync, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Refit.RequestExecutionHelpers.SendOrCaptureExceptionAsync[T,TBody](HttpClient client, HttpRequestMessage request, RefitSettings settings, Boolean isApiResponse, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\RequestExecutionHelpers.cs:line 335
+   --- End of inner exception stack trace ---
+   at Refit.RequestExecutionHelpers.SendOrCaptureExceptionAsync[T,TBody](HttpClient client, HttpRequestMessage request, RefitSettings settings, Boolean isApiResponse, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\RequestExecutionHelpers.cs:line 347
+   at Refit.RequestExecutionHelpers.SendAndProcessResponseAsync[T,TBody](HttpClient client, HttpRequestMessage request, RefitSettings settings, RequestExecutionOptions options, Int32 timeoutMilliseconds, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\RequestExecutionHelpers.cs:line 133
+   at Refit.GeneratedRequestRunner.SendAsync[T,TBody](HttpClient client, HttpRequestMessage request, RefitSettings settings, Boolean isApiResponse, Boolean shouldDisposeResponse, Boolean bufferBody, CancellationToken cancellationToken) in D:\a\refit\refit\src\Refit\GeneratedRequestRunner.Sending.cs:line 73
+   at UserApiService.GetAllAsync(CancellationToken cts) in D:\DAW\PrimerTrimestre\ES\Clase\RepositorioRemoto\RepositorioRemoto\service\api\UserApiService.cs:line 28
+   at UserService.SyncUsersAsync(CancellationToken cts) in D:\DAW\PrimerTrimestre\ES\Clase\RepositorioRemoto\RepositorioRemoto\service\users\UsersService.cs:line 23
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken cts) in D:\DAW\PrimerTrimestre\ES\Clase\RepositorioRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 26
+2026-10-07 21:40:43.224 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:40:43.226 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:40:43.228 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:40:43.231 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:40:43.519 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 285.1261ms - 200
+2026-10-07 21:40:43.523 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 294.7878ms - 200
+2026-10-07 21:40:43.526 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:40:43.529 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:40:43.657 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:40:43.660 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:40:43.662 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:40:43.664 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:40:43.669 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:40:43.672 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:40:43.745 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:41:33.231 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:41:33.252 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:41:33.257 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:41:33.263 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:41:33.357 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 88.1097ms - 200
+2026-10-07 21:41:33.361 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 104.1713ms - 200
+2026-10-07 21:41:33.365 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:41:33.367 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:41:33.370 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:41:33.372 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:41:33.373 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:41:33.375 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:41:33.380 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:41:33.384 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:41:33.458 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:42:23.225 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:42:23.228 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:42:23.232 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:42:23.237 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:42:23.339 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 96.6522ms - 200
+2026-10-07 21:42:23.344 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 111.9ms - 200
+2026-10-07 21:42:23.348 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:42:23.351 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:42:23.355 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:42:23.358 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:42:23.360 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:42:23.363 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:42:23.367 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:42:23.372 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:42:23.446 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:43:13.240 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:43:13.244 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:43:13.248 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:43:13.254 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:43:16.743 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 3484.2818ms - 200
+2026-10-07 21:43:16.747 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 3499.2134ms - 200
+2026-10-07 21:43:16.751 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:43:16.755 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:43:16.758 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:43:16.761 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:43:16.763 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:43:16.769 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:43:16.773 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:43:16.778 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:43:16.790 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:44:03.221 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:44:03.223 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:44:03.225 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:44:03.227 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:44:03.986 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 756.6723ms - 200
+2026-10-07 21:44:03.990 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 765.0099ms - 200
+2026-10-07 21:44:03.993 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:44:03.996 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:44:03.999 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:44:04.001 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:44:04.003 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:44:04.005 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:44:04.009 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:44:04.013 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:44:04.086 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:44:53.232 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:44:53.235 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:44:53.239 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:44:53.242 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:44:56.954 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 3708.734ms - 200
+2026-10-07 21:44:56.960 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 3721.0586ms - 200
+2026-10-07 21:44:56.984 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:44:56.987 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:44:56.991 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:44:56.993 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:44:56.996 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:44:56.998 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:44:57.002 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:44:57.006 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:44:57.018 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:45:43.226 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:45:43.230 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:45:43.234 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:45:43.241 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:45:43.492 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 245.5267ms - 200
+2026-10-07 21:45:43.496 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 261.5631ms - 200
+2026-10-07 21:45:43.499 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:45:43.501 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:45:43.503 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:45:43.506 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:45:43.509 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:45:43.512 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:45:43.515 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:45:43.519 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:45:43.594 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:46:33.224 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:46:33.227 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:46:33.230 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:46:33.232 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:46:35.763 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 2527.9941ms - 200
+2026-10-07 21:46:35.770 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 2540.3286ms - 200
+2026-10-07 21:46:35.777 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:46:35.781 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:46:35.788 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:46:35.792 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:46:35.798 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:46:35.802 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:46:35.808 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:46:35.814 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:46:35.829 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:46:58.124 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:46:58.190 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:46:58.226 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:46:58.235 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:46:58.640 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 398.7204ms - 200
+2026-10-07 21:46:58.650 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 436.0559ms - 200
+2026-10-07 21:46:58.715 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:46:58.721 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:46:59.205 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:46:59.624 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:46:59.629 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:46:59.631 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:46:59.950 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:46:59.957 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:46:59.987 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:47:47.946 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:47:47.948 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:47:47.951 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:47:47.955 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:47:48.758 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 799.5434ms - 200
+2026-10-07 21:47:48.762 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 811.8029ms - 200
+2026-10-07 21:47:48.769 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:47:48.772 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:47:48.811 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:47:48.816 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:47:48.818 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:47:48.820 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:47:48.825 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:47:48.829 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:47:48.902 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:48:05.345 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:48:05.423 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:48:05.460 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:48:05.468 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:48:05.796 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 318.2822ms - 200
+2026-10-07 21:48:05.805 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 357.9166ms - 200
+2026-10-07 21:48:05.890 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:48:05.900 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:48:06.434 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:48:06.723 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:48:06.729 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:48:06.732 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:48:07.055 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:48:07.062 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:48:07.091 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:48:33.496 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:48:33.544 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:48:33.575 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:48:33.583 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:48:33.935 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 338.5438ms - 200
+2026-10-07 21:48:33.945 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 380.6873ms - 200
+2026-10-07 21:48:34.004 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:48:34.011 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:48:34.468 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:48:34.767 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:48:34.773 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:48:34.776 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:48:35.078 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:48:35.087 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:48:35.120 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:49:23.307 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:49:23.310 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:49:23.314 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:49:23.318 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:49:23.476 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 153.7458ms - 200
+2026-10-07 21:49:23.478 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 164.6535ms - 200
+2026-10-07 21:49:23.483 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:49:23.485 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:49:23.521 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:49:23.526 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:49:23.529 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:49:23.531 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:49:23.537 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:49:23.544 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:49:23.617 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:49:38.793 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:49:38.851 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:49:38.888 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:49:38.897 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:49:39.183 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 271.7103ms - 200
+2026-10-07 21:49:39.193 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 316.3882ms - 200
+2026-10-07 21:49:39.251 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:49:39.258 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:49:39.762 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:49:40.143 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:49:40.148 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:49:40.150 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:49:40.548 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:49:40.558 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:49:40.585 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:50:08.099 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:50:08.156 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:50:08.193 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:50:08.199 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:50:08.540 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 328.6349ms - 200
+2026-10-07 21:50:08.550 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 370.5757ms - 200
+2026-10-07 21:50:08.612 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:50:08.617 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:50:09.058 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:50:09.317 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:50:09.321 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:50:09.324 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:50:09.635 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:50:09.644 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:50:09.671 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:50:57.914 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:50:57.916 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:50:57.919 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:50:57.922 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:50:58.002 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 77.6711ms - 200
+2026-10-07 21:50:58.006 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 87.8104ms - 200
+2026-10-07 21:50:58.023 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:50:58.026 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:50:58.071 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:50:58.075 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:50:58.077 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:50:58.079 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:50:58.085 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:50:58.090 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:50:58.164 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:51:47.931 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:51:47.934 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:51:47.937 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:51:47.940 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:51:48.094 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 150.1028ms - 200
+2026-10-07 21:51:48.100 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 162.849ms - 200
+2026-10-07 21:51:48.107 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:51:48.112 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:51:48.253 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:51:48.257 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:51:48.258 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:51:48.260 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:51:48.264 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:51:48.269 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:51:48.342 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:52:37.912 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:52:37.940 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:52:37.944 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:52:37.950 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:52:38.331 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 375.1107ms - 200
+2026-10-07 21:52:38.337 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 393.2938ms - 200
+2026-10-07 21:52:38.344 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:52:38.349 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:52:38.356 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:52:38.361 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:52:38.365 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:52:38.369 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:52:38.376 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:52:38.384 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:52:38.459 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:53:27.812 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:53:27.864 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:53:27.905 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:53:27.913 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:53:28.334 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 408.5959ms - 200
+2026-10-07 21:53:28.341 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 454.9034ms - 200
+2026-10-07 21:53:28.398 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:53:28.404 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:53:28.849 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:53:29.116 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:53:29.121 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:53:29.124 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:53:29.466 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:53:29.474 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:53:29.501 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:54:17.629 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:54:17.633 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:54:17.640 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:54:17.645 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:54:17.797 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 146.734ms - 200
+2026-10-07 21:54:17.802 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 164.5607ms - 200
+2026-10-07 21:54:17.812 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:54:17.817 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:54:17.883 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:54:17.888 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:54:17.890 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:54:17.891 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:54:17.896 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:54:17.901 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:54:17.975 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:55:07.643 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:55:07.646 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:55:07.648 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:55:07.652 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:55:07.715 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 59.8215ms - 200
+2026-10-07 21:55:07.718 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 69.9004ms - 200
+2026-10-07 21:55:07.732 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:55:07.735 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:55:07.850 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:55:07.854 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:55:07.857 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:55:07.859 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:55:07.865 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:55:07.870 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:55:07.943 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:55:57.627 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:55:57.631 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:55:57.634 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:55:57.638 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:55:57.928 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 287.0949ms - 200
+2026-10-07 21:55:57.933 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 299.4373ms - 200
+2026-10-07 21:55:57.939 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:55:57.944 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:55:57.950 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:55:57.956 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:55:57.960 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:55:57.963 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:55:57.971 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:55:57.980 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:55:58.056 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:56:47.633 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:56:47.637 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:56:47.641 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:56:47.646 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:56:50.151 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 2500.222ms - 200
+2026-10-07 21:56:50.156 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 2515.4244ms - 200
+2026-10-07 21:56:50.160 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:56:50.162 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:56:50.165 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:56:50.167 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:56:50.169 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:56:50.172 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:56:50.178 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:56:50.182 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:56:50.194 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:57:37.617 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:57:37.639 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:57:37.641 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:57:37.645 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:57:37.719 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 71.0279ms - 200
+2026-10-07 21:57:37.723 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 81.275ms - 200
+2026-10-07 21:57:37.726 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:57:37.729 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:57:37.734 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:57:37.736 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:57:37.739 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:57:37.741 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:57:37.746 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:57:37.751 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:57:37.762 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:58:27.627 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:58:27.631 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:58:27.635 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:58:27.640 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:58:27.888 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 241.9627ms - 200
+2026-10-07 21:58:27.891 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 256.022ms - 200
+2026-10-07 21:58:27.894 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:58:27.896 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:58:27.899 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:58:27.901 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:58:27.903 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:58:27.906 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:58:27.909 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:58:27.912 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:58:27.986 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 21:59:17.632 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 21:59:17.635 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 21:59:17.639 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:59:17.645 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 21:59:17.710 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 59.8986ms - 200
+2026-10-07 21:59:17.714 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 75.4737ms - 200
+2026-10-07 21:59:17.718 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 21:59:17.721 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 21:59:17.724 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 21:59:17.726 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 21:59:17.728 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 21:59:17.730 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 21:59:17.735 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 21:59:17.738 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 21:59:17.811 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 22:00:07.626 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 22:00:07.629 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 22:00:07.631 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 22:00:07.635 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 22:00:07.731 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 92.8648ms - 200
+2026-10-07 22:00:07.734 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 102.3269ms - 200
+2026-10-07 22:00:07.736 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 22:00:07.739 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 22:00:07.742 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 22:00:07.744 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 22:00:07.746 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 22:00:07.748 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 22:00:07.751 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 22:00:07.754 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 22:00:07.826 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 22:00:57.620 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 22:00:57.622 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 22:00:57.624 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 22:00:57.626 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 22:00:57.849 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 220.2598ms - 200
+2026-10-07 22:00:57.854 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 230.6884ms - 200
+2026-10-07 22:00:57.859 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 22:00:57.864 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 22:00:57.869 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 22:00:57.873 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 22:00:57.877 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 22:00:57.881 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 22:00:57.886 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 22:00:57.892 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 22:00:57.969 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-07 22:01:47.620 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-07 22:01:47.624 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-07 22:01:47.628 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 22:01:47.634 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-07 22:01:50.177 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 2537.4586ms - 200
+2026-10-07 22:01:50.182 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 2554.3705ms - 200
+2026-10-07 22:01:50.188 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-07 22:01:50.193 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-07 22:01:50.199 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-07 22:01:50.202 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-07 22:01:50.206 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-07 22:01:50.209 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-07 22:01:50.214 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-07 22:01:50.221 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-07 22:01:50.233 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.

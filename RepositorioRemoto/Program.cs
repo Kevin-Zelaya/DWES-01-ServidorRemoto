@@ -5,19 +5,19 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 // Solo para limpiar los logs
-builder.Logging.ClearProviders();
+// builder.Logging.ClearProviders();
 
-builder.Logging.AddFilter(
-    "Microsoft.EntityFrameworkCore.Database.Command",
-    LogLevel.None);
+// builder.Logging.AddFilter(
+//     "Microsoft.EntityFrameworkCore.Database.Command",
+//     LogLevel.None);
 
-builder.Logging.AddFilter(
-    "Microsoft.EntityFrameworkCore.Query",
-    LogLevel.None);
+// builder.Logging.AddFilter(
+//     "Microsoft.EntityFrameworkCore.Query",
+//     LogLevel.None);
 
 builder.Logging.AddFilter(
     "Microsoft.EntityFrameworkCore.Database.Transaction",
-    LogLevel.None);
+    LogLevel.Information);
 
 builder.Logging.AddFilter(
     "Microsoft.EntityFrameworkCore.Database.Connection",
