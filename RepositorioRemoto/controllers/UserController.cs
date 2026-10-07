@@ -20,9 +20,9 @@ public class UserControllers(
     public async Task<ActionResult<List<UserDto>>> GetAllUser()
     {
         var response = await _service.GetAllUsersAsync();
-        var dtos = response.Value.Select(u => u.ToDto()).ToList();
         if(response.IsFailure)
             return StatusCode((int)response.Error.StatusCode, response.Error.message);
+        var dtos = response.Value.Select(u => u.ToDto()).ToList();
         return Ok(
             response.Value);
     }

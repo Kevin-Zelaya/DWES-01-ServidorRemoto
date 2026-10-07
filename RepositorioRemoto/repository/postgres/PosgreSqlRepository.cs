@@ -48,7 +48,6 @@ public class PostgreSqlRepository(
         catch (DbUpdateException ex)
         {
             _logger.LogError(
-                ex,
                 "Error al guardar el usuario en PostgreSQL.");
 
             return Result.Failure<UserEntity, DomainError>(
@@ -62,7 +61,6 @@ public class PostgreSqlRepository(
         catch (NpgsqlException ex)
         {
             _logger.LogError(
-                ex,
                 "Error de PostgreSQL al crear el usuario.");
 
             return Result.Failure<UserEntity, DomainError>(
@@ -71,7 +69,6 @@ public class PostgreSqlRepository(
         catch (Exception ex)
         {
             _logger.LogError(
-                ex,
                 "Error inesperado al crear el usuario.");
 
             return Result.Failure<UserEntity, DomainError>(
@@ -169,7 +166,7 @@ public class PostgreSqlRepository(
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al eliminar todos los usuarios");
+            _logger.LogError("Error al eliminar todos los usuarios");
 
             return Result.Failure<bool, DomainError>(
                 new DatabaseError.WriteFailure(ex.Message));
@@ -204,7 +201,6 @@ public class PostgreSqlRepository(
         catch (DbUpdateException ex)
         {
             _logger.LogError(
-                ex,
                 "Error al eliminar el usuario {UserId}",
                 userId);
 
@@ -214,7 +210,6 @@ public class PostgreSqlRepository(
         catch (Exception ex)
         {
             _logger.LogError(
-                ex,
                 "Error inesperado al eliminar el usuario {UserId}",
                 userId);
 
@@ -239,7 +234,7 @@ public class PostgreSqlRepository(
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al obtener todos los usuarios");
+            _logger.LogError("Error al obtener todos los usuarios");
 
             return Result.Failure<List<UserEntity>, DomainError>(
                 new DatabaseError.ReadFailure(ex.Message));
@@ -324,7 +319,6 @@ public class PostgreSqlRepository(
         catch (DbUpdateException ex)
         {
             _logger.LogError(
-                ex,
                 "Error al guardar los cambios del usuario {UserId}.",
                 id);
 
@@ -334,7 +328,6 @@ public class PostgreSqlRepository(
         catch (Exception ex)
         {
             _logger.LogError(
-                ex,
                 "Error inesperado al actualizar el usuario {UserId}.",
                 id);
 

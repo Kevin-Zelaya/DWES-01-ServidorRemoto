@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -616,5 +617,378 @@ public class UserServiceTests
 
         Assert.That(response.IsFailure, Is.True);
     }
-    
+
+    [Test]
+    public async Task GetAll_ShouldReturnUsers()
+    {
+        _context.Users.Add(new UserEntity
+        {
+            id = 1,
+            name = "Sofía Gómez",
+            username = "sofiag",
+            email = "sofia.gomez@example.com"
+        });
+
+        await _context.SaveChangesAsync();
+
+        var response = await _repository.GetAllAsync();
+
+        Assert.That(response.IsSuccess, Is.True);
+        Assert.That(response.Value.Count, Is.EqualTo(1));
+        Assert.That(response.Value[0].name, Is.EqualTo("Sofía Gómez"));
+    }
+
+    [Test]
+    public async Task GetAll_WhenDatabaseIsEmpty_ShouldReturnEmptyList()
+    {
+        var response = await _repository.GetAllAsync();
+
+        Assert.That(response.IsSuccess, Is.True);
+        Assert.That(response.Value.Count, Is.EqualTo(0));
+    }
+
+    [Test]
+    public async Task GetUserById_ShouldReturUser()
+    {
+        _context.Users.Add(new UserEntity
+        {
+            id = 1,
+            name = "Sofía Gómez",
+            username = "sofiag",
+            email = "sofia.gomez@example.com"
+        });
+
+        await _context.SaveChangesAsync();
+
+        var response = await _repository.GetUserByIdAsync(1);
+
+        Assert.That(response.IsSuccess, Is.True);
+        Assert.That(response.Value.name, Is.EqualTo("Sofía Gómez"));
+    }
+    [Test]
+    public async Task GetUserById_WhenUserDoesNotExist_ShouldReturnFailure()
+    {
+        var response = await _repository.GetUserByIdAsync(999);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(response.Error, Is.TypeOf<DatabaseError.NotFound>());
+    }
+
+    [Test]
+    public async Task Create_ShouldReturnCreatedUser()
+    {
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Sofía Gómez",
+            username = "sofiag",
+            email = "sofia.gomez@example.com"
+        };
+
+        var response = await _repository.CreateAsync(user);
+
+        Assert.That(response.IsSuccess, Is.True);
+        Assert.That(response.Value.name, Is.EqualTo("Sofía Gómez"));
+    }
+
+    [Test]
+    public async Task CreateRange_ShouldReturnSuccess()
+    {
+        var users = new List<UserEntity>
+        {
+            new UserEntity
+            {
+                id = 1,
+                name = "Sofía Gómez",
+                username = "sofiag",
+                email = "sofia@example.com"
+            },
+            new UserEntity
+            {
+                id = 2,
+                name = "Alejandro Pérez",
+                username = "alexperez",
+                email = "alejandro@example.com"
+            }
+        };
+
+        var response = await _repository.CreateRangeAsync(users);
+
+        Assert.That(response.IsSuccess, Is.True);
+
+        var usersInDb = await _context.Users.ToListAsync();
+
+        Assert.That(usersInDb.Count, Is.EqualTo(2));
+    }
+
+    [Test]
+    public async Task CreateRange_WhenListIsEmpty_ShouldReturnFailure()
+    {
+        var users = new List<UserEntity>();
+
+        var response = await _repository.CreateRangeAsync(users);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(response.Error, Is.TypeOf<DatabaseError.WriteFailure>());
+    }
+
+    [Test]
+    public async Task Update_ShouldReturnUpdatedUser()
+    {
+        _context.Users.Add(new UserEntity
+        {
+            id = 1,
+            name = "Sofía Gómez",
+            username = "sofiag",
+            email = "sofia@example.com"
+        });
+
+        await _context.SaveChangesAsync();
+
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin Zelaya",
+            username = "sofiag",
+            email = "sofia@example.com"
+        };
+
+        var response = await _repository.UpdateAsync(user, 1);
+
+        Assert.That(response.IsSuccess, Is.True);
+        Assert.That(response.Value.name, Is.EqualTo("Kevin Zelaya"));
+    }
+
+    [Test]
+    public async Task Update_WhenUserDoesNotExist_ShouldReturnFailure()
+    {
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin Zelaya",
+            username = "sofiag",
+            email = "sofia@example.com"
+        };
+
+        var response = await _repository.UpdateAsync(user, 999);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(response.Error, Is.TypeOf<DatabaseError.NotFound>());
+    }
+    [Test]
+    public async Task Delete_ShouldReturnSuccess()
+    {
+        _context.Users.Add(new UserEntity
+        {
+            id = 1,
+            name = "Sofía Gómez",
+            username = "sofiag",
+            email = "sofia@example.com"
+        });
+
+        await _context.SaveChangesAsync();
+
+        var response = await _repository.DeleteAsync(1);
+
+        Assert.That(response.IsSuccess, Is.True);
+
+        var user = await _context.Users.FindAsync(1);
+
+        Assert.That(user, Is.Null);
+    }
+
+    [Test]
+    public async Task Delete_WhenUserDoesNotExist_ShouldReturnFailure()
+    {
+        var response = await _repository.DeleteAsync(999);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(response.Error, Is.TypeOf<DatabaseError.NotFound>());
+    }
+    [Test]
+    public async Task DeleteAll_ShouldReturnSuccess()
+    {
+        _context.Users.AddRange(
+            new UserEntity
+            {
+                id = 1,
+                name = "Sofía Gómez",
+                username = "sofiag",
+                email = "sofia@example.com"
+            },
+            new UserEntity
+            {
+                id = 2,
+                name = "Alejandro Pérez",
+                username = "alexperez",
+                email = "alejandro@example.com"
+            }
+        );
+
+        await _context.SaveChangesAsync();
+
+        var response = await _repository.DeleteAllAsync();
+
+        Assert.That(response.IsSuccess, Is.True);
+
+        var users = await _context.Users.ToListAsync();
+
+        Assert.That(users.Count, Is.EqualTo(0));
+    }
+    [Test]
+    public async Task Create_WhenIdAlreadyExists_ShouldReturnConstraintViolation()
+    {
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Sofía",
+            username = "sofia",
+            email = "sofia@example.com"
+        };
+
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+
+        _context.ChangeTracker.Clear();
+
+        var duplicatedUser = new UserEntity
+        {
+            id = 1,
+            name = "Kevin",
+            username = "kevin",
+            email = "kevin@example.com"
+        };
+
+        var response = await _repository.CreateAsync(duplicatedUser);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(
+            response.Error,
+            Is.TypeOf<DatabaseError.ConstraintViolation>());
+    }
+    [Test]
+    public async Task CreateRange_WhenIdAlreadyExists_ShouldReturnConstraintViolation()
+    {
+        _context.Users.Add(new UserEntity
+        {
+            id = 1,
+            name = "Sofía",
+            username = "sofia",
+            email = "sofia@example.com"
+        });
+
+        await _context.SaveChangesAsync();
+
+        _context.ChangeTracker.Clear();
+
+        var users = new List<UserEntity>
+        {
+            new UserEntity
+            {
+                id = 1,
+                name = "Kevin",
+                username = "kevin",
+                email = "kevin@example.com"
+            },
+            new UserEntity
+            {
+                id = 2,
+                name = "Carlos",
+                username = "carlos",
+                email = "carlos@example.com"
+            }
+        };
+
+        var response = await _repository.CreateRangeAsync(users);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(
+            response.Error,
+            Is.TypeOf<DatabaseError.ConstraintViolation>());
+    }
+    [Test]
+    public async Task Update_WhenConstraintIsViolated_ShouldReturnFailure()
+    {
+        _context.Users.AddRange(
+            new UserEntity
+            {
+                id = 1,
+                name = "Sofía",
+                username = "sofia",
+                email = "sofia@example.com"
+            },
+            new UserEntity
+            {
+                id = 2,
+                name = "Carlos",
+                username = "carlos",
+                email = "carlos@example.com"
+            }
+        );
+
+        await _context.SaveChangesAsync();
+
+        var user = new UserEntity
+        {
+            id = 2,
+            name = "Kevin",
+            username = "kevin",
+            email = "kevin@example.com"
+        };
+
+        var response = await _repository.UpdateAsync(user, 1);
+
+        Assert.That(response.IsFailure, Is.True);
+    }
+
+    [Test]
+    public void GetUserById_WhenCancelled_ShouldThrowOperationCanceledException()
+    {
+        var cts = new CancellationTokenSource();
+        cts.Cancel();
+
+        Assert.ThrowsAsync<OperationCanceledException>(
+            async () => await _repository.GetUserByIdAsync(1, cts.Token)
+        );
+    }
+    [Test]
+    public void DeleteAll_WhenCancelled_ShouldThrowTaskCanceledException()
+    {
+        var cts = new CancellationTokenSource();
+        cts.Cancel();
+
+        Assert.ThrowsAsync<TaskCanceledException>(
+            async () => await _repository.DeleteAllAsync(cts.Token)
+        );
+    }
+    [Test]
+    public async Task GetAll_WhenTableDoesNotExist_ShouldReturnSchemaMismatch()
+    {
+        await _context.Database.EnsureDeletedAsync();
+
+        var response = await _repository.GetAllAsync();
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(response.Error, Is.TypeOf<DatabaseError.SchemaMismatch>());
+    }
+    [Test]
+    public async Task GetUserById_WhenTableDoesNotExist_ShouldReturnFailure()
+    {
+        await _context.Database.EnsureDeletedAsync();
+
+        var response = await _repository.GetUserByIdAsync(1);
+
+        Assert.That(response.IsFailure, Is.True);
+    }
+    [Test]
+    public async Task GetUserById_WhenTableDoesNotExist_ShouldReturnReadFailure()
+    {
+        await _context.Database.EnsureDeletedAsync();
+
+        var response = await _repository.GetUserByIdAsync(1);
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(response.Error, Is.TypeOf<DatabaseError.ReadFailure>());
+    }
+
 }

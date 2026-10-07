@@ -31,7 +31,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 10 or 14)
         {
             logger.LogError(
-                ex,
                 "Error de conexión o acceso al archivo de SQLite.");
 
             return Result.Failure<List<UserEntity>, DomainError>(
@@ -44,7 +43,6 @@ public class SqliteRepository(
                 StringComparison.OrdinalIgnoreCase))
         {
             logger.LogError(
-                ex,
                 "No existe la tabla de usuarios en la base de datos.");
 
             return Result.Failure<List<UserEntity>, DomainError>(
@@ -53,7 +51,6 @@ public class SqliteRepository(
         catch (SqliteException ex)
         {
             logger.LogError(
-                ex,
                 "Error de SQLite al obtener todos los usuarios. Código: {SqliteErrorCode}",
                 ex.SqliteErrorCode);
 
@@ -63,7 +60,6 @@ public class SqliteRepository(
         catch (OperationCanceledException ex)
         {
             logger.LogWarning(
-                ex,
                 "La consulta de todos los usuarios fue cancelada.");
 
             throw;
@@ -71,7 +67,6 @@ public class SqliteRepository(
         catch (Exception ex)
         {
             logger.LogError(
-                ex,
                 "Error inesperado al obtener todos los usuarios.");
 
             return Result.Failure<List<UserEntity>, DomainError>(
@@ -112,7 +107,6 @@ public class SqliteRepository(
         catch (OperationCanceledException ex)
         {
             logger.LogWarning(
-                ex,
                 "La consulta del usuario {UserId} fue cancelada.", id);
 
             throw;
@@ -120,7 +114,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 10 or 14)
         {
             logger.LogError(
-                ex,
                 "Error de conexión al consultar el usuario {UserId}.", id);
 
             return Result.Failure<UserEntity, DomainError>(
@@ -129,7 +122,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 11 or 26)
         {
             logger.LogCritical(
-                ex,
                 "La base de datos SQLite está dañada o no es válida.");
 
             return Result.Failure<UserEntity, DomainError>(
@@ -138,7 +130,6 @@ public class SqliteRepository(
         catch (SqliteException ex)
         {
             logger.LogError(
-                ex,
                 "Error de SQLite al consultar el usuario {UserId}. Código: {SqliteErrorCode}",
                 id,
                 ex.SqliteErrorCode);
@@ -149,7 +140,6 @@ public class SqliteRepository(
         catch (Exception ex)
         {
             logger.LogError(
-                ex,
                 "Error inesperado al consultar el usuario {UserId}.", id);
 
             return Result.Failure<UserEntity, DomainError>(
@@ -181,7 +171,6 @@ public class SqliteRepository(
                 { SqliteErrorCode: 19 } sqlite)
         {
             logger.LogWarning(
-                ex,
                 "No se pudo crear el usuario por una restricción de la base de datos.");
 
             return Result.Failure<UserEntity, DomainError>(
@@ -190,7 +179,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
         {
             logger.LogWarning(
-                ex,
                 "No se pudo crear el usuario porque la base de datos está bloqueada.");
 
             return Result.Failure<UserEntity, DomainError>(
@@ -254,7 +242,6 @@ public class SqliteRepository(
                 { SqliteErrorCode: 19 } sqlite)
         {
             logger.LogWarning(
-                ex,
                 "No se pudo crear la colección por una restricción de la base de datos.");
 
             return Result.Failure<bool, DomainError>(
@@ -263,7 +250,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
         {
             logger.LogWarning(
-                ex,
                 "No se pudo crear la colección porque la base de datos está bloqueada.");
 
             return Result.Failure<bool, DomainError>(
@@ -272,7 +258,6 @@ public class SqliteRepository(
         catch (DbUpdateException ex)
         {
             logger.LogError(
-                ex,
                 "Error al guardar la colección de usuarios.");
 
             return Result.Failure<bool, DomainError>(
@@ -281,7 +266,6 @@ public class SqliteRepository(
         catch (OperationCanceledException ex)
         {
             logger.LogWarning(
-                ex,
                 "La creación de la colección de usuarios fue cancelada.");
 
             throw;
@@ -289,7 +273,6 @@ public class SqliteRepository(
         catch (Exception ex)
         {
             logger.LogError(
-                ex,
                 "Error inesperado al crear la colección de usuarios.");
 
             return Result.Failure<bool, DomainError>(
@@ -334,7 +317,6 @@ public class SqliteRepository(
                 { SqliteErrorCode: 19 } sqlite)
         {
             logger.LogWarning(
-                ex,
                 "No se pudo actualizar el usuario {UserId} por una restricción.",
                 id);
 
@@ -344,7 +326,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
         {
             logger.LogWarning(
-                ex,
                 "La base de datos está bloqueada al actualizar el usuario {UserId}.",
                 id);
 
@@ -354,7 +335,6 @@ public class SqliteRepository(
         catch (DbUpdateException ex)
         {
             logger.LogError(
-                ex,
                 "Error al guardar los cambios del usuario {UserId}.", id);
 
             return Result.Failure<UserEntity, DomainError>(
@@ -363,7 +343,6 @@ public class SqliteRepository(
         catch (Exception ex)
         {
             logger.LogError(
-                ex,
                 "Error inesperado al actualizar el usuario {UserId}.", id);
 
             return Result.Failure<UserEntity, DomainError>(
@@ -406,7 +385,6 @@ public class SqliteRepository(
                 { SqliteErrorCode: 19 } sqlite)
         {
             logger.LogWarning(
-                ex,
                 "No se pudo eliminar el usuario {UserId} por una restricción.",
                 userId);
 
@@ -416,7 +394,6 @@ public class SqliteRepository(
         catch (DbUpdateException ex)
         {
             logger.LogError(
-                ex,
                 "Error al guardar la eliminación del usuario {UserId}.",
                 userId);
 
@@ -426,7 +403,6 @@ public class SqliteRepository(
         catch (Exception ex)
         {
             logger.LogError(
-                ex,
                 "Error inesperado al eliminar el usuario {UserId}.",
                 userId);
 
@@ -458,7 +434,6 @@ public class SqliteRepository(
         catch (OperationCanceledException ex)
         {
             logger.LogWarning(
-                ex,
                 "La eliminación de todos los usuarios fue cancelada.");
 
             throw;
@@ -466,7 +441,6 @@ public class SqliteRepository(
         catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
         {
             logger.LogWarning(
-                ex,
                 "No se pudieron eliminar los usuarios porque SQLite está bloqueado.");
 
             return Result.Failure<bool, DomainError>(
@@ -475,7 +449,6 @@ public class SqliteRepository(
         catch (Exception ex)
         {
             logger.LogError(
-                ex,
                 "Error inesperado al eliminar todos los usuarios.");
 
             return Result.Failure<bool, DomainError>(
