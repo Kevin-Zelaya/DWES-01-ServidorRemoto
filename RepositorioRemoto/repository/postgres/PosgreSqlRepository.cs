@@ -81,7 +81,7 @@ public class PostgreSqlRepository(
 
 
     // Sin log para evitar que se esten ejecutando.
-    public async Task<Result<UserEntity, DomainError>> CreateRangeAsync(
+    public async Task<Result<bool, DomainError>> CreateRangeAsync(
         IEnumerable<UserEntity> users)
     {
         try
@@ -93,7 +93,7 @@ public class PostgreSqlRepository(
                 _logger.LogWarning(
                     "Lote de usuarios vacios.");
 
-                return Result.Failure<UserEntity, DomainError>(
+                return Result.Failure<bool, DomainError>(
                     new DatabaseError.WriteFailure(
                         "No se han proporcionado usuarios para crear."));
             }
@@ -108,8 +108,8 @@ public class PostgreSqlRepository(
             //     "Se han creado {UserCount} usuarios correctamente.",
             //     usersList.Count);
 
-            return Result.Success<UserEntity, DomainError>(
-                usersList[0]);
+            return Result.Success<bool, DomainError>(
+                true);
         }
         catch (DbUpdateException ex)
             when (ex.InnerException is PostgresException pgEx
@@ -119,7 +119,7 @@ public class PostgreSqlRepository(
             //     ex,
             //     "Se ha producido una violación de restricciones al crear usuarios.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.ConstraintViolation(ex.Message));
         }
         catch (DbUpdateException ex)
@@ -128,7 +128,7 @@ public class PostgreSqlRepository(
             //     ex,
             //     "Error al guardar el lote de usuarios.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.WriteFailure(ex.Message));
         }
         catch (OperationCanceledException)
@@ -144,7 +144,7 @@ public class PostgreSqlRepository(
             //     ex,
             //     "Error inesperado al crear el lote de usuarios.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.Unknown(ex.Message));
         }
     }

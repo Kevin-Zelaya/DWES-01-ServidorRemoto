@@ -5,7 +5,7 @@ using RepositorioRemoto.Cache.Common;
 public class UserService(
     IRepository _repository,
     IUserApiService _api,
-    UnitOfWork _unitOfWork,
+    IUnitOfWork _unitOfWork,
     ICache<UserModel> _cache,
     ILogger<UserService> _logger
 ) : IUserService

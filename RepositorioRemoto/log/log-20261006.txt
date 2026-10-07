@@ -3945,3 +3945,372 @@ Refit.ApiException: Response status code does not indicate success: 500 (Interna
 2026-10-06 20:13:35.976 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
 2026-10-06 20:13:35.977 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
 2026-10-06 20:13:36.049 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:40:42.729 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-06 22:42:06.425 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-06 22:42:06.572 [FTL] [Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: An error occurred when configuring the exception handler middleware. Either the 'ExceptionHandlingPath' or the 'ExceptionHandler' property must be set in 'UseExceptionHandler()'. Alternatively, set one of the aforementioned properties in 'Startup.ConfigureServices' as follows: 'services.AddExceptionHandler(options => { ... });' or configure to generate a 'ProblemDetails' response in 'service.AddProblemDetails()'.
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl..ctor(RequestDelegate next, ILoggerFactory loggerFactory, IOptions`1 options, DiagnosticListener diagnosticListener, IEnumerable`1 exceptionHandlers, IMeterFactory meterFactory, IProblemDetailsService problemDetailsService)
+   at Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.<>c__DisplayClass5_0.<SetExceptionHandlerMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2026-10-06 22:42:06.577 [ERR] [Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: An error occurred when configuring the exception handler middleware. Either the 'ExceptionHandlingPath' or the 'ExceptionHandler' property must be set in 'UseExceptionHandler()'. Alternatively, set one of the aforementioned properties in 'Startup.ConfigureServices' as follows: 'services.AddExceptionHandler(options => { ... });' or configure to generate a 'ProblemDetails' response in 'service.AddProblemDetails()'.
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl..ctor(RequestDelegate next, ILoggerFactory loggerFactory, IOptions`1 options, DiagnosticListener diagnosticListener, IEnumerable`1 exceptionHandlers, IMeterFactory meterFactory, IProblemDetailsService problemDetailsService)
+   at Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.<>c__DisplayClass5_0.<SetExceptionHandlerMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-06 22:42:06.618 [ERR] [UserSyncBackgroundService] Error inesperado durante la sincronización de usuarios.
+System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'IServiceProvider'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ThrowHelper.ThrowObjectDisposedException()
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.Create(IServiceProvider internalServiceProvider, IDbContextOptions contextOptions)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<GetOrAdd>g__BuildServiceProvider|4_1(IDbContextOptions _, ValueTuple`2 arguments)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<>c.<GetOrAdd>b__4_0(IDbContextOptions contextOptions, ValueTuple`2 tuples)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd[TArg](TKey key, Func`3 valueFactory, TArg factoryArgument)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.GetOrAdd(IDbContextOptions options, Boolean providerRequired)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at AppDbContext..ctor(DbContextOptions`1 options) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\context\DbContext.cs:line 6
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 25
+2026-10-06 22:42:06.626 [ERR] [Microsoft.Extensions.Hosting.Internal.Host] BackgroundService failed
+System.AggregateException: An error occurred while writing to logger(s). (Cannot access a disposed object.
+Object name: 'EventLogInternal'.)
+ ---> System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'EventLogInternal'.
+   at System.Diagnostics.EventLogInternal.OpenForWrite(String currentMachineName)
+   at System.Diagnostics.EventLogInternal.InternalWriteEvent(UInt32 eventID, UInt16 category, EventLogEntryType type, String[] strings, Byte[] rawData, String currentMachineName)
+   at System.Diagnostics.EventLogInternal.WriteEvent(EventInstance instance, Byte[] data, Object[] values)
+   at Microsoft.Extensions.Logging.EventLog.WindowsEventLog.WriteEntry(String message, EventLogEntryType type, Int32 eventID, Int16 category)
+   at Microsoft.Extensions.Logging.EventLog.EventLogLogger.WriteMessage(String message, EventLogEntryType eventLogEntryType, Int32 eventId)
+   at Microsoft.Extensions.Logging.EventLog.EventLogLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.Logger.<Log>g__LoggerLog|14_0[TState](LogLevel logLevel, EventId eventId, ILogger logger, Exception exception, Func`3 formatter, List`1& exceptions, TState& state)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.ThrowLoggingError(List`1 exceptions)
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, String message, Object[] args)
+   at Microsoft.Extensions.Logging.LoggerExtensions.LogError(ILogger logger, Exception exception, String message, Object[] args)
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 52
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-10-06 22:42:25.568 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-06 22:42:25.724 [FTL] [Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: An error occurred when configuring the exception handler middleware. Either the 'ExceptionHandlingPath' or the 'ExceptionHandler' property must be set in 'UseExceptionHandler()'. Alternatively, set one of the aforementioned properties in 'Startup.ConfigureServices' as follows: 'services.AddExceptionHandler(options => { ... });' or configure to generate a 'ProblemDetails' response in 'service.AddProblemDetails()'.
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl..ctor(RequestDelegate next, ILoggerFactory loggerFactory, IOptions`1 options, DiagnosticListener diagnosticListener, IEnumerable`1 exceptionHandlers, IMeterFactory meterFactory, IProblemDetailsService problemDetailsService)
+   at Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.<>c__DisplayClass5_0.<SetExceptionHandlerMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2026-10-06 22:42:25.729 [ERR] [Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: An error occurred when configuring the exception handler middleware. Either the 'ExceptionHandlingPath' or the 'ExceptionHandler' property must be set in 'UseExceptionHandler()'. Alternatively, set one of the aforementioned properties in 'Startup.ConfigureServices' as follows: 'services.AddExceptionHandler(options => { ... });' or configure to generate a 'ProblemDetails' response in 'service.AddProblemDetails()'.
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl..ctor(RequestDelegate next, ILoggerFactory loggerFactory, IOptions`1 options, DiagnosticListener diagnosticListener, IEnumerable`1 exceptionHandlers, IMeterFactory meterFactory, IProblemDetailsService problemDetailsService)
+   at Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.<>c__DisplayClass5_0.<SetExceptionHandlerMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-06 22:42:25.766 [ERR] [UserSyncBackgroundService] Error inesperado durante la sincronización de usuarios.
+System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'IServiceProvider'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ThrowHelper.ThrowObjectDisposedException()
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.Create(IServiceProvider internalServiceProvider, IDbContextOptions contextOptions)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<GetOrAdd>g__BuildServiceProvider|4_1(IDbContextOptions _, ValueTuple`2 arguments)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<>c.<GetOrAdd>b__4_0(IDbContextOptions contextOptions, ValueTuple`2 tuples)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd[TArg](TKey key, Func`3 valueFactory, TArg factoryArgument)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.GetOrAdd(IDbContextOptions options, Boolean providerRequired)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at AppDbContext..ctor(DbContextOptions`1 options) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\context\DbContext.cs:line 6
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 25
+2026-10-06 22:42:25.774 [ERR] [Microsoft.Extensions.Hosting.Internal.Host] BackgroundService failed
+System.AggregateException: An error occurred while writing to logger(s). (Cannot access a disposed object.
+Object name: 'EventLogInternal'.)
+ ---> System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'EventLogInternal'.
+   at System.Diagnostics.EventLogInternal.OpenForWrite(String currentMachineName)
+   at System.Diagnostics.EventLogInternal.InternalWriteEvent(UInt32 eventID, UInt16 category, EventLogEntryType type, String[] strings, Byte[] rawData, String currentMachineName)
+   at System.Diagnostics.EventLogInternal.WriteEvent(EventInstance instance, Byte[] data, Object[] values)
+   at Microsoft.Extensions.Logging.EventLog.WindowsEventLog.WriteEntry(String message, EventLogEntryType type, Int32 eventID, Int16 category)
+   at Microsoft.Extensions.Logging.EventLog.EventLogLogger.WriteMessage(String message, EventLogEntryType eventLogEntryType, Int32 eventId)
+   at Microsoft.Extensions.Logging.EventLog.EventLogLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.Logger.<Log>g__LoggerLog|14_0[TState](LogLevel logLevel, EventId eventId, ILogger logger, Exception exception, Func`3 formatter, List`1& exceptions, TState& state)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.ThrowLoggingError(List`1 exceptions)
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, String message, Object[] args)
+   at Microsoft.Extensions.Logging.LoggerExtensions.LogError(ILogger logger, Exception exception, String message, Object[] args)
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 52
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-10-06 22:42:57.555 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-06 22:42:57.842 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:42:57.846 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:42:57.862 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:42:57.865 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:42:57.968 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 99.3373ms - 200
+2026-10-06 22:42:57.973 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 116.1864ms - 200
+2026-10-06 22:42:58.001 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:42:58.004 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:42:58.366 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:42:58.368 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:42:58.543 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:42:58.545 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:42:58.547 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:42:58.547 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:42:58.553 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:42:58.669 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:42:58.671 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:42:58.672 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:42:58.674 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:42:58.675 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:42:58.688 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:43:47.726 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:43:47.727 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:43:47.728 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:43:47.729 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:43:47.740 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 9.806ms - 200
+2026-10-06 22:43:47.741 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 13.2321ms - 200
+2026-10-06 22:43:47.745 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:43:47.746 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:43:47.762 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:43:47.763 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:43:47.764 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:43:47.765 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:43:47.766 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:43:47.766 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:43:47.767 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:43:47.770 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:43:47.771 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:43:47.772 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:43:47.774 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:43:47.775 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:43:47.779 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:44:37.736 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:44:37.737 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:44:37.738 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:44:37.739 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:44:37.749 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 8.771ms - 200
+2026-10-06 22:44:37.750 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 11.582ms - 200
+2026-10-06 22:44:37.751 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:44:37.753 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:44:37.817 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:44:37.818 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:44:37.820 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:44:37.820 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:44:37.821 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:44:37.822 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:44:37.822 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:44:37.824 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:44:37.825 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:44:37.826 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:44:37.828 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:44:37.829 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:44:37.831 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:45:27.732 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:45:27.733 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:45:27.734 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:45:27.735 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:45:27.765 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 27.8005ms - 200
+2026-10-06 22:45:27.766 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 31.8238ms - 200
+2026-10-06 22:45:27.767 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:45:27.767 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:45:27.768 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:45:27.769 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:45:27.770 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:45:27.770 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:45:27.771 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:45:27.772 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:45:27.772 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:45:27.773 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:45:27.774 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:45:27.775 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:45:27.776 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:45:27.777 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:45:27.780 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:46:17.733 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:46:17.733 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:46:17.734 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:46:17.735 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:46:17.745 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 9.0262ms - 200
+2026-10-06 22:46:17.746 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 12.0011ms - 200
+2026-10-06 22:46:17.748 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:46:17.749 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:46:17.750 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:46:17.751 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:46:17.752 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:46:17.754 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:46:17.755 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:46:17.764 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:46:17.765 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:46:17.769 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:46:17.772 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:46:17.773 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:46:17.775 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:46:17.775 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:46:17.779 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:46:31.645 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-06 22:46:31.835 [FTL] [Microsoft.AspNetCore.Hosting.Diagnostics] Application startup exception
+System.InvalidOperationException: An error occurred when configuring the exception handler middleware. Either the 'ExceptionHandlingPath' or the 'ExceptionHandler' property must be set in 'UseExceptionHandler()'. Alternatively, set one of the aforementioned properties in 'Startup.ConfigureServices' as follows: 'services.AddExceptionHandler(options => { ... });' or configure to generate a 'ProblemDetails' response in 'service.AddProblemDetails()'.
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl..ctor(RequestDelegate next, ILoggerFactory loggerFactory, IOptions`1 options, DiagnosticListener diagnosticListener, IEnumerable`1 exceptionHandlers, IMeterFactory meterFactory, IProblemDetailsService problemDetailsService)
+   at Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.<>c__DisplayClass5_0.<SetExceptionHandlerMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2026-10-06 22:46:31.841 [ERR] [Microsoft.Extensions.Hosting.Internal.Host] Hosting failed to start
+System.InvalidOperationException: An error occurred when configuring the exception handler middleware. Either the 'ExceptionHandlingPath' or the 'ExceptionHandler' property must be set in 'UseExceptionHandler()'. Alternatively, set one of the aforementioned properties in 'Startup.ConfigureServices' as follows: 'services.AddExceptionHandler(options => { ... });' or configure to generate a 'ProblemDetails' response in 'service.AddProblemDetails()'.
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl..ctor(RequestDelegate next, ILoggerFactory loggerFactory, IOptions`1 options, DiagnosticListener diagnosticListener, IEnumerable`1 exceptionHandlers, IMeterFactory meterFactory, IProblemDetailsService problemDetailsService)
+   at Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.<>c__DisplayClass5_0.<SetExceptionHandlerMiddleware>b__0(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-10-06 22:46:31.884 [ERR] [UserSyncBackgroundService] Error inesperado durante la sincronización de usuarios.
+System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'IServiceProvider'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ThrowHelper.ThrowObjectDisposedException()
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.Diagnostics.Internal.ScopedLoggerFactory.Create(IServiceProvider internalServiceProvider, IDbContextOptions contextOptions)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<GetOrAdd>g__BuildServiceProvider|4_1(IDbContextOptions _, ValueTuple`2 arguments)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<>c.<GetOrAdd>b__4_0(IDbContextOptions contextOptions, ValueTuple`2 tuples)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd[TArg](TKey key, Func`3 valueFactory, TArg factoryArgument)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.GetOrAdd(IDbContextOptions options, Boolean providerRequired)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at AppDbContext..ctor(DbContextOptions`1 options) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\context\DbContext.cs:line 6
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 25
+2026-10-06 22:46:31.893 [ERR] [Microsoft.Extensions.Hosting.Internal.Host] BackgroundService failed
+System.AggregateException: An error occurred while writing to logger(s). (Cannot access a disposed object.
+Object name: 'EventLogInternal'.)
+ ---> System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'EventLogInternal'.
+   at System.Diagnostics.EventLogInternal.OpenForWrite(String currentMachineName)
+   at System.Diagnostics.EventLogInternal.InternalWriteEvent(UInt32 eventID, UInt16 category, EventLogEntryType type, String[] strings, Byte[] rawData, String currentMachineName)
+   at System.Diagnostics.EventLogInternal.WriteEvent(EventInstance instance, Byte[] data, Object[] values)
+   at Microsoft.Extensions.Logging.EventLog.WindowsEventLog.WriteEntry(String message, EventLogEntryType type, Int32 eventID, Int16 category)
+   at Microsoft.Extensions.Logging.EventLog.EventLogLogger.WriteMessage(String message, EventLogEntryType eventLogEntryType, Int32 eventId)
+   at Microsoft.Extensions.Logging.EventLog.EventLogLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.Logger.<Log>g__LoggerLog|14_0[TState](LogLevel logLevel, EventId eventId, ILogger logger, Exception exception, Func`3 formatter, List`1& exceptions, TState& state)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.ThrowLoggingError(List`1 exceptions)
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerExtensions.Log(ILogger logger, LogLevel logLevel, EventId eventId, Exception exception, String message, Object[] args)
+   at Microsoft.Extensions.Logging.LoggerExtensions.LogError(ILogger logger, Exception exception, String message, Object[] args)
+   at UserSyncBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in F:\DWES-01-ServidorRemoto\RepositorioRemoto\service\Background\UserSyncBackgroundService.cs:line 52
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-10-06 22:50:36.349 [DBG] [] PRUEBA DIRECTA DE SERILOG
+2026-10-06 22:50:36.586 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:50:36.590 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:50:36.605 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:50:36.608 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:50:36.695 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 83.2002ms - 200
+2026-10-06 22:50:36.698 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 97.6554ms - 200
+2026-10-06 22:50:36.729 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:50:36.732 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:50:37.020 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:50:37.023 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:50:37.173 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:50:37.174 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:50:37.176 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:50:37.176 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:50:37.181 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:50:37.286 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:50:37.287 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:50:37.288 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:50:37.291 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:50:37.292 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:50:37.303 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.
+2026-10-06 22:51:26.497 [INF] [UserService] Iniciando la sincronización de usuarios.
+2026-10-06 22:51:26.498 [INF] [UserApiService] Obteniendo todos los usuarios.
+2026-10-06 22:51:26.500 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:51:26.501 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Sending HTTP request GET https://jsonplaceholder.typicode.com/users
+2026-10-06 22:51:26.513 [INF] [System.Net.Http.HttpClient.jasonplaceholder.ClientHandler] Received HTTP response headers after 11.1999ms - 200
+2026-10-06 22:51:26.515 [INF] [System.Net.Http.HttpClient.jasonplaceholder.LogicalHandler] End processing HTTP request after 15.7801ms - 200
+2026-10-06 22:51:26.519 [INF] [UserApiService] Se obtuvieron 10 usuarios.
+2026-10-06 22:51:26.520 [INF] [UserService] Se obtuvieron 10 usuarios de la API.
+2026-10-06 22:51:26.536 [DBG] [UserService] Transacción de sincronización iniciada.
+2026-10-06 22:51:26.537 [INF] [SqliteRepository] Eliminando todos los usuarios de SQLite.
+2026-10-06 22:51:26.538 [INF] [SqliteRepository] Se eliminaron 10 usuarios de SQLite.
+2026-10-06 22:51:26.539 [DBG] [UserService] Base de datos limpiada correctamente.
+2026-10-06 22:51:26.540 [INF] [RepositorioRemoto.Cache.InMemoryCache] Caché en memoria vaciada correctamente.
+2026-10-06 22:51:26.540 [DBG] [UserService] Caché limpiada correctamente.
+2026-10-06 22:51:26.541 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:51:26.542 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:51:26.543 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 5.
+2026-10-06 22:51:26.544 [INF] [SqliteRepository] Creando 5 usuarios en SQLite.
+2026-10-06 22:51:26.545 [INF] [SqliteRepository] Se crearon correctamente 5 usuarios.
+2026-10-06 22:51:26.545 [DBG] [UserService] Lote insertado correctamente. Usuarios procesados: 10.
+2026-10-06 22:51:26.550 [INF] [UserService] Sincronización completada. Total de usuarios sincronizados: 10.

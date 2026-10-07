@@ -1,6 +1,6 @@
 public class UnitOfWork(
     AppDbContext _context
-)
+) : IUnitOfWork
 {
     public Task BeginTransactionAsync(CancellationToken cts = default)
     {

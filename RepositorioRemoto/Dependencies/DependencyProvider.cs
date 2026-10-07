@@ -29,6 +29,8 @@ Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         services.AddScoped<IUserApiService, UserApiService>();
         // Orquestador del negocio
         services.AddScoped<IUserService, UserService>();
+        // Unidad de trabajo
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         // Logs
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(AppConfig.Config)

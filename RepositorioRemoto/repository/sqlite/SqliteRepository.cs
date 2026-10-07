@@ -220,7 +220,7 @@ public class SqliteRepository(
     /// <summary>
     /// Crear varios usuarios en una sola operación.
     /// </summary>
-    public async Task<Result<UserEntity, DomainError>> CreateRangeAsync(
+    public async Task<Result<bool, DomainError>> CreateRangeAsync(
         IEnumerable<UserEntity> users)
     {
         var userList = users.ToList();
@@ -230,7 +230,7 @@ public class SqliteRepository(
             logger.LogWarning(
                 "No se creó ningún usuario porque la colección está vacía.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.WriteFailure(
                     "No se puede crear una colección vacía."));
         }
@@ -247,7 +247,7 @@ public class SqliteRepository(
                 "Se crearon correctamente {TotalUsers} usuarios.",
                 userList.Count);
 
-            return Result.Success<UserEntity, DomainError>(userList[0]);
+            return Result.Success<bool, DomainError>(true);
         }
         catch (DbUpdateException ex)
             when (ex.InnerException is SqliteException
@@ -257,7 +257,7 @@ public class SqliteRepository(
                 ex,
                 "No se pudo crear la colección por una restricción de la base de datos.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.ConstraintViolation(sqlite.Message));
         }
         catch (SqliteException ex) when (ex.SqliteErrorCode is 5 or 6)
@@ -266,7 +266,7 @@ public class SqliteRepository(
                 ex,
                 "No se pudo crear la colección porque la base de datos está bloqueada.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.DatabaseLocked(ex.Message));
         }
         catch (DbUpdateException ex)
@@ -275,7 +275,7 @@ public class SqliteRepository(
                 ex,
                 "Error al guardar la colección de usuarios.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.WriteFailure(ex.Message));
         }
         catch (OperationCanceledException ex)
@@ -292,7 +292,7 @@ public class SqliteRepository(
                 ex,
                 "Error inesperado al crear la colección de usuarios.");
 
-            return Result.Failure<UserEntity, DomainError>(
+            return Result.Failure<bool, DomainError>(
                 new DatabaseError.Unknown(ex.Message));
         }
     }
