@@ -498,7 +498,27 @@ public class UserServiceTests
             id = 1,
             name = "Kevin Zelaya",
             username = "sofiag",
-            email = "sofia.gomez@example.com"
+            email = "sofia.gomez@example.com",
+            phone = "+34 611 987 654",
+            website = "sofiait.com",
+            address = new AddressDto
+            {
+                street = "Avinguda Diagonal",
+                suite = "Ático 2",
+                city = "Barcelona",
+                zipcode = "08018",
+                geo = new GeoDto
+                {
+                    lat = "41.4036",
+                    lng = "2.1744"
+                }
+            },
+            company = new CompanyDto
+            {
+                name = "ByteCore Studio",
+                catchPhrase = "Transformando datos en conexiones reales",
+                bs = "big data ia automatizacion"
+            }
         };
 
         var model = new UserModel
@@ -506,7 +526,27 @@ public class UserServiceTests
             id = 1,
             name = "Kevin Zelaya",
             username = "sofiag",
-            email = "sofia.gomez@example.com"
+            email = "sofia.gomez@example.com",
+            phone = "+34 611 987 654",
+            website = "sofiait.com",
+            address = new Address
+            {
+                street = "Avinguda Diagonal",
+                suite = "Ático 2",
+                city = "Barcelona",
+                zipcode = "08018",
+                geo = new Geo
+                {
+                    lat = "41.4036",
+                    lng = "2.1744"
+                }
+            },
+            company = new Company
+            {
+                name = "ByteCore Studio",
+                catchPhrase = "Transformando datos en conexiones reales",
+                bs = "big data ia automatizacion"
+            }
         };
 
         _api
