@@ -290,39 +290,40 @@ var assemblies = [
   {
     "name": "RepositorioRemoto",
     "classes": [
-      { "name": "Address", "rp": "RepositorioRemoto_Address.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 37, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AddressDto", "rp": "RepositorioRemoto_AddressDto.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Address", "rp": "RepositorioRemoto_Address.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AddressDto", "rp": "RepositorioRemoto_AddressDto.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 35, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "ApiError", "rp": "RepositorioRemoto_ApiError.html", "cl": 7, "ucl": 1, "cal": 8, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "AppConfig", "rp": "RepositorioRemoto_AppConfig.html", "cl": 39, "ucl": 0, "cal": 39, "tl": 53, "cb": 6, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "AppConfig", "rp": "RepositorioRemoto_AppConfig.html", "cl": 39, "ucl": 6, "cal": 45, "tl": 53, "cb": 6, "tb": 18, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "AppDbContext", "rp": "RepositorioRemoto_AppDbContext.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Company", "rp": "RepositorioRemoto_Company.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 37, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "CompanyDto", "rp": "RepositorioRemoto_CompanyDto.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "CreateUserDto", "rp": "RepositorioRemoto_CreateUserDto.html", "cl": 7, "ucl": 0, "cal": 7, "tl": 33, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Company", "rp": "RepositorioRemoto_Company.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "CompanyDto", "rp": "RepositorioRemoto_CompanyDto.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 35, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "CreateUserDto", "rp": "RepositorioRemoto_CreateUserDto.html", "cl": 13, "ucl": 0, "cal": 13, "tl": 33, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DatabaseError", "rp": "RepositorioRemoto_DatabaseError.html", "cl": 24, "ucl": 15, "cal": 39, "tl": 62, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DatabaseRefreshedEventArgs", "rp": "RepositorioRemoto_DatabaseRefreshedEventArgs.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "DependencyProvider", "rp": "RepositorioRemoto_DependencyProvider.html", "cl": 0, "ucl": 50, "cal": 50, "tl": 84, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "DependencyProvider", "rp": "RepositorioRemoto_DependencyProvider.html", "cl": 0, "ucl": 60, "cal": 60, "tl": 70, "cb": 0, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "DomainError", "rp": "RepositorioRemoto_DomainError.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 2, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Geo", "rp": "RepositorioRemoto_Geo.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 37, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "GeoDto", "rp": "RepositorioRemoto_GeoDto.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Geo", "rp": "RepositorioRemoto_Geo.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "GeoDto", "rp": "RepositorioRemoto_GeoDto.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 35, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "LogTheme", "rp": "RepositorioRemoto_LogTheme.html", "cl": 0, "ucl": 39, "cal": 39, "tl": 44, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "Microsoft.AspNetCore.OpenApi.Generated", "rp": "RepositorioRemoto_Generated.html", "cl": 0, "ucl": 381, "cal": 381, "tl": 606, "cb": 0, "tb": 206, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "PostgreSqlRepository", "rp": "RepositorioRemoto_PostgreSqlRepository.html", "cl": 151, "ucl": 57, "cal": 208, "tl": 345, "cb": 8, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "Program", "rp": "RepositorioRemoto_Program.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 41, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "PostgreSqlRepository", "rp": "RepositorioRemoto_PostgreSqlRepository.html", "cl": 194, "ucl": 65, "cal": 259, "tl": 219, "cb": 16, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Program", "rp": "RepositorioRemoto_Program.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 67, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "Program", "rp": "RepositorioRemoto_Program.html", "cl": 0, "ucl": 44, "cal": 44, "tl": 67, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "RepositorioRemoto.Cache.InMemoryCache\u003CT\u003E", "rp": "RepositorioRemoto_InMemoryCache_1.html", "cl": 59, "ucl": 10, "cal": 69, "tl": 118, "cb": 8, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "RepositorioRemoto.Cache.RedisCache\u003CT\u003E", "rp": "RepositorioRemoto_RedisCache_1.html", "cl": 40, "ucl": 23, "cal": 63, "tl": 113, "cb": 8, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "RepositorioRemoto.Errors.CacheError", "rp": "RepositorioRemoto_CacheError.html", "cl": 4, "ucl": 11, "cal": 15, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "SqliteRepository", "rp": "RepositorioRemoto_SqliteRepository.html", "cl": 163, "ucl": 157, "cal": 320, "tl": 487, "cb": 8, "tb": 8, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "RepositorioRemoto.Cache.RedisCache\u003CT\u003E", "rp": "RepositorioRemoto_RedisCache_1.html", "cl": 80, "ucl": 82, "cal": 162, "tl": 214, "cb": 19, "tb": 26, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "RepositorioRemoto.Errors.CacheError", "rp": "RepositorioRemoto_CacheError.html", "cl": 15, "ucl": 0, "cal": 15, "tl": 27, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "SqliteRepository", "rp": "RepositorioRemoto_SqliteRepository.html", "cl": 214, "ucl": 141, "cal": 355, "tl": 248, "cb": 16, "tb": 16, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "System.Runtime.CompilerServices", "rp": "RepositorioRemoto_CompilerServices.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 23, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UnitOfWork", "rp": "RepositorioRemoto_UnitOfWork.html", "cl": 9, "ucl": 3, "cal": 12, "tl": 17, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UpdateUserRequest", "rp": "RepositorioRemoto_UpdateUserRequest.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 12, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UnitOfWork", "rp": "RepositorioRemoto_UnitOfWork.html", "cl": 15, "ucl": 14, "cal": 29, "tl": 36, "cb": 0, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UpdateUserRequest", "rp": "RepositorioRemoto_UpdateUserRequest.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 11, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "UserApiService", "rp": "RepositorioRemoto_UserApiService.html", "cl": 167, "ucl": 42, "cal": 209, "tl": 319, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UserControllers", "rp": "RepositorioRemoto_UserControllers.html", "cl": 0, "ucl": 40, "cal": 40, "tl": 60, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UserDto", "rp": "RepositorioRemoto_UserDto.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 36, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UserEntity", "rp": "RepositorioRemoto_UserEntity.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 40, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UserControllers", "rp": "RepositorioRemoto_UserControllers.html", "cl": 0, "ucl": 40, "cal": 40, "tl": 60, "cb": 0, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UserDto", "rp": "RepositorioRemoto_UserDto.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 35, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UserEntity", "rp": "RepositorioRemoto_UserEntity.html", "cl": 16, "ucl": 0, "cal": 16, "tl": 42, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "UserMapper", "rp": "RepositorioRemoto_UserMapper.html", "cl": 153, "ucl": 0, "cal": 153, "tl": 179, "cb": 9, "tb": 14, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UserModel", "rp": "RepositorioRemoto_UserModel.html", "cl": 8, "ucl": 0, "cal": 8, "tl": 37, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UserService", "rp": "RepositorioRemoto_UserService.html", "cl": 181, "ucl": 87, "cal": 268, "tl": 470, "cb": 23, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "UserSyncBackgroundService", "rp": "RepositorioRemoto_UserSyncBackgroundService.html", "cl": 0, "ucl": 39, "cal": 39, "tl": 58, "cb": 0, "tb": 6, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UserModel", "rp": "RepositorioRemoto_UserModel.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 34, "cb": 0, "tb": 0, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UserService", "rp": "RepositorioRemoto_UserService.html", "cl": 296, "ucl": 154, "cal": 450, "tl": 516, "cb": 46, "tb": 102, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "UserSyncBackgroundService", "rp": "RepositorioRemoto_UserSyncBackgroundService.html", "cl": 0, "ucl": 45, "cal": 45, "tl": 58, "cb": 0, "tb": 10, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -367,6 +368,12 @@ var riskHotspots = [
       { "value": 10, "exceeded": false },
     ]},
   {
+    "assembly": "RepositorioRemoto", "class": "UserService", "reportPath": "RepositorioRemoto_UserService.html", "methodName": "GetUserByIdAsync()", "methodShortName": "GetUserByIdAsync()", "fileIndex": 0, "line": 172,
+    "metrics": [
+      { "value": 72, "exceeded": true },
+      { "value": 8, "exceeded": false },
+    ]},
+  {
     "assembly": "RepositorioRemoto", "class": "Microsoft.AspNetCore.OpenApi.Generated", "reportPath": "RepositorioRemoto_Generated.html", "methodName": "NormalizeDocId(System.String)", "methodShortName": "NormalizeDocId(...)", "fileIndex": 0, "line": 320,
     "metrics": [
       { "value": 42, "exceeded": true },
@@ -379,10 +386,34 @@ var riskHotspots = [
       { "value": 6, "exceeded": false },
     ]},
   {
+    "assembly": "RepositorioRemoto", "class": "UserService", "reportPath": "RepositorioRemoto_UserService.html", "methodName": "DeleteUserAsync()", "methodShortName": "DeleteUserAsync()", "fileIndex": 0, "line": 323,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "RepositorioRemoto", "class": "UserService", "reportPath": "RepositorioRemoto_UserService.html", "methodName": "UpdateUserAsync()", "methodShortName": "UpdateUserAsync()", "fileIndex": 0, "line": 253,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
     "assembly": "RepositorioRemoto", "class": "UserSyncBackgroundService", "reportPath": "RepositorioRemoto_UserSyncBackgroundService.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 14,
     "metrics": [
       { "value": 42, "exceeded": true },
       { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "RepositorioRemoto", "class": "UserSyncBackgroundService", "reportPath": "RepositorioRemoto_UserSyncBackgroundService.html", "methodName": "ExecuteAsync()", "methodShortName": "ExecuteAsync()", "fileIndex": 0, "line": 13,
+    "metrics": [
+      { "value": 42, "exceeded": true },
+      { "value": 6, "exceeded": false },
+    ]},
+  {
+    "assembly": "RepositorioRemoto", "class": "UserService", "reportPath": "RepositorioRemoto_UserService.html", "methodName": "SyncDatabaseAsync()", "methodShortName": "SyncDatabaseAsync()", "fileIndex": 0, "line": 78,
+    "metrics": [
+      { "value": 34, "exceeded": true },
+      { "value": 12, "exceeded": false },
     ]},
 ];
 

@@ -8,7 +8,8 @@ public class UserService(
     IUserApiService _api,
     IUnitOfWork _unitOfWork,
     ICache<UserModel> _cache,
-    ILogger<UserService> _logger
+    ILogger<UserService> _logger,
+    INotificationService _notification
 ) : IUserService
 {
     /// <summary>
@@ -19,7 +20,7 @@ public class UserService(
     {
         _logger.LogInformation(
             "Iniciando la sincronización de usuarios.");
-
+        // Obtenemos los usuarios desde la api
         var apiResult = await _api.GetAllAsync(cts);
 
         if (apiResult.IsFailure)
@@ -35,129 +36,45 @@ public class UserService(
             "Se obtuvieron {TotalUsers} usuarios de la API.",
             apiResult.Value.Count);
 
-        const int maxAttempts = 3;
-
-        for (int attempt = 1; attempt <= maxAttempts; attempt++)
-        {
-            var result = await SyncDatabaseAsync(
-                apiResult.Value.Select(u => u.ToDto()).ToList(),
-                cts);
-
-            if (result.IsSuccess)
-            {
-                return result;
-            }
-
-            if (attempt == maxAttempts)
-            {
-                _logger.LogError(
-                    "La sincronización falló después de {MaxAttempts} intentos.",
-                    maxAttempts);
-
-                return result;
-            }
-
-            _logger.LogWarning(
-                "Error durante la sincronización. Reintentando ({Attempt}/{MaxAttempts})...",
-                attempt,
-                maxAttempts);
-
-            await Task.Delay(
-                TimeSpan.FromSeconds(5),
-                cts);
-        }
-
-        return Result.Failure<int, DomainError>(
-            new DatabaseError.Unknown(
-                "No se pudo completar la sincronización."));
-    }
-
-    private async Task<Result<int, DomainError>> SyncDatabaseAsync(
-        List<UserDto> users,
-        CancellationToken cts)
-    {
         try
         {
+            // Iniciar transacción 
             await _unitOfWork.BeginTransactionAsync(cts);
+            // Vaciar base de datos
+            await _repository.DeleteAllAsync();
+            // Limpiar cache
+            await _cache.ClearAsync();
+            // Mapear a dto
+            // var users = apiResult.Value
+            //     .Select(u => u.ToDto())
+            //     .ToList();
 
-            _logger.LogDebug(
-                "Transacción de sincronización iniciada.");
-
-            var deleteResult =
-                await _repository.DeleteAllAsync();
-
-            if (deleteResult.IsFailure)
-            {
-                _logger.LogWarning(
-                    "No se pudo limpiar la base de datos.");
-
-                await _unitOfWork.RollbackTransactionAsync(
-                    CancellationToken.None);
-
-                return Result.Failure<int, DomainError>(
-                    deleteResult.Error);
-            }
-
-            _logger.LogDebug(
-                "Base de datos limpiada correctamente.");
-
-            var clearCacheResult =
-                await _cache.ClearAsync();
-
-            if (clearCacheResult.IsFailure)
-            {
-                _logger.LogWarning(
-                    "No se pudo limpiar la caché.");
-
-                await _unitOfWork.RollbackTransactionAsync(
-                    CancellationToken.None);
-
-                return Result.Failure<int, DomainError>(
-                    clearCacheResult.Error);
-            }
-
-            _logger.LogDebug(
-                "Caché limpiada correctamente.");
-
-            var batchSize = AppConfig.BatchSettings.BatchSize;
             var totalInserted = 0;
-
-            foreach (var batch in users.Chunk(batchSize))
+            // Iterar en grupos (El tamaño de los batch se especifica en el appsettings)
+            foreach (var batch in apiResult.Value.Chunk(
+                AppConfig.BatchSettings.BatchSize))
             {
                 cts.ThrowIfCancellationRequested();
 
                 var entities = batch
-                    .Select(u => u.ToModel().ToEntity())
+                    .Select(u => u.ToEntity())
                     .ToList();
 
-                var createResult =
+                var result =
                     await _repository.CreateRangeAsync(entities);
-
-                if (createResult.IsFailure)
+                // Si alguno falla, rollback
+                if (result.IsFailure)
                 {
-                    _logger.LogWarning(
-                        "Error al insertar el lote de usuarios. Tamaño: {BatchSize}.",
-                        entities.Count);
-
                     await _unitOfWork.RollbackTransactionAsync(
                         CancellationToken.None);
 
                     return Result.Failure<int, DomainError>(
-                        createResult.Error);
+                        result.Error);
                 }
-
                 totalInserted += entities.Count;
-
-                _logger.LogDebug(
-                    "Lote insertado correctamente. Usuarios procesados: {TotalInserted}.",
-                    totalInserted);
             }
-
+            // Confirmar transacción
             await _unitOfWork.CommitTransactionAsync(cts);
-
-            _logger.LogInformation(
-                "Sincronización completada. Total de usuarios sincronizados: {TotalUsers}.",
-                totalInserted);
 
             return Result.Success<int, DomainError>(
                 totalInserted);
@@ -169,23 +86,14 @@ public class UserService(
 
             throw;
         }
-        catch (NpgsqlException)
-        {
-            await _unitOfWork.RollbackTransactionAsync(
-                CancellationToken.None);
-
-            return Result.Failure<int, DomainError>(
-                new DatabaseError.Unknown(
-                    "Se perdió la conexión con PostgreSQL."));
-        }
         catch (Exception ex)
         {
             await _unitOfWork.RollbackTransactionAsync(
                 CancellationToken.None);
 
             _logger.LogError(
-                "Error inesperado durante la sincronización: {Message}",
-                ex.Message);
+                ex,
+                "Error durante la sincronización.");
 
             return Result.Failure<int, DomainError>(
                 new DatabaseError.Unknown(ex.Message));
@@ -315,26 +223,7 @@ public class UserService(
         
         _logger.LogInformation(
             "Iniciando actualización del usuario {UserId}.", id);
-        /*
-        // 1. Actualizar en API
-        var response = await _api.UpdateAsync(id, request);
 
-        if (response.IsFailure)
-        {
-            _logger.LogWarning(
-                "La API rechazó o no pudo completar la actualización del usuario {UserId}.",
-                id);
-
-            return Result.Failure<UserModel, DomainError>(
-                response.Error);
-        }
-
-        var user = response.Value;
-
-        _logger.LogInformation(
-            "Usuario {UserId} actualizado en la API.",
-            id);
-        */
         // 2. Actualizar base de datos
         var responseDatabase = await _repository.UpdateAsync(
             request.ToModel().ToEntity(),
@@ -374,7 +263,8 @@ public class UserService(
         _logger.LogInformation(
             "Proceso de actualización del usuario {UserId} finalizado.",
             id);
-
+        //Notificar actualización
+        _notification.NotifyUserUpdated(responseDatabase.Value.ToModel());
         return Result.Success<UserModel, DomainError>(request.ToModel());
     }
 
@@ -384,27 +274,6 @@ public class UserService(
     public async Task<Result<bool, DomainError>> DeleteUserAsync(int id)
     {
         var key = $"user:{id}";
-
-        _logger.LogInformation(
-            "Iniciando eliminación del usuario {UserId}.", id);
-        /*
-        // 1. Eliminar de la API
-        var response = await _api.DeleteAsync(id);
-
-        if (response.IsFailure)
-        {
-            _logger.LogWarning(
-                "No se pudo eliminar el usuario {UserId} de la API.",
-                id);
-
-            return Result.Failure<bool, DomainError>(
-                response.Error);
-        }
-
-        _logger.LogInformation(
-            "Usuario {UserId} eliminado de la API.", id);
-            */
-
         // 2. Eliminar de base de datos
         var responseDatabase = await _repository.DeleteAsync(id);
 
@@ -436,16 +305,18 @@ public class UserService(
                 "Caché eliminada para el usuario {UserId}.", id);
         }
 
+        
         _logger.LogInformation(
             "Proceso de eliminación del usuario {UserId} finalizado.",
             id);
-
+        // Notificar eliminacion
+        _notification.NotifyUserDeleted(id);
         return Result.Success<bool, DomainError>(true);
     }
 
     /// <summary>
-/// Crear un usuario en la API, base de datos y caché.
-/// </summary>
+    /// Crear un usuario en la API, base de datos y caché.
+    /// </summary>
     public async Task<Result<UserModel, DomainError>> CreateUserAsync(
         CreateUserDto request,
         CancellationToken cts = default)
@@ -510,6 +381,8 @@ public class UserService(
         _logger.LogInformation(
             "Proceso de creación del usuario {UserId} finalizado.",
             user.id);
+        // Notificar
+        _notification.NotifyUserCreated(user);
 
         return Result.Success<UserModel, DomainError>(user);
     }

@@ -31,12 +31,15 @@ public class DependencyProvider
         services.AddScoped<IUserService, UserService>();
         // Unidad de trabajo
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        //if (enviroment.IsDevelopment())
+        //if (enviroment.IsProduction())
         if (enviroment.IsProduction())
         {
+            // Contexto con la conexion para postgresql
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(AppConfig.ConnectionString));
+            // Repositorio para postgresql
             services.AddScoped<IRepository, PostgreSqlRepository>();
+            // Configuracion para redis
             var redis = ConnectionMultiplexer.Connect(
                 AppConfig.Config["Redis:ConnectionString"]!
             );
@@ -66,5 +69,9 @@ public class DependencyProvider
         services.AddScoped<UnitOfWork>();
         // Background service
         services.AddHostedService<UserSyncBackgroundService>();
+
+        // Notificaciones
+        services.AddSingleton<INotificationService, NotificationService>();
+
     }
 }

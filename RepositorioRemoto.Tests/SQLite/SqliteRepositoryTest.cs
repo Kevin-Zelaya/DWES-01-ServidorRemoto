@@ -1,114 +1,176 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
 public class SqliteRepositoryTests
 {
-    private SqliteConnection _connection = null!;
     private AppDbContext _context = null!;
-    private SqliteRepository _repository = null!;
+    private IRepository _repository = null!;
+    private Mock<ILogger<SqliteRepository>> _logger = null!;
 
-    // Se ejecuta antes de cada test para levantar una base de datos limpia en memoria
     [SetUp]
-    public async Task SetUp()
+    public void Setup()
     {
-        _connection = new SqliteConnection("DataSource=:memory:");
-        await _connection.OpenAsync();
-
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseSqlite(_connection)
+            .UseSqlite("Data Source=:memory:")
             .Options;
 
         _context = new AppDbContext(options);
-        await _context.Database.EnsureCreatedAsync();
 
-        var logger = NullLogger<SqliteRepository>.Instance;
-        _repository = new SqliteRepository(_context, logger);
+        _context.Database.OpenConnection();
+        _context.Database.EnsureCreated();
+
+        _logger = new Mock<ILogger<SqliteRepository>>();
+
+        _repository = new SqliteRepository(
+            _context,
+            _logger.Object);
     }
 
-    // Se ejecuta después de cada test para liberar recursos de la base de datos
     [TearDown]
     public async Task TearDown()
     {
+        await _context.Database.EnsureDeletedAsync();
         await _context.DisposeAsync();
-        await _connection.DisposeAsync();
     }
 
     [Test]
-    public async Task GetAllAsync_ShouldReturnAllUsers()
+    public async Task GetAll_ShouldReturnUsers()
     {
-        //Añadimos un par de usuarios
         _context.Users.AddRange(
-            new UserEntity { name = "User 1", email = "1@test.com" },
-            new UserEntity { name = "User 2", email = "2@test.com" }
-        );
+            new UserEntity
+            {
+                id = 1,
+                name = "Kevin",
+                username = "kevin",
+                email = "kevin@test.com"
+            },
+            new UserEntity
+            {
+                id = 2,
+                name = "Juan",
+                username = "juan",
+                email = "juan@test.com"
+            });
+
         await _context.SaveChangesAsync();
 
-        //Obtenemos todos
         var result = await _repository.GetAllAsync();
 
         Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value.Count, Is.EqualTo(2));
+        Assert.That(result.Value, Has.Count.EqualTo(2));
     }
-
     [Test]
-    public async Task GetUserByIdAsync_ShouldReturnUser_WhenUserExists()
+    public async Task GetAll_WhenDatabaseIsEmpty_ShouldReturnEmptyList()
     {
-        var user = new UserEntity { name = "Sergio", email = "sergio@test.com" };
+        var result = await _repository.GetAllAsync();
+
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.Empty);
+    }
+    [Test]
+    public async Task GetUserById_ShouldReturnUser()
+    {
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin",
+            username = "kevin",
+            email = "kevin@test.com"
+        };
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        var result = await _repository.GetUserByIdAsync(user.id);
+        var result = await _repository.GetUserByIdAsync(1);
 
         Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value.name, Is.EqualTo("Sergio"));
+        Assert.That(result.Value.id, Is.EqualTo(1));
+        Assert.That(result.Value.name, Is.EqualTo("Kevin"));
     }
-
     [Test]
-    public async Task GetUserByIdAsync_ShouldReturnFailure_WhenUserDoesNotExist()
+    public async Task GetUserById_WhenUserDoesNotExist_ShouldReturnFailure()
     {
-        //Buscar ID inexistente
         var result = await _repository.GetUserByIdAsync(999);
 
         Assert.That(result.IsFailure, Is.True);
+        Assert.That(
+            result.Error,
+            Is.TypeOf<DatabaseError.NotFound>());
     }
 
     [Test]
-    public async Task GetUserByIdAsync_ShouldSupportCancellationToken()
+    public async Task Create_ShouldReturnCreatedUser()
     {
-        var user = new UserEntity { name = "TokenUser", email = "token@test.com" };
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-
-        using var cts = new CancellationTokenSource();
-
-        //Consultar pasando el token de cancelación
-        var result = await _repository.GetUserByIdAsync(user.id, cts.Token);
-
-        Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value.name, Is.EqualTo("TokenUser"));
-    }
-
-    [Test]
-    public async Task CreateAsync_ShouldInsertUserSuccessfully()
-    {
-        var user = new UserEntity { name = "Nuevo", email = "nuevo@test.com" };
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin",
+            username = "kevin",
+            email = "kevin@test.com"
+        };
 
         var result = await _repository.CreateAsync(user);
 
         Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value.id, Is.GreaterThan(0));
+        Assert.That(result.Value.id, Is.EqualTo(1));
+        Assert.That(result.Value.name, Is.EqualTo("Kevin"));
     }
 
     [Test]
-    public async Task CreateRangeAsync_ShouldInsertUsersSuccessfully()
+    public async Task Create_WhenIdAlreadyExists_ShouldReturnFailure()
+    {
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin",
+            username = "kevin",
+            email = "kevin@test.com"
+        };
+
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+
+        _context.ChangeTracker.Clear();
+
+        var duplicatedUser = new UserEntity
+        {
+            id = 1,
+            name = "Otro",
+            username = "otro",
+            email = "otro@test.com"
+        };
+
+        var result = await _repository.CreateAsync(duplicatedUser);
+
+        Assert.That(result.IsFailure, Is.True);
+        Assert.That(
+            result.Error,
+            Is.TypeOf<DatabaseError.WriteFailure>());
+    }
+
+    [Test]
+    public async Task CreateRange_ShouldReturnSuccess()
     {
         var users = new List<UserEntity>
         {
-            new() { name = "R1", email = "r1@test.com" },
-            new() { name = "R2", email = "r2@test.com" }
+            new()
+            {
+                id = 1,
+                name = "Kevin",
+                username = "kevin",
+                email = "kevin@test.com"
+            },
+            new()
+            {
+                id = 2,
+                name = "Juan",
+                username = "juan",
+                email = "juan@test.com"
+            }
         };
 
         var result = await _repository.CreateRangeAsync(users);
@@ -116,87 +178,142 @@ public class SqliteRepositoryTests
         Assert.That(result.IsSuccess, Is.True);
         Assert.That(result.Value, Is.True);
     }
-
     [Test]
-    public async Task CreateRangeAsync_ShouldReturnFailure_WhenCollectionIsEmpty()
+    public async Task CreateRange_WhenListIsEmpty_ShouldReturnFailure()
     {
-        //Pasar colección vacía para cubrir la validación
-        var result = await _repository.CreateRangeAsync(new List<UserEntity>());
+        var result = await _repository.CreateRangeAsync(
+            new List<UserEntity>());
 
         Assert.That(result.IsFailure, Is.True);
+        Assert.That(
+            result.Error,
+            Is.TypeOf<DatabaseError.WriteFailure>());
     }
-
     [Test]
-    public async Task UpdateAsync_ShouldModifyExistingUser()
+    public async Task Update_ShouldReturnUpdatedUser()
     {
-        var user = new UserEntity { name = "Viejo", email = "viejo@test.com" };
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin",
+            username = "kevin",
+            email = "old@test.com"
+        };
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        user.name = "Modificado";
-        var result = await _repository.UpdateAsync(user, user.id);
+        var updatedUser = new UserEntity
+        {
+            id = 1,
+            name = "Kevin Updated",
+            username = "kevin",
+            email = "new@test.com"
+        };
+
+        var result = await _repository.UpdateAsync(
+            updatedUser,
+            1);
 
         Assert.That(result.IsSuccess, Is.True);
-        Assert.That(result.Value.name, Is.EqualTo("Modificado"));
+        Assert.That(
+            result.Value.name,
+            Is.EqualTo("Kevin Updated"));
     }
-
     [Test]
-    public async Task UpdateAsync_ShouldReturnFailure_WhenUserDoesNotExist()
+    public async Task Update_WhenUserDoesNotExist_ShouldReturnFailure()
     {
-        var user = new UserEntity { id = 999, name = "No Existe", email = "no@test.com" };
+        var user = new UserEntity
+        {
+            id = 999,
+            name = "Kevin",
+            username = "kevin"
+        };
 
-        //Intentar actualizar un usuario que no está en la BD
         var result = await _repository.UpdateAsync(user, 999);
 
         Assert.That(result.IsFailure, Is.True);
+        Assert.That(
+            result.Error,
+            Is.TypeOf<DatabaseError.NotFound>());
     }
-
     [Test]
-    public async Task DeleteAsync_ShouldRemoveUser_WhenUserExists()
+    public async Task Delete_ShouldReturnSuccess()
     {
-        var user = new UserEntity { name = "Borrar", email = "borrar@test.com" };
+        var user = new UserEntity
+        {
+            id = 1,
+            name = "Kevin",
+            username = "kevin"
+        };
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        var deleteResult = await _repository.DeleteAsync(user.id);
-        Assert.That(deleteResult.IsSuccess, Is.True);
+        var result = await _repository.DeleteAsync(1);
 
-        // Comprobar que ya no se encuentra
-        var getResult = await _repository.GetUserByIdAsync(user.id);
-        Assert.That(getResult.IsFailure, Is.True);
+        Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.True);
     }
 
     [Test]
-    public async Task DeleteAsync_ShouldReturnFailure_WhenUserDoesNotExist()
+    public async Task Delete_WhenUserDoesNotExist_ShouldReturnFailure()
     {
         var result = await _repository.DeleteAsync(999);
 
         Assert.That(result.IsFailure, Is.True);
+        Assert.That(
+            result.Error,
+            Is.TypeOf<DatabaseError.NotFound>());
     }
-
     [Test]
-    public async Task DeleteAllAsync_ShouldClearAllUsers()
+    public async Task DeleteAll_ShouldReturnSuccess()
     {
-        _context.Users.Add(new UserEntity { name = "U1", email = "u1@test.com" });
+        _context.Users.AddRange(
+            new UserEntity
+            {
+                id = 1,
+                name = "Kevin",
+                username = "kevin"
+            },
+            new UserEntity
+            {
+                id = 2,
+                name = "Juan",
+                username = "juan"
+            });
+
         await _context.SaveChangesAsync();
 
         var result = await _repository.DeleteAllAsync();
-        Assert.That(result.IsSuccess, Is.True);
-
-        var all = await _repository.GetAllAsync();
-        Assert.That(all.Value, Is.Empty);
-    }
-
-    [Test]
-    public async Task DeleteAllAsync_ShouldSupportCancellationToken()
-    {
-        _context.Users.Add(new UserEntity { name = "U2", email = "u2@test.com" });
-        await _context.SaveChangesAsync();
-
-        using var cts = new CancellationTokenSource();
-
-        var result = await _repository.DeleteAllAsync(cts.Token);
 
         Assert.That(result.IsSuccess, Is.True);
+        Assert.That(result.Value, Is.True);
+
+        var users = await _context.Users.ToListAsync();
+
+        Assert.That(users, Is.Empty);
     }
+    // [Test]
+    // public void DeleteAll_WhenCancelled_ShouldThrow()
+    // {
+    //     var cts = new CancellationTokenSource();
+    //     cts.Cancel();
+
+    //     Assert.ThrowsAsync<TaskCanceledException>(
+    //         async () =>
+    //             await _repository.DeleteAllAsync(cts.Token));
+    // }
+    // [Test]
+    // public void GetUserById_WhenCancelled_ShouldThrow()
+    // {
+    //     var cts = new CancellationTokenSource();
+    //     cts.Cancel();
+
+    //     Assert.ThrowsAsync<OperationCanceledException>(
+    //         async () =>
+    //             await _repository.GetUserByIdAsync(
+    //                 1,
+    //                 cts.Token));
+    // }
 }

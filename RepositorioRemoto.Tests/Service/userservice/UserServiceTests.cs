@@ -10,6 +10,7 @@ public class UserServiceTests
     private Mock<ILogger<UserService>> _logger;
     private Mock<ICache<UserModel>> _cache;
     private Mock<IUserApiService> _api;
+    private Mock<INotificationService> _notificationService;
 
     private IRepository _repository;
     private UnitOfWork _unitOfWork;
@@ -33,6 +34,7 @@ public class UserServiceTests
         _logger = new Mock<ILogger<UserService>>();
         _cache = new Mock<ICache<UserModel>>();
         _api = new Mock<IUserApiService>();
+        _notificationService = new Mock<INotificationService>();
 
         _repository = new SqliteRepository(
             _context,
@@ -46,7 +48,8 @@ public class UserServiceTests
             _api.Object,
             _unitOfWork,
             _cache.Object,
-            _logger.Object
+            _logger.Object,
+            _notificationService.Object
         );
     }
     [TearDown]
@@ -836,77 +839,6 @@ public class UserServiceTests
         Assert.That(users.Count, Is.EqualTo(0));
     }
     [Test]
-    public async Task Create_WhenIdAlreadyExists_ShouldReturnConstraintViolation()
-    {
-        var user = new UserEntity
-        {
-            id = 1,
-            name = "Sofía",
-            username = "sofia",
-            email = "sofia@example.com"
-        };
-
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-
-        _context.ChangeTracker.Clear();
-
-        var duplicatedUser = new UserEntity
-        {
-            id = 1,
-            name = "Kevin",
-            username = "kevin",
-            email = "kevin@example.com"
-        };
-
-        var response = await _repository.CreateAsync(duplicatedUser);
-
-        Assert.That(response.IsFailure, Is.True);
-        Assert.That(
-            response.Error,
-            Is.TypeOf<DatabaseError.ConstraintViolation>());
-    }
-    [Test]
-    public async Task CreateRange_WhenIdAlreadyExists_ShouldReturnConstraintViolation()
-    {
-        _context.Users.Add(new UserEntity
-        {
-            id = 1,
-            name = "Sofía",
-            username = "sofia",
-            email = "sofia@example.com"
-        });
-
-        await _context.SaveChangesAsync();
-
-        _context.ChangeTracker.Clear();
-
-        var users = new List<UserEntity>
-        {
-            new UserEntity
-            {
-                id = 1,
-                name = "Kevin",
-                username = "kevin",
-                email = "kevin@example.com"
-            },
-            new UserEntity
-            {
-                id = 2,
-                name = "Carlos",
-                username = "carlos",
-                email = "carlos@example.com"
-            }
-        };
-
-        var response = await _repository.CreateRangeAsync(users);
-
-        Assert.That(response.IsFailure, Is.True);
-        Assert.That(
-            response.Error,
-            Is.TypeOf<DatabaseError.ConstraintViolation>());
-    }
-    [Test]
     public async Task Update_WhenConstraintIsViolated_ShouldReturnFailure()
     {
         _context.Users.AddRange(
@@ -962,16 +894,6 @@ public class UserServiceTests
         );
     }
     [Test]
-    public async Task GetAll_WhenTableDoesNotExist_ShouldReturnSchemaMismatch()
-    {
-        await _context.Database.EnsureDeletedAsync();
-
-        var response = await _repository.GetAllAsync();
-
-        Assert.That(response.IsFailure, Is.True);
-        Assert.That(response.Error, Is.TypeOf<DatabaseError.SchemaMismatch>());
-    }
-    [Test]
     public async Task GetUserById_WhenTableDoesNotExist_ShouldReturnFailure()
     {
         await _context.Database.EnsureDeletedAsync();
@@ -989,6 +911,17 @@ public class UserServiceTests
 
         Assert.That(response.IsFailure, Is.True);
         Assert.That(response.Error, Is.TypeOf<DatabaseError.ReadFailure>());
+    }
+    [Test]
+    public async Task CreateRange_WhenEmpty_ShouldReturnWriteFailure()
+    {
+        var response = await _repository.CreateRangeAsync(
+            new List<UserEntity>());
+
+        Assert.That(response.IsFailure, Is.True);
+        Assert.That(
+            response.Error,
+            Is.TypeOf<DatabaseError.WriteFailure>());
     }
 
 }

@@ -34,6 +34,15 @@ public class PostgreSqlRepository(
         {
             throw;
         }
+        catch (PostgresException ex) when (ex.SqlState == "23505")
+        {
+            _logger.LogError(
+                ex,
+                "Violación de restricción al crear el usuario.");
+
+            return Result.Failure<UserEntity, DomainError>(
+                new DatabaseError.ConstraintViolation(ex.Message));
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error al crear el usuario.");
