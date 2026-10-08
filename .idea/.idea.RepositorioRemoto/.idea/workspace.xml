@@ -15,12 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/RedisCacheTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/RedisCacheTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/Service/cache/CacheTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/app.db-shm" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/app.db-shm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/app.db-wal" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/app.db-wal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261007.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261007.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/controllers/UserController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,16 +148,19 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "cidr.known.project.marker": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "feature/testcache",
+    "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true"
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Project.RepositorioRemoto">
+  <component name="RunManager">
     <configuration name="RepositorioRemoto" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
