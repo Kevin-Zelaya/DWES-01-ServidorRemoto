@@ -15,7 +15,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8f86bf51-afdb-4dce-87b7-79f1fca7177b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RepositorioRemoto/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto.Tests/error/ErrorTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto.Tests/error/ErrorTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/RepositorioRemoto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/RepositorioRemoto.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261008.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RepositorioRemoto/log/log-20261008.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +45,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f6f937e7fde51c3ca061c59112cdd35b76a72e9ef8821ac361c6ef71e90ea88/ControllerEndpointRouteBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/InMemoryCacheTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto.Tests/Cache/RedisCacheTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto.Tests/Controllers/UserControllersTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/RepositorioRemoto.Tests/NotificationServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto.Tests/SQLite/SqliteRepositoryTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/RepositorioRemoto/config/AppConfig.cs" root0="FORCE_HIGHLIGHTING" />
@@ -64,61 +68,61 @@
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.968849525901283E-9" />
-      <entry key="MS500" value="0.01822255843059115" />
-      <entry key="S2" value="0.6922718876626309" />
-      <entry key="S5" value="2.5207366253514416" />
-      <entry key="S10" value="4.145058937374675" />
-      <entry key="S30" value="5.862538897396702" />
-      <entry key="S60" value="6.404058310373177" />
-      <entry key="M2" value="6.69488456744968" />
-      <entry key="M5" value="6.876196283852789" />
-      <entry key="M10" value="6.952734310520629" />
-      <entry key="M15" value="7.216879003533284" />
-      <entry key="M30" value="11.474828111531995" />
-      <entry key="H1" value="26.31755523544079" />
-      <entry key="H2" value="53.036619404933276" />
-      <entry key="H4" value="91.63839816699118" />
-      <entry key="D1" value="174.93081465321214" />
-      <entry key="W1" value="199.46893235516814" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000000000004" />
+      <entry key="S2" value="1.0001892511272905" />
+      <entry key="S5" value="1.0820577736015473" />
+      <entry key="S10" value="1.771254864840822" />
+      <entry key="S30" value="4.633823957212447" />
+      <entry key="S60" value="6.385931154794083" />
+      <entry key="M2" value="7.562394080804128" />
+      <entry key="M5" value="8.39013505420477" />
+      <entry key="M10" value="8.703405535039245" />
+      <entry key="M15" value="9.044168740688121" />
+      <entry key="M30" value="13.34255944751553" />
+      <entry key="H1" value="28.17180727281046" />
+      <entry key="H2" value="54.8920526803369" />
+      <entry key="H4" value="93.51431386197434" />
+      <entry key="D1" value="176.89150060389744" />
+      <entry key="W1" value="201.46253173295935" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0000003530381254" />
-      <entry key="M10" value="1.0018453992576954" />
-      <entry key="M15" value="1.0323084152763744" />
-      <entry key="M30" value="1.5728270143451653" />
-      <entry key="H1" value="3.5498950600734402" />
-      <entry key="H2" value="7.638431966883493" />
-      <entry key="H4" value="14.45374941035877" />
-      <entry key="D1" value="30.325516854660435" />
-      <entry key="W1" value="35.11299638117965" />
+      <entry key="MS100" value="1.2587222481246146E-84" />
+      <entry key="MS500" value="1.6595333396042793E-17" />
+      <entry key="S2" value="6.382583356910902E-5" />
+      <entry key="S5" value="0.020989331086065367" />
+      <entry key="S10" value="0.14487695153496769" />
+      <entry key="S30" value="0.5252101369343334" />
+      <entry key="S60" value="0.7247138310632228" />
+      <entry key="M2" value="0.8513012575247513" />
+      <entry key="M5" value="0.9376342508093235" />
+      <entry key="M10" value="0.970101917727602" />
+      <entry key="M15" value="1.0103858085415953" />
+      <entry key="M30" value="1.5560367322045399" />
+      <entry key="H1" value="3.530896255792711" />
+      <entry key="H2" value="7.617964352710116" />
+      <entry key="H4" value="14.434371597648413" />
+      <entry key="D1" value="30.318736944657996" />
+      <entry key="W1" value="35.11187480911041" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="5.247275612410522E-6" />
-      <entry key="MS500" value="0.0879978275376098" />
-      <entry key="S2" value="0.93560071391782" />
-      <entry key="S5" value="2.966829300965225" />
-      <entry key="S10" value="4.786175112273448" />
-      <entry key="S30" value="6.717814629379855" />
-      <entry key="S60" value="7.327996253214064" />
-      <entry key="M2" value="7.655880101025697" />
-      <entry key="M5" value="7.8603547241549725" />
-      <entry key="M10" value="7.946606552219363" />
-      <entry key="M15" value="8.243729820479551" />
-      <entry key="M30" value="13.04368848121659" />
-      <entry key="H1" value="29.86313009110713" />
-      <entry key="H2" value="60.67048027236654" />
-      <entry key="H4" value="106.0879049100532" />
-      <entry key="D1" value="205.25487715057443" />
-      <entry key="W1" value="234.58168892494078" />
+      <entry key="MS100" value="3.510237314700606E-6" />
+      <entry key="MS500" value="0.08110867293369896" />
+      <entry key="S2" value="0.5337862103490028" />
+      <entry key="S5" value="0.8611305690006427" />
+      <entry key="S10" value="1.7202525011579737" />
+      <entry key="S30" value="5.01247267003487" />
+      <entry key="S60" value="7.014698600261158" />
+      <entry key="M2" value="8.358349676007107" />
+      <entry key="M5" value="9.303591273387935" />
+      <entry key="M10" value="9.66104211877188" />
+      <entry key="M15" value="10.046030886969602" />
+      <entry key="M30" value="14.89307142317503" />
+      <entry key="H1" value="31.69760383075253" />
+      <entry key="H2" value="62.50505627578899" />
+      <entry key="H4" value="107.94424737720597" />
+      <entry key="D1" value="207.20874997835733" />
+      <entry key="W1" value="236.57416194666135" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -197,20 +201,20 @@
     <option name="version" value="3" />
   </component>
   <component name="UnitTestsCoverage.Settings">
-    <option name="coveragePercentColumnWidth" value="150" />
+    <option name="coveragePercentColumnWidth" value="148" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="272" />
+    <option name="symbolColumnWidth" value="275" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 77% 377/1659" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 89% 204/1893" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 77% 377/1659" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
-          <item name="RepositorioRemoto.Tests 99% 2/765" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 89% 204/1893" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="RepositorioRemoto 77% 202/877" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />
