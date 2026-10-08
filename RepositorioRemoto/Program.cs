@@ -1,11 +1,37 @@
 ﻿
 // Configuración de la aplicación
 
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
 
-// Reducir los logs de HttpClient y Entity Framework
-builder.Logging.AddFilter("System.Net.Http.HttpClient", LogLevel.Warning);
-builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+var builder = WebApplication.CreateBuilder(args);
+// Solo para limpiar los logs
+// builder.Logging.ClearProviders();
+
+// builder.Logging.AddFilter(
+//     "Microsoft.EntityFrameworkCore.Database.Command",
+//     LogLevel.None);
+
+// builder.Logging.AddFilter(
+//     "Microsoft.EntityFrameworkCore.Query",
+//     LogLevel.None);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Transaction",
+    LogLevel.Information);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Connection",
+    LogLevel.None);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Connection",
+    LogLevel.None);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(AppConfig.Config)
+    .CreateLogger();
+// --------------------------------------------
+builder.Logging.AddSerilog(Log.Logger);
 
 DependencyProvider.Configure(
     builder.Services,

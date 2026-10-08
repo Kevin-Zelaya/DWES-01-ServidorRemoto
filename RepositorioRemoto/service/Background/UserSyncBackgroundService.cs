@@ -7,17 +7,15 @@ public class UserSyncBackgroundService(
     ILogger<UserSyncBackgroundService> logger
 ) : BackgroundService
 {
-    public static event EventHandler<DatabaseRefreshedEventArgs>?
-        DatabaseRefreshed;
-
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    public static event EventHandler<DatabaseRefreshedEventArgs>? DatabaseRefreshed;
+    protected override async Task ExecuteAsync(
+        CancellationToken cts)
     {
         using var timer = new PeriodicTimer(
             TimeSpan.FromSeconds(
                 AppConfig.BatchSettings.IntervalInSeconds));
-
-        
-        do{
+        do
+        {
             try
             {
                 using var scope = scopeFactory.CreateScope();
@@ -25,7 +23,7 @@ public class UserSyncBackgroundService(
                 var userService = scope.ServiceProvider
                     .GetRequiredService<IUserService>();
 
-                var result = await userService.SyncUsersAsync(stoppingToken);
+                var result = await userService.SyncUsersAsync(cts);
 
                 if (result.IsSuccess)
                 {
@@ -33,7 +31,9 @@ public class UserSyncBackgroundService(
                         this,
                         new DatabaseRefreshedEventArgs(
                             result.Value,
-                            DateTime.UtcNow));
+                            DateTime.UtcNow
+                        )
+                    );
                 }
                 else
                 {
@@ -43,7 +43,7 @@ public class UserSyncBackgroundService(
                 }
             }
             catch (OperationCanceledException)
-                when (stoppingToken.IsCancellationRequested)
+                when (cts.IsCancellationRequested)
             {
                 break;
             }
@@ -53,6 +53,6 @@ public class UserSyncBackgroundService(
                     ex,
                     "Error inesperado durante la sincronización de usuarios.");
             }
-        } while (await timer.WaitForNextTickAsync(stoppingToken));
+        } while(await timer.WaitForNextTickAsync(cts));
     }
 }

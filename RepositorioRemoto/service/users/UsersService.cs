@@ -1,5 +1,6 @@
 using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using RepositorioRemoto.Cache.Common;
 
 public class UserService(
@@ -19,7 +20,6 @@ public class UserService(
         _logger.LogInformation(
             "Iniciando la sincronización de usuarios.");
 
-        // 1. Obtener datos de la API
         var apiResult = await _api.GetAllAsync(cts);
 
         if (apiResult.IsFailure)
@@ -35,23 +35,64 @@ public class UserService(
             "Se obtuvieron {TotalUsers} usuarios de la API.",
             apiResult.Value.Count);
 
+        const int maxAttempts = 3;
+
+        for (int attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            var result = await SyncDatabaseAsync(
+                apiResult.Value.Select(u => u.ToDto()).ToList(),
+                cts);
+
+            if (result.IsSuccess)
+            {
+                return result;
+            }
+
+            if (attempt == maxAttempts)
+            {
+                _logger.LogError(
+                    "La sincronización falló después de {MaxAttempts} intentos.",
+                    maxAttempts);
+
+                return result;
+            }
+
+            _logger.LogWarning(
+                "Error durante la sincronización. Reintentando ({Attempt}/{MaxAttempts})...",
+                attempt,
+                maxAttempts);
+
+            await Task.Delay(
+                TimeSpan.FromSeconds(5),
+                cts);
+        }
+
+        return Result.Failure<int, DomainError>(
+            new DatabaseError.Unknown(
+                "No se pudo completar la sincronización."));
+    }
+
+    private async Task<Result<int, DomainError>> SyncDatabaseAsync(
+        List<UserDto> users,
+        CancellationToken cts)
+    {
         try
         {
-            // 2. Iniciar transacción
             await _unitOfWork.BeginTransactionAsync(cts);
 
             _logger.LogDebug(
                 "Transacción de sincronización iniciada.");
 
-            // 3. Limpiar la base de datos
-            var deleteResult = await _repository.DeleteAllAsync();
+            var deleteResult =
+                await _repository.DeleteAllAsync();
 
             if (deleteResult.IsFailure)
             {
-                _logger.LogError(
-                    "No se pudo limpiar la base de datos. Se revierte la transacción.");
+                _logger.LogWarning(
+                    "No se pudo limpiar la base de datos.");
 
-                await _unitOfWork.RollbackTransactionAsync(cts);
+                await _unitOfWork.RollbackTransactionAsync(
+                    CancellationToken.None);
 
                 return Result.Failure<int, DomainError>(
                     deleteResult.Error);
@@ -60,15 +101,16 @@ public class UserService(
             _logger.LogDebug(
                 "Base de datos limpiada correctamente.");
 
-            // 4. Limpiar la caché
-            var clearCacheResult = await _cache.ClearAsync();
+            var clearCacheResult =
+                await _cache.ClearAsync();
 
             if (clearCacheResult.IsFailure)
             {
-                _logger.LogError(
-                    "No se pudo limpiar la caché. Se revierte la sincronización.");
+                _logger.LogWarning(
+                    "No se pudo limpiar la caché.");
 
-                await _unitOfWork.RollbackTransactionAsync(cts);
+                await _unitOfWork.RollbackTransactionAsync(
+                    CancellationToken.None);
 
                 return Result.Failure<int, DomainError>(
                     clearCacheResult.Error);
@@ -77,16 +119,15 @@ public class UserService(
             _logger.LogDebug(
                 "Caché limpiada correctamente.");
 
-            // 5. Insertar usuarios por lotes
             var batchSize = AppConfig.BatchSettings.BatchSize;
             var totalInserted = 0;
 
-            foreach (var batch in apiResult.Value.Chunk(batchSize))
+            foreach (var batch in users.Chunk(batchSize))
             {
                 cts.ThrowIfCancellationRequested();
 
                 var entities = batch
-                    .Select(u => u.ToEntity())
+                    .Select(u => u.ToModel().ToEntity())
                     .ToList();
 
                 var createResult =
@@ -94,11 +135,12 @@ public class UserService(
 
                 if (createResult.IsFailure)
                 {
-                    _logger.LogError(
-                        "Error al insertar el lote de usuarios. Tamaño: {BatchSize}. Se revierte la transacción.",
+                    _logger.LogWarning(
+                        "Error al insertar el lote de usuarios. Tamaño: {BatchSize}.",
                         entities.Count);
 
-                    await _unitOfWork.RollbackTransactionAsync(cts);
+                    await _unitOfWork.RollbackTransactionAsync(
+                        CancellationToken.None);
 
                     return Result.Failure<int, DomainError>(
                         createResult.Error);
@@ -111,7 +153,6 @@ public class UserService(
                     totalInserted);
             }
 
-            // 6. Confirmar transacción
             await _unitOfWork.CommitTransactionAsync(cts);
 
             _logger.LogInformation(
@@ -119,27 +160,32 @@ public class UserService(
                 totalInserted);
 
             return Result.Success<int, DomainError>(
-                apiResult.Value.Count);
+                totalInserted);
         }
-        catch (OperationCanceledException ex)
+        catch (OperationCanceledException)
         {
-            _logger.LogWarning(
-                ex,
-                "La sincronización de usuarios fue cancelada.");
-
             await _unitOfWork.RollbackTransactionAsync(
                 CancellationToken.None);
 
             throw;
         }
-        catch (Exception ex)
+        catch (NpgsqlException)
         {
-            _logger.LogError(
-                ex,
-                "Error inesperado durante la sincronización de usuarios.");
-
             await _unitOfWork.RollbackTransactionAsync(
                 CancellationToken.None);
+
+            return Result.Failure<int, DomainError>(
+                new DatabaseError.Unknown(
+                    "Se perdió la conexión con PostgreSQL."));
+        }
+        catch (Exception ex)
+        {
+            await _unitOfWork.RollbackTransactionAsync(
+                CancellationToken.None);
+
+            _logger.LogError(
+                "Error inesperado durante la sincronización: {Message}",
+                ex.Message);
 
             return Result.Failure<int, DomainError>(
                 new DatabaseError.Unknown(ex.Message));
