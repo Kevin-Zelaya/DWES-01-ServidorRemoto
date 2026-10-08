@@ -46,7 +46,6 @@ public class DependencyProvider
             services.AddSingleton<IConnectionMultiplexer>(redis);
 
             services.AddSingleton(typeof(ICache<>), typeof(RedisCache<>));
-            Console.WriteLine("aqui mira");
         }
         else// if(enviroment.IsProduction())
         {
