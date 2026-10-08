@@ -1,12 +1,32 @@
+using System.ComponentModel.DataAnnotations;
 
 public class UpdateUserRequest
 {
     public int id { get; set; }
-    public string name { get; set; }
-    public string username { get; set; }
-    public string email { get; set; }
-    public AddressDto address { get; set; }
-    public string phone { get; set; }
-    public string website { get; set; }
-    public CompanyDto company { get; set; }
+    [Required]
+    [StringLength(100, MinimumLength = 2)]
+    public string name { get; set; } = string.Empty;
+
+    [Required]
+    [StringLength(100, MinimumLength = 3)]
+    public string username { get; set; } = string.Empty;
+
+    [Required]
+    [EmailAddress]
+    [StringLength(100)]
+    public string email { get; set; } = string.Empty;
+
+    [Required]
+    public AddressDto address { get; set; } = new();
+
+    [Phone]
+    [StringLength(100)]
+    public string? phone { get; set; }
+
+    [Url]
+    [StringLength(100)]
+    public string? website { get; set; }
+
+    [Required]
+    public CompanyDto company { get; set; } = new();
 }

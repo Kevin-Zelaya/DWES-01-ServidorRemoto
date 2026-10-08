@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 [Table("users")]
 public class UserEntity
 {
     /// <summary>Para el mapper</summary>
     [Key]
+    [Column("id")]
     public int id { get; set; }
 
     [Required]

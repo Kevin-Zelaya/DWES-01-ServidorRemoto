@@ -1,11 +1,38 @@
 ﻿
 // Configuración de la aplicación
 
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore.Storage;
+using Serilog;
 
-// Reducir los logs de HttpClient y Entity Framework
-builder.Logging.AddFilter("System.Net.Http.HttpClient", LogLevel.Warning);
-builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+var builder = WebApplication.CreateBuilder(args);
+// Solo para limpiar los logs
+builder.Logging.ClearProviders();
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Command",
+    LogLevel.None);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Query",
+    LogLevel.None);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Transaction",
+    LogLevel.Information);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Connection",
+    LogLevel.None);
+
+builder.Logging.AddFilter(
+    "Microsoft.EntityFrameworkCore.Database.Connection",
+    LogLevel.None);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(AppConfig.Config)
+    .CreateLogger();
+// --------------------------------------------
+builder.Logging.AddSerilog(Log.Logger);
 
 DependencyProvider.Configure(
     builder.Services,
@@ -19,6 +46,15 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+// Crear la base de datos SQLite si no existe
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider
+        .GetRequiredService<AppDbContext>();
+
+    context.EnsureCreated();
+}
+
 // documentación swagger
 
 app.MapOpenApi();
@@ -26,11 +62,35 @@ app.UseSwaggerUI(options => {
     options.SwaggerEndpoint("/openapi/v1.json", "Mi API V1");
 });
 
+// --------- Suscripciones a eventos ------------
 // Background service
 UserSyncBackgroundService.DatabaseRefreshed += (sender, e) =>
 {
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"\n[CONSOLA] Base de datos sincronizada. Total registros: {e.RegistrosCargados}");
+    Console.ResetColor();
+};
+var notificationService =
+    app.Services.GetRequiredService<INotificationService>();
+// create
+notificationService.UserCreated += (sender, user) =>
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine($"[CONSOLA] Usuario creado: {user.id} {user.name}");
+    Console.ResetColor();
+};
+// Update
+notificationService.UserUpdated += (sender, user) =>
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine($"[CONSOLA] Usuario actualizado: {user.id} {user.name}");
+    Console.ResetColor();
+};
+// Delete
+notificationService.UserDeleted += (sender, id) =>
+{
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine($"[CONSOLA] Eliminado usuario con el id: {id}");
     Console.ResetColor();
 };
 

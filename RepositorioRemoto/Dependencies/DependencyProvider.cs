@@ -17,7 +17,7 @@ public class DependencyProvider
     )
     {
         Console.WriteLine($"Environment: {enviroment.EnvironmentName}");
-Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
+    Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         // Refit
         services.AddHttpClient("jasonplaceholder", client =>
         {
@@ -31,26 +31,15 @@ Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         services.AddScoped<IUserService, UserService>();
         // Unidad de trabajo
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        // Logs
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(AppConfig.Config)
-            .WriteTo.Console(
-            theme: AnsiConsoleTheme.Code,
-            outputTemplate:
-            "{Timestamp:HH:mm:ss} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
-        )
-        .CreateLogger(); 
-        Log.Logger.Debug("PRUEBA DIRECTA DE SERILOG");
-        services.AddLogging(logging =>
-        {
-            logging.AddSerilog(Log.Logger);
-        });
-        //if (enviroment.IsDevelopment())
+        //if (enviroment.IsProduction())
         if (enviroment.IsProduction())
         {
+            // Contexto con la conexion para postgresql
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(AppConfig.ConnectionString));
+            // Repositorio para postgresql
             services.AddScoped<IRepository, PostgreSqlRepository>();
+            // Configuracion para redis
             var redis = ConnectionMultiplexer.Connect(
                 AppConfig.Config["Redis:ConnectionString"]!
             );
@@ -80,5 +69,9 @@ Console.WriteLine($"Redis: {AppConfig.Config["Redis:ConnectionString"]}");
         services.AddScoped<UnitOfWork>();
         // Background service
         services.AddHostedService<UserSyncBackgroundService>();
+
+        // Notificaciones
+        services.AddSingleton<INotificationService, NotificationService>();
+
     }
 }
